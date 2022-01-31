@@ -2,34 +2,34 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Galeri as ModelsGaleri;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Mustahik as ModelsMustahik;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
-use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class Galeri extends Component
+class Mustahik extends Component
 {
-    use WithPagination;
     use LivewireAlert;
-    use WithFileUploads;
-
-    public $readyToLoad, $new_id, $thumbnail, $keterangan, $old_file, $picture;
+    use WithPagination;
     protected $paginationTheme = 'bootstrap';
-    public $rules = [
-        'keterangan' => ['required'],
-        'thumbnail' => 'image|max:512',
-    ];
-
+    public $readyToLoad, $search, $nama, $alamat, $desa, $kecamatan, $blok, $gender, $pekerjaan, $new_id;
     protected $listeners = [
         'confirmed',
         'cancelled',
-        'publish',
     ];
 
+    public $rules = [
+        'nama' => 'required',
+        'alamat' => 'required',
+        'desa' => 'required',
+        'kecamatan' => 'required',
+        'blok' => 'required',
+        'gender' => 'required',
+        'pekerjaan' => 'required'
+    ];
     public function mount()
     {
+        $this->search = '';
         $this->readyToLoad = false;
     }
 
@@ -38,10 +38,15 @@ class Galeri extends Component
         $this->readyToLoad = true;
     }
 
+    public function updated()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
-        return view('livewire.galeri', [
-            'data' => $this->readyToLoad ? ModelsGaleri::orderBy('created_at', 'asc')->simplePaginate(8) : [],
+        return view('livewire.mustahik', [
+            'data' => $this->readyToLoad ? ModelsMustahik::where('nama_lengkap', 'like', '%' . $this->search . '%')->simplePaginate(15) : [],
         ]);
     }
 
@@ -55,12 +60,14 @@ class Galeri extends Component
     {
         $this->validate();
         try {
-            $extension = $this->thumbnail->extension();
-            $filename = now() . '.' . $extension;
-            $this->thumbnail->storeAs('public/galeri', $filename);
-            ModelsGaleri::create([
-                'keterangan' => $this->keterangan,
-                'picture' => $filename
+            ModelsMustahik::create([
+                'nama_lengkap' => $this->nama,
+                'alamat' => $this->alamat,
+                'desa' => $this->desa,
+                'kecamatan' => $this->kecamatan,
+                'blok' => $this->blok,
+                'gender' => $this->gender,
+                'pekerjaan' => $this->pekerjaan
             ]);
             $this->alert(
                 'success',
@@ -69,7 +76,7 @@ class Galeri extends Component
         } catch (\Throwable $th) {
             $this->alert(
                 'error',
-                'Terjadi kesalahan saat menyimpan data'
+                'Terjadi kesalahan saat menambahkan data'
             );
         }
         $this->dispatchBrowserEvent('userStore');
@@ -79,27 +86,29 @@ class Galeri extends Component
 
     public function edit($id)
     {
-        $data = ModelsGaleri::where('id', $id)->first();
+        $data = ModelsMustahik::find($id)->first();
         $this->new_id = $id;
-        $this->keterangan = $data->keterangan;
-        $this->old_file = $data->picture;
+        $this->nama = $data->nama_lengkap;
+        $this->alamat = $data->alamat;
+        $this->desa = $data->desa;
+        $this->kecamatan = $data->kecamatan;
+        $this->blok = $data->blok;
+        $this->gender = $data->gender;
+        $this->pekerjaan = $data->pekerjaan;
     }
 
     public function update()
     {
+        $this->validate();
         try {
-            if ($this->thumbnail != null) {
-                Storage::delete('public/galeri/' . $this->old_file);
-                $extension = $this->thumbnail->extension();
-                $filename = now() . '.' . $extension;
-                $this->thumbnail->storeAs('public/galeri', $filename);
-            } else {
-                $filename = $this->old_file;
-            }
-            ModelsGaleri::find($this->new_id)->update([
-                'keterangan' => $this->keterangan,
-                'picture' => $filename,
-                'updated_at' => now(),
+            ModelsMustahik::find($this->new_id)->update([
+                'nama_lengkap' => $this->nama,
+                'alamat' => $this->alamat,
+                'desa' => $this->desa,
+                'kecamatan' => $this->kecamatan,
+                'blok' => $this->blok,
+                'gender' => $this->gender,
+                'pekerjaan' => $this->pekerjaan
             ]);
             $this->alert(
                 'success',
@@ -116,9 +125,9 @@ class Galeri extends Component
         $this->resetFields();
     }
 
-    public function triggerConfirm($id, $thumbnail)
+    public function triggerConfirm($id)
     {
-        $this->confirm('Apakah anda ingin menghapus foto ini ?', [
+        $this->confirm('Apakah anda ingin data mustahik ini ?', [
             'toast' => false,
             'position' => 'center',
             'confirmButtonText' =>  'Ya',
@@ -126,16 +135,13 @@ class Galeri extends Component
             'onConfirmed' => 'confirmed',
             'onDismissed' => 'cancelled'
         ]);
-
         $this->new_id = $id;
-        $this->thumbnail = $thumbnail;
     }
 
     public function confirmed()
     {
         try {
-            Storage::delete('public/galeri/' . $this->thumbnail);
-            ModelsGaleri::destroy($this->new_id);
+            ModelsMustahik::destroy($this->new_id);
             $this->alert(
                 'success',
                 'Data berhasil dihapus'

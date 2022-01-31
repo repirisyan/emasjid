@@ -148,7 +148,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <h5 class="text-uppercase"><i class="fa fa-fw fa-money-bill"></i>&nbsp;Saldo</h5>
+            <h5 class="text-uppercase"><i class="fa fa-fw fa-money-bill"></i>&nbsp;kas Operasional masjid</h5>
             <p>
                 <b>Rp. {{ number_format($saldo, '0', ',', '.') }}</b>
             </p>
@@ -156,18 +156,6 @@
             <h5 class="text-uppercase"><i class="fab fa-youtube"></i>&nbsp;Youtube Channel</h5>
             <a href="https://www.youtube.com/channel/UC9R7JphX0QnHTUqiZMbJIkg/featured" target="_blank"
                 class="btn bg-teal text-white"><i class="fab fa-youtube"></i>&nbsp;Subscribe</a>
-            <hr>
-            <div class="card card-outline card-teal shadow">
-                <div class="card-header">
-                    <h5 class="mt-4 text-uppercase text-center" id="zona_sholat"></h5>
-                </div>
-                <div class="card-body">
-                    <table class="table">
-                        <tbody class="waktu_sholat">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
             <hr>
             <div class="card card-outline card-teal shadow">
                 <div class="card-header">

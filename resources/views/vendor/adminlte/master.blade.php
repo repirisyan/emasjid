@@ -93,7 +93,6 @@
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
         <script src="//unpkg.com/alpinejs" defer></script>
-
         {{-- Configured Scripts --}}
         @include('adminlte::plugins', ['type' => 'js'])
 

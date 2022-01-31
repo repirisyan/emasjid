@@ -11,7 +11,7 @@ class LaporanMudhohi extends Component
 {
     use WithPagination;
     public $id_master_hewan, $readyToLoad, $date;
-
+    protected $paginationTheme = 'bootstrap';
     public function mount()
     {
         $this->id_master_hewan = 1;

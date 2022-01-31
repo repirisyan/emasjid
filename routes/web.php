@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DistribusiController;
 use App\Http\Controllers\KeuanganController;
+use App\Http\Controllers\MustahikConctroller;
 use App\Http\Controllers\ShobulController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,19 @@ Route::get('home/berita', function () {
 Route::get('home/galeri', function () {
     return view('home_galeri');
 });
+
+Route::get('home/event', function () {
+    return view('home_event');
+});
+
+Route::get('home/keuangan', function () {
+    return view('home_keuangan');
+});
+
+Route::get('home/kontak', function () {
+    return view('home_kontak');
+});
+
 Route::get('home/berita/detail/{id}', [App\Http\Controllers\HomeBerita::class, 'detail']);
 
 Auth::routes(['register' => false]);
@@ -58,6 +72,13 @@ Route::middleware(['is_pengurus', 'auth'])->group(function () {
     Route::get('pengurus/event', function () {
         return view('admin.event');
     });
+    Route::get('pengurus/kontak', function () {
+        return view('admin.kontak');
+    });
+    Route::get('pengurus/mustahik', function () {
+        return view('admin.mustahik');
+    });
+    Route::get('mustahik/export/', [MustahikConctroller::class, 'export']);
     Route::get('pengurus/galeri', function () {
         return view('admin.galeri');
     });

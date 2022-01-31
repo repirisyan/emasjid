@@ -3,7 +3,7 @@
 @section('title', 'Kelola Galeri')
 
 @section('content_header')
-    <h1>Galeri Publik</h1>
+    <h1>Galeri Foto</h1>
     <hr>
 @stop
 

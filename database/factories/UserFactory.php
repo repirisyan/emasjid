@@ -33,7 +33,7 @@ class UserFactory extends Factory
             'email' => $this->faker->email(),
             'JenisKelamin' => $this->faker->randomElement(['Laki-laki', 'Perempuan']),
             'role' => 2,
-            'id_jabatan' => 0,
+            'id_jabatan' => null,
             'password' => Hash::make("12345"),
             'picture' => 'default_picture.png',
         ];

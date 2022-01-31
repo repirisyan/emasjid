@@ -11,7 +11,8 @@ class Ustadz extends Component
 {
     use LivewireAlert;
     use WithPagination;
-    public $new_id, $jabatan, $name, $created_at,$range_gaji, $TempatLahir, $TanggalLahir, $alamat, $kontak, $email, $JenisKelamin;
+    protected $paginationTheme = 'bootstrap';
+    public $new_id, $jabatan, $name, $created_at, $range_gaji, $TempatLahir, $TanggalLahir, $alamat, $kontak, $email, $JenisKelamin;
     public $readyToLoad = false;
     public $search = '';
 
@@ -35,6 +36,12 @@ class Ustadz extends Component
     {
         $this->resetExcept('readyToLoad');
     }
+
+    public function updated()
+    {
+        $this->resetPage();
+    }
+
 
     public function triggerConfirm($id)
     {

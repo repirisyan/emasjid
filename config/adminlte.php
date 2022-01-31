@@ -127,7 +127,7 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-ligt-primary sidebar-no-expand elevation-4',
+    'classes_sidebar' => 'sidebar-light-primary sidebar-no-expand elevation-4',
     'classes_sidebar_nav' => 'nav-flat',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -277,6 +277,12 @@ return [
             'can' => ['isPengurus', 'isAdmin'],
         ],
         [
+            'text' => 'Kajian Online',
+            'icon' => 'fas fa-fw fa-newspaper',
+            'url' => 'pengurus/kajian',
+            'can' => ['isPengurus', 'isAdmin'],
+        ],
+        [
             'text' => 'Galeri',
             'icon' => 'fas fa-fw fa-image',
             'url' => 'pengurus/galeri',
@@ -291,7 +297,7 @@ return [
         [
             'text' => 'Mustahik',
             'icon' => 'fas fa-fw fa-user',
-            'url' => '#',
+            'url' => 'pengurus/mustahik',
             'can' => ['isPengurus', 'isAdmin'],
         ],
         [
@@ -421,6 +427,12 @@ return [
                 ],
             ]
 
+        ],
+        [
+            'text' => 'Kontak Pesan',
+            'icon' => 'fas fa-fw fa-envelope',
+            'url' => 'pengurus/kontak',
+            'can' => ['isPengurus', 'isAdmin'],
         ],
     ],
 

@@ -17,7 +17,7 @@ class LaporanKeuangan extends Component
     use LivewireAlert;
 
     public $readyToLoad, $kategori, $tanggal, $keterangan, $nilai, $id_keuangan, $konfirmasi, $bulan, $tahun, $menu_saldo, $tahun_preview, $bulan_preview;
-
+    protected $paginationTheme = 'bootstrap';
     protected $rules = [
         'kategori' => 'required',
         'tanggal' => 'required|date',
@@ -78,6 +78,7 @@ class LaporanKeuangan extends Component
 
     public function filter()
     {
+        //Function kosong untuk mentrigger inputan
     }
 
     public function menu_saldo()

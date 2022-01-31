@@ -14,11 +14,12 @@ class Users extends Component
     use LivewireAlert;
     protected $paginationTheme = 'bootstrap';
 
-    public $created_at, $search, $name, $status, $TempatLahir, $range_gaji, $TanggalLahir, $alamat, $kontak, $email, $new_id, $JenisKelamin, $role;
+    public $readyToLoad, $created_at, $search, $name, $status, $TempatLahir, $range_gaji, $TanggalLahir, $alamat, $kontak, $email, $new_id, $JenisKelamin, $role;
 
     public function mount()
     {
         $this->search = '';
+        $this->readyToLoad = false;
     }
 
     protected $listeners = [
@@ -26,7 +27,6 @@ class Users extends Component
         'cancelled'
     ];
 
-    public $readyToLoad = false;
 
     public function loadPosts()
     {
@@ -46,9 +46,13 @@ class Users extends Component
         $this->resetExcept('readyToLoad');
     }
 
+    public function updated()
+    {
+        $this->resetPage();
+    }
+
     public function store()
     {
-
         $this->validate([
             'name' => ['required', 'string', 'max:255'],
             'TanggalLahir' => ['required'],

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>E-Masjid</title>
+    <title>@yield('title')</title>
 
     <!-- Fonts -->
     @if (!config('adminlte.enabled_laravel_mix'))
@@ -31,7 +31,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
+        <div class="container-fluid">
             <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ asset('storage/logo/mosque.png') }}"
                     alt="" style="width: 25px; heigh:25px">
                 <small> E-Masjid</small></a>
@@ -41,31 +41,74 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" aria-current="page"
-                            href="{{ url('/') }}"><i class="fa fa-fw fa-home"></i> Home</a>
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-fw fa-mosque"></i>&nbsp;Profil
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Visi Misi</a>
+                            <a class="dropdown-item" href="#">Sejarah</a>
+                            <a class="dropdown-item" href="#">Struktur Organisasi</a>
+                            <a class="dropdown-item" href="#">Imam dan Muadzin</a>
+                            <a class="dropdown-item" href="#">Database Ustadz</a>
+                        </div>
                     </li>
-                    {{-- <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#"><i class="fa fa-fw fa-mosque"></i>
-                            Profil</a>
-                    </li> --}}
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('home/berita') ? 'active' : '' }}" aria-current="page"
-                            href="{{ url('home/berita') }}"><i class="fa fa-fw fa-newspaper"></i> Berita</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
+                            data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-fw fa-quran"></i>&nbsp;Kajian
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                            <a class="dropdown-item" href="#">Kajian Online</a>
+                            <a class="dropdown-item" href="#">Jadwal Imam dan Khotib Jumat</a>
+                            <a class="dropdown-item" href="#">Jadwal Kanjian Rutin</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button"
+                            data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-fw fa-users"></i>&nbsp;Divisi Ziswaf
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                            <a class="dropdown-item" href="#">Visi Misi</a>
+                            <a class="dropdown-item" href="#">Galeri Kegiatan</a>
+                        </div>
+                    </li>
+                    <li class="nav-item {{ Request::is('home/keuangan') ? 'active' : '' }} dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button"
+                            data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-fw fa-file"></i>&nbsp;Laporan
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                            <a class="dropdown-item" href="{{ url('home/keuangan') }}">Laporan Kas Operational
+                                Masjid</a>
+                            <a class="dropdown-item" href="#">Laporan Ziswaf</a>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('home/event') ? 'active' : '' }}" aria-current="page"
                             href="{{ url('home/event') }}"><i class="fa fa-fw fa-calendar"></i> Event</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('home/galeri') ? 'active' : '' }}" aria-current="page"
-                            href="{{ url('home/galeri') }}"><i class="fa fa-fw fa-image"></i> Galeri</a>
+                    <li class="nav-item @if (Request::is('home/galeri') || Request::is('home/berita')) active @endif dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button"
+                            data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-fw fa-image"></i>&nbsp;Galeri
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
+                            <a class="dropdown-item" href="{{ url('home/galeri') }}">Foto</a>
+                            <a class="dropdown-item" href="{{ url('home/berita') }}">Berita</a>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('home/qurban/monitoring') ? 'active' : '' }}"
                             aria-current="page" href="{{ route('home.monitoring_qurban') }}"><i
                                 class="fa fa-fw fa-desktop"></i> Monitoring Qurban</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::is('home/kontak') ? 'active' : '' }}" aria-current="page"
+                            href="{{ url('home/kontak') }}"><i class="fa fa-fw fa-envelope"></i>&nbsp;Kontak</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
@@ -102,7 +145,10 @@
         </div>
     </footer>
     @livewireScripts
-    <script src="{{ mix(config('adminlte.laravel_mix_js_path', 'js/app.js')) }}"></script>
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
     @yield('custom_js')
 </body>
 

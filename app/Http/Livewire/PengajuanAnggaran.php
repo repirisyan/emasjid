@@ -12,7 +12,7 @@ class PengajuanAnggaran extends Component
 {
     use WithPagination;
     use LivewireAlert;
-
+    protected $paginationTheme = 'bootstrap';
     public $readyToLoad, $tanggal, $keterangan, $nilai, $id_keuangan;
 
     protected $rules = [

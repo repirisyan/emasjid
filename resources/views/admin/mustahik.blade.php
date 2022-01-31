@@ -1,14 +1,14 @@
 @extends('adminlte::page')
 
-@section('title', 'Kelola Event')
+@section('title', 'Kelola Mustahik')
 
 @section('content_header')
-    <h1>Kelola Event</h1>
+    <h1>Kelola Mustahik</h1>
     <hr>
 @stop
 
 @section('content')
-    @livewire('event')
+    @livewire('mustahik')
 @stop
 
 @section('css')

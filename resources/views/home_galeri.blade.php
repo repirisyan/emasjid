@@ -11,6 +11,7 @@
 
     </style>
 @endsection
+@section('title','Galeri Foto')
 @section('content')
     <div class="container">
         @livewire('home-galeri')

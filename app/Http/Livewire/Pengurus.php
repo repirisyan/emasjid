@@ -14,7 +14,7 @@ class Pengurus extends Component
     public $new_id, $jabatan, $name, $created_at, $range_gaji, $TempatLahir, $TanggalLahir, $alamat, $kontak, $email, $JenisKelamin;
     public $readyToLoad = false;
     public $search = '';
-
+    protected $paginationTheme = 'bootstrap';
     public function loadPosts()
     {
         $this->readyToLoad = true;
@@ -37,6 +37,12 @@ class Pengurus extends Component
         $this->resetValidation();
         $this->resetExcept('readyToLoad');
     }
+
+    public function updated()
+    {
+        $this->resetPage();
+    }
+
     public function detailUser($id)
     {
         $user = User::where('id', $id)->first();

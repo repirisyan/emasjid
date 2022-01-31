@@ -24,7 +24,7 @@ class DistribusiShohibul extends Component
         $this->readyToLoad = false;
     }
 
-    public function updatingSearch()
+    public function updated()
     {
         $this->resetPage();
     }
