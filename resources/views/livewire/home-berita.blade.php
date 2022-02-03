@@ -25,7 +25,7 @@
     </div>
     @if ($readyToLoad == true)
         <div class="d-flex justify-content-center">
-            {{ $data->render('pagination::bootstrap-4') }}
+            {{ $data->links() }}
         </div>
     @endif
 </div>

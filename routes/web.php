@@ -36,6 +36,10 @@ Route::get('home/galeri', function () {
     return view('home_galeri');
 });
 
+Route::get('home/galeri/ziswaf', function () {
+    return view('home_galeri_ziswaf');
+});
+
 Route::get('home/event', function () {
     return view('home_event');
 });
@@ -44,11 +48,54 @@ Route::get('home/keuangan', function () {
     return view('home_keuangan');
 });
 
+Route::get('home/keuangan/ziswaf', function () {
+    return view('home_keuangan_ziswaf');
+});
+
 Route::get('home/kontak', function () {
     return view('home_kontak');
 });
 
+Route::get('home/ustadz', function () {
+    return view('home_ustadz');
+});
+
+Route::get('home/imam-muadzin', function () {
+    return view('home_imam_muadzin');
+});
+
+Route::get('home/sholat-jumat', function () {
+    return view('home_sholat_jumat');
+});
+
+Route::get('home/profile/visimisi', function () {
+    return view('home_visimisi');
+});
+
+Route::get('home/ziswaf/visimisi', function () {
+    return view('home_ziswaf_visimisi');
+});
+
+Route::get('home/profile/organisasi', function () {
+    return view('home_organisasi');
+});
+
+Route::get('home/profile/sejarah', function () {
+    return view('home_sejarah');
+});
+
+Route::get('home/kajian-rutin', function () {
+    return view('home_kajian_rutin');
+});
+
+Route::get('home/kajian-online', function () {
+    return view('home_kajian_online');
+});
+
 Route::get('home/berita/detail/{id}', [App\Http\Controllers\HomeBerita::class, 'detail']);
+Route::get('home/kajian/detail/{id}', [App\Http\Controllers\HomeKajian::class, 'detail']);
+
+Route::get('ziswaf/keuangan/{dari}/{sampai}/export', [App\Http\Controllers\ZiswafVisiMisi::class, 'export']);
 
 Auth::routes(['register' => false]);
 
@@ -62,6 +109,14 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+Route::middleware(['auth', 'kajian'])->group(function () {
+    Route::get('kajian/online', function () {
+        return view('admin.kajian_online');
+    });
+    Route::get('kajian/online/{id}/edit', [App\Http\Controllers\KajianController::class, 'edit'])->name('kajian_edit');
+    Route::patch('kajian/online/{id}/update', [App\Http\Controllers\KajianController::class, 'update']);
+});
+
 Route::middleware(['auth', 'is_user'])->group(function () {
     Route::get('/qurban/pendaftaran', function () {
         return view('pendaftaran_qurban');
@@ -69,6 +124,9 @@ Route::middleware(['auth', 'is_user'])->group(function () {
 });
 
 Route::middleware(['is_pengurus', 'auth'])->group(function () {
+    Route::get('ziswaf/galeri', function () {
+        return view('admin.ziswaf_galeri');
+    });
     Route::get('pengurus/event', function () {
         return view('admin.event');
     });
@@ -112,14 +170,33 @@ Route::middleware(['is_admin', 'auth'])->group(function () {
     Route::get('/users', function () {
         return view('admin.kelola_akun');
     });
-    Route::get('admin/settings/masjid', function () {
+    Route::get('admin/settings/masjid/logo', function () {
         return view('admin.profile_masjid');
     });
+
+    Route::get('admin/settings/masjid/struktur-organisasi', function () {
+        return view('admin.profile_struktur_organisasi');
+    });
+    Route::get('admin/settings/masjid/visimisi', [App\Http\Controllers\MasjidVisiController::class, 'index'])->name('masjid.visi_misi');
+    Route::get('admin/settings/masjid/sejarah', [App\Http\Controllers\MasjidVisiController::class, 'sejarah']);
+    Route::post('admin/settings/masjid/visimisi/update', [App\Http\Controllers\MasjidVisiController::class, 'update']);
+    Route::post('admin/settings/masjid/sejarah/update', [App\Http\Controllers\MasjidVisiController::class, 'update_sejarah']);
+    Route::get('ziswaf/visimisi', [App\Http\Controllers\ZiswafVisiMisi::class, 'index'])->name('ziswaf.visi_misi');
+    Route::post('ziswaf/visimisi/update', [App\Http\Controllers\ZiswafVisiMisi::class, 'update']);
     Route::get('/users/pengurus', function () {
         return view('admin.pengurus');
     });
     Route::get('/users/ustadz', function () {
         return view('admin.ustadz');
+    });
+    Route::get('/users/imam', function () {
+        return view('admin.imam');
+    });
+    Route::get('/users/khotib', function () {
+        return view('admin.khotib');
+    });
+    Route::get('/users/muadzin', function () {
+        return view('admin.muadzin');
     });
 });
 
@@ -132,6 +209,9 @@ Route::middleware(['auth', 'is_ketua'])->group(function () {
 Route::middleware(['is_bendahara', 'auth'])->group(function () {
     Route::get('/pengurus/hewan_qurban', function () {
         return view('admin.hewan_qurban');
+    });
+    Route::get('/ziswaf/keuangan', function () {
+        return view('admin.keuangan.ziswaf_keuangan');
     });
     Route::get('/pengurus/qurban/pembayaran', function () {
         return view('admin.pembayaran');

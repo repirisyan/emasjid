@@ -17,6 +17,7 @@ class CreateGalerisTable extends Migration
             $table->id();
             $table->string('keterangan');
             $table->string('picture');
+            $table->enum('kategori', [1, 2]); //1 = Publik, 2 = Ziswaf
             $table->timestamps();
         });
     }

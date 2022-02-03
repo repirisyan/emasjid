@@ -16,7 +16,7 @@ class HomeBerita extends Component
     public function render()
     {
         return view('livewire.home-berita', [
-            'data' => $this->readyToLoad ? Berita::with('user')->where('status', 1)->paginate(8) : [],
+            'data' => $this->readyToLoad ? Berita::with('user')->where('status', 1)->where('kategori', 1)->paginate(8) : [],
         ]);
     }
 }

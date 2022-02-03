@@ -241,9 +241,30 @@ return [
         ],
         [
             'text' => 'Profil Masjid',
-            'url'  => 'admin/settings/masjid',
             'icon' => 'fas fa-fw fa-mosque',
             'can'  => 'isAdmin',
+            'submenu' => [
+                [
+                    'text' => 'Logo',
+                    'url'  => 'admin/settings/masjid/logo',
+                    'icon' => 'fas fa-fw fa-dot-circle',
+                ],
+                [
+                    'text' => 'Visi Misi',
+                    'url'  => 'admin/settings/masjid/visimisi',
+                    'icon' => 'fas fa-fw fa-dot-circle',
+                ],
+                [
+                    'text' => 'Sejarah',
+                    'url'  => 'admin/settings/masjid/sejarah',
+                    'icon' => 'fas fa-fw fa-dot-circle',
+                ],
+                [
+                    'text' => 'Struktur Organisasi',
+                    'url'  => 'admin/settings/masjid/struktur-organisasi',
+                    'icon' => 'fas fa-fw fa-dot-circle',
+                ],
+            ]
         ],
         [
             'text'    => 'Kelola Akun',
@@ -268,6 +289,49 @@ return [
                     'can'  => 'isAdmin',
                     'url'   => '/users/ustadz',
                 ],
+                [
+                    'text'    => 'Imam',
+                    'icon'    => 'fas fa-fw fa-user-shield',
+                    'can'  => 'isAdmin',
+                    'url'   => '/users/imam',
+                ],
+                [
+                    'text'    => 'Muadzin',
+                    'icon'    => 'fas fa-fw fa-user-shield',
+                    'can'  => 'isAdmin',
+                    'url'   => '/users/muadzin',
+                ],
+                [
+                    'text'    => 'Khotib',
+                    'icon'    => 'fas fa-fw fa-user-shield',
+                    'can'  => 'isAdmin',
+                    'url'   => '/users/khotib',
+                ],
+            ],
+        ],
+        [
+            'text' => 'Divisi Ziswaf',
+            'icon' => 'fas fa-fw fa-users',
+            'can' => ['isBendahara', 'isPengurus', 'isAdmin'],
+            'submenu' => [
+                [
+                    'text' => 'Visi Misi',
+                    'icon' => 'fas fa-fw fa-dot-circle',
+                    'url' => 'ziswaf/visimisi',
+                    'can' => ['isAdmin', 'isPengurus']
+                ],
+                [
+                    'text' => 'Laporan Keuangan',
+                    'icon' => 'fas fa-fw fa-dot-circle',
+                    'url' => 'ziswaf/keuangan',
+                    'can' => ['isAdmin', 'isBendahara']
+                ],
+                [
+                    'text' => 'Galeri Kegiatan',
+                    'icon' => 'fas fa-fw fa-dot-circle',
+                    'url' => 'ziswaf/galeri',
+                    'can' => ['isAdmin', 'isPengurus']
+                ],
             ],
         ],
         [
@@ -279,8 +343,8 @@ return [
         [
             'text' => 'Kajian Online',
             'icon' => 'fas fa-fw fa-newspaper',
-            'url' => 'pengurus/kajian',
-            'can' => ['isPengurus', 'isAdmin'],
+            'url' => 'kajian/online',
+            'can' => ['isUstadz', 'isAdmin', 'isKetua'],
         ],
         [
             'text' => 'Galeri',
@@ -336,7 +400,7 @@ return [
                     'icon' => 'fas fa-fw fa-mosque',
                 ],
                 [
-                    'text' => 'Jadwal Kajian Khusus',
+                    'text' => 'Jadwal Kajian Rutin',
                     'url'  => 'pengurus/kegiatan/kajian',
                     'icon' => 'fas fa-fw fa-quran',
                 ],

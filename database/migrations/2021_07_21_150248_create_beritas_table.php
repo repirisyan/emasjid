@@ -17,7 +17,7 @@ class CreateBeritasTable extends Migration
             $table->id();
             $table->string('judul');
             $table->text('berita');
-            $table->enum('kategori',[1,2,3]); //1 = berita, 2 = informasi kajian, 3 = Tausiah Online
+            $table->enum('kategori',[1,2]); //1 = berita, 2 = Tausiah Online
             $table->foreignId('user_id')->constrained()->onDelete('restrict');
             $table->string('thumbnail');
             $table->unsignedInteger('status');

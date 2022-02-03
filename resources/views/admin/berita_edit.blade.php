@@ -20,7 +20,7 @@
                     @method('PATCH')
                     <div class="form-group">
                         <input name="judul" placeholder="Judul" type="text" value="{{ $item->judul }}"
-                            class="w-50 form-control @error('jabatan') is-invalid @enderror">
+                            class="w-50 form-control @error('judul') is-invalid @enderror">
                         @error('judul') <div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                     <div class="form-group">
@@ -31,8 +31,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <img src="{{ asset('storage/berita/' . $item->thumbnail) }}"
-                            alt="" class="img-thumbnail mb-2">
+                        <img src="{{ asset('storage/berita/' . $item->thumbnail) }}" alt="" class="img-thumbnail mb-2">
                         <input name="thumbnail_old" type="hidden" value="{{ $item->thumbnail }}">
                         <input name="thumbnail" type="file"
                             class="form-control-file @error('thumbnail') is-invalid @enderror" style="width: 250px"
@@ -41,8 +40,7 @@
                     </div>
                     <a href="{{ url('pengurus/berita') }}" class="float-left mr-2 mt-2"><i
                             class="fa fa-fw fa-arrow-left"></i> Kembali</a>
-                    <button class="btn bg-teal float-right mr-2" type="submit"><i
-                            class="fa fa-fw fa-bookmark"></i>Draft</button>
+                    <button class="btn btn-primary float-right mr-2" type="submit">Simpan</button>
                 </form>
             @endforeach
         </div>

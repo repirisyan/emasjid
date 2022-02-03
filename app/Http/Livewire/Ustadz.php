@@ -30,6 +30,9 @@ class Ustadz extends Component
     protected $listeners = [
         'confirmed',
         'cancelled',
+        'confirmedImam',
+        'confirmedMuadzin',
+        'confirmedKhotib',
     ];
 
     public function resetFields()
@@ -51,6 +54,51 @@ class Ustadz extends Component
             'confirmButtonText' =>  'Ya',
             'cancelButtonText' =>  'Tidak',
             'onConfirmed' => 'confirmed',
+            // 'onConfirmed' => ['confirmed', $id], you can pass argument with array
+            'onDismissed' => 'cancelled'
+        ]);
+
+        $this->new_id = $id;
+    }
+
+    public function triggerImam($id)
+    {
+        $this->confirm('Jadikan Imam ?', [
+            'toast' => false,
+            'position' => 'center',
+            'confirmButtonText' =>  'Ya',
+            'cancelButtonText' =>  'Tidak',
+            'onConfirmed' => 'confirmedImam',
+            // 'onConfirmed' => ['confirmed', $id], you can pass argument with array
+            'onDismissed' => 'cancelled'
+        ]);
+
+        $this->new_id = $id;
+    }
+
+    public function triggerMuadzin($id)
+    {
+        $this->confirm('Jadikan Muadzin ?', [
+            'toast' => false,
+            'position' => 'center',
+            'confirmButtonText' =>  'Ya',
+            'cancelButtonText' =>  'Tidak',
+            'onConfirmed' => 'confirmedMuadzin',
+            // 'onConfirmed' => ['confirmed', $id], you can pass argument with array
+            'onDismissed' => 'cancelled'
+        ]);
+
+        $this->new_id = $id;
+    }
+
+    public function triggerKhotib($id)
+    {
+        $this->confirm('Jadikan Khotib ?', [
+            'toast' => false,
+            'position' => 'center',
+            'confirmButtonText' =>  'Ya',
+            'cancelButtonText' =>  'Tidak',
+            'onConfirmed' => 'confirmedKhotib',
             // 'onConfirmed' => ['confirmed', $id], you can pass argument with array
             'onDismissed' => 'cancelled'
         ]);
@@ -82,6 +130,66 @@ class Ustadz extends Component
             $this->alert(
                 'success',
                 'Jabatan berhasil dinonaktifkan'
+            );
+        } catch (\Throwable $th) {
+            $this->alert(
+                'success',
+                'Terjadi kesalahan saat mengubah status'
+            );
+        }
+        $this->resetExcept('readyToLoad');
+    }
+
+    public function confirmedImam()
+    {
+        // Example code inside confirmed callback
+        try {
+            User::find($this->new_id)->update([
+                'imam' => true,
+            ]);
+            $this->alert(
+                'success',
+                'Data imam berhasil ditambahkan'
+            );
+        } catch (\Throwable $th) {
+            $this->alert(
+                'success',
+                'Terjadi kesalahan saat mengubah status'
+            );
+        }
+        $this->resetExcept('readyToLoad');
+    }
+
+    public function confirmedMuadzin()
+    {
+        // Example code inside confirmed callback
+        try {
+            User::find($this->new_id)->update([
+                'muadzin' => true,
+            ]);
+            $this->alert(
+                'success',
+                'Data muadzin berhasil ditambahkan'
+            );
+        } catch (\Throwable $th) {
+            $this->alert(
+                'success',
+                'Terjadi kesalahan saat mengubah status'
+            );
+        }
+        $this->resetExcept('readyToLoad');
+    }
+
+    public function confirmedKhotib()
+    {
+        // Example code inside confirmed callback
+        try {
+            User::find($this->new_id)->update([
+                'khotib' => true,
+            ]);
+            $this->alert(
+                'success',
+                'Data khotib berhasil ditambahkan'
             );
         } catch (\Throwable $th) {
             $this->alert(

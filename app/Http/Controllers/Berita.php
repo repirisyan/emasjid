@@ -31,7 +31,6 @@ class Berita extends Controller
                 ModelsBerita::find($id)->update([
                     'judul' => $request->judul,
                     'berita' => $request->deskripsi,
-                    'status' => 0,
                     'thumbnail' => $filename,
                     'updated_at' => now()
                 ]);
@@ -39,7 +38,6 @@ class Berita extends Controller
                 ModelsBerita::find($id)->update([
                     'judul' => $request->judul,
                     'berita' => $request->deskripsi,
-                    'status' => 0,
                     'updated_at' => now()
                 ]);
             }

@@ -60,6 +60,7 @@ class Galeri extends Component
             $this->thumbnail->storeAs('public/galeri', $filename);
             ModelsGaleri::create([
                 'keterangan' => $this->keterangan,
+                'kategori' => 1,
                 'picture' => $filename
             ]);
             $this->alert(

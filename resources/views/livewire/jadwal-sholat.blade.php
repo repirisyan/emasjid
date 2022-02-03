@@ -1,4 +1,4 @@
-<div>
+<div wire:init="loadPosts">
     {{-- The Master doesn't talk, he acts. --}}
     <div class="card">
         <div class="card-header">
@@ -11,15 +11,17 @@
                     <thead>
                         <tr>
                             <th scope="col">Tanggal</th>
-                            <th scope="col">Ustadz</th>
+                            <th scope="col">Imam</th>
+                            <th scope="col">Khotib</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody wire:init="loadPosts">
                         @foreach ($data_sholat as $item)
                             <tr>
-                                <td>{{ $item->tanggal_kegiatan }}</td>
-                                <td>{{ $item->user->name }}</td>
+                                <td>{{ $item->tanggal }}</td>
+                                <td>{{ $item->imam->name }}</td>
+                                <td>{{ $item->khotib->name }}</td>
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button"
@@ -29,7 +31,7 @@
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                             <button wire:loading.attr="disabled" type="button" data-toggle="modal"
                                                 data-target="#modalUbah" class="dropdown-item"
-                                                wire:click="edit('{{ $item->id }}','{{ $item->tanggal_kegiatan }}','{{ $item->user->id }}')"><i
+                                                wire:click="edit('{{ $item->id }}','{{ $item->tanggal }}','{{ $item->imam_id }}','{{ $item->khotib_id }}')"><i
                                                     class="fa fa-fw fa-edit"></i>&nbsp;Ubah</button>
                                             <button wire:loading.attr="disabled" type="button" data-toggle="modal"
                                                 data-target="#modalHapus" class="dropdown-item text-danger"
@@ -70,13 +72,22 @@
                         @error('tanggal_kegiatan') <div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                     <div class="form-group">
-                        <select wire:model.defer="user_id" class="form-control @error('user_id') is-invalid @enderror">
-                            <option>Pilih Ustadz</option>
-                            @foreach ($data_ustadz as $item)
+                        <select wire:model.defer="imam_id" class="form-control @error('imam_id') is-invalid @enderror">
+                            <option>Pilih Imam</option>
+                            @foreach ($imam as $item)
                                 <option value={{ $item->id }}>{{ $item->name }}</option>
                             @endforeach
                         </select>
-                        @error('user_id') <div class="invalid-feedback">{{ $message }}</div>@enderror
+                        @error('imam_id') <div class="invalid-feedback">{{ $message }}</div>@enderror
+                    </div>
+                    <div class="form-group">
+                        <select wire:model.defer="khotib_id" class="form-control @error('khotib_id') is-invalid @enderror">
+                            <option>Pilih Khotib</option>
+                            @foreach ($khotib as $item)
+                                <option value={{ $item->id }}>{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('khotib_id') <div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -107,12 +118,20 @@
                         @error('tanggal_kegiatan') <div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                     <div class="form-group">
-                        <select wire:model.defer="user_id" class="form-control @error('user_id') is-invalid @enderror">
-                            @foreach ($data_ustadz as $item)
+                        <select wire:model.defer="imam_id" class="form-control @error('imam_id') is-invalid @enderror">
+                            @foreach ($imam as $item)
                                 <option value={{ $item->id }}>{{ $item->name }}</option>
                             @endforeach
                         </select>
-                        @error('user_id') <div class="invalid-feedback">{{ $message }}</div>@enderror
+                        @error('imam_id') <div class="invalid-feedback">{{ $message }}</div>@enderror
+                    </div>
+                    <div class="form-group">
+                        <select wire:model.defer="khotib_id" class="form-control @error('khotib_id') is-invalid @enderror">
+                            @foreach ($imam as $item)
+                                <option value={{ $item->id }}>{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('khotib_id') <div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -18,7 +18,7 @@ class CreateKegiatan extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('nama_kegiatan');
             $table->date('tanggal_kegiatan');
-            $table->unsignedInteger('jenis_kegiatan');
+            $table->enum('jenis_kegiatan',[2]);  //2 Kajian Rutin
             $table->timestamps();
         });
     }

@@ -34,6 +34,10 @@ class AuthServiceProvider extends ServiceProvider
             return ($user->role == 3 && $user->id_jabatan == null);
         });
 
+        Gate::define('isUstadz', function (User $user) {
+            return ($user->role == 4);
+        });
+
         Gate::define('isUser', function (User $user) {
             return ($user->role == 2);
         });

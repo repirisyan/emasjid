@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Profil Masjid')
+@section('title', 'Profil Masjid Logo')
 
 @section('content_header')
-    <h1>Profil Masjid</h1>
+    <h1>Logo Masjid</h1>
     <hr>
 @stop
 

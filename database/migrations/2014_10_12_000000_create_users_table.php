@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->enum('id_jabatan',[1,2,3,4])->nullable(); // 1 = distribusi, 2 = produksi, 3 = bendahara, 4 = ketua
+            $table->enum('id_jabatan', [1, 2, 3, 4])->nullable(); // 1 = distribusi, 2 = produksi, 3 = bendahara, 4 = ketua
             $table->string('name');
             $table->string('range_gaji')->nullable();
             $table->string('password');
@@ -27,6 +27,9 @@ class CreateUsersTable extends Migration
             $table->char('JenisKelamin');
             $table->string('role');
             $table->string('picture');
+            $table->boolean('imam')->nullable();
+            $table->boolean('muadzin')->nullable();
+            $table->boolean('khotib')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

@@ -30,7 +30,7 @@ class HomeGaleri extends Component
     public function render()
     {
         return view('livewire.home-galeri', [
-            'data' => $this->readyToLoad ? Galeri::orderBy('created_at', 'asc')->simplePaginate(8) : [],
+            'data' => $this->readyToLoad ? Galeri::where('kategori', 1)->orderBy('created_at', 'asc')->simplePaginate(8) : [],
         ]);
     }
 }

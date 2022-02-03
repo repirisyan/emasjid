@@ -36,6 +36,11 @@ class Berita extends Component
         $this->readyToLoad = false;
     }
 
+    public function updated()
+    {
+        $this->resetPage();
+    }
+
 
     public function loadPosts()
     {
@@ -75,6 +80,7 @@ class Berita extends Component
                 'berita' => $this->deskripsi,
                 'user_id' => auth()->user()->id,
                 'status' => $status,
+                'kategori' => 1,
                 'thumbnail' => $filename,
             ]);
             $this->flash('success', 'Data Berhasil Disimpan', [], 'pengurus/berita');

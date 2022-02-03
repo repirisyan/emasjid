@@ -49,6 +49,24 @@
                                                 data-target="#modalDetail">
                                                 <i class="fa fa-fw fa-info"></i>&nbsp;Detail
                                             </button>
+                                            @if ($item->JenisKelamin == 'Laki-laki')
+                                                @if ($item->imam == null)
+                                                    <button class="dropdown-item" wire:loading.attr="disabled"
+                                                        type="button" wire:click="triggerImam({{ $item->id }})"><i
+                                                            class="fa fa-fw fa-dot-circle"></i>Imam</button>
+                                                @endif
+                                                @if ($item->muadzin == null)
+                                                    <button class="dropdown-item" wire:loading.attr="disabled"
+                                                        type="button"
+                                                        wire:click="triggerMuadzin({{ $item->id }})"><i
+                                                            class="fa fa-fw fa-dot-circle"></i>Muadzin</button>
+                                                @endif
+                                                @if ($item->khotib == null)
+                                                    <button class="dropdown-item" wire:loading.attr="disabled"
+                                                        type="button" wire:click="triggerKhotib({{ $item->id }})"><i
+                                                            class="fa fa-fw fa-dot-circle"></i>Khotib</button>
+                                                @endif
+                                            @endif
                                             <button wire:loading.attr="disabled" type="button"
                                                 class="dropdown-item text-danger"
                                                 wire:click="triggerConfirmPengurus({{ $item->id }})"><i

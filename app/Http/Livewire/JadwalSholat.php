@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Kegiatan;
+use App\Models\SholatJumat;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -13,9 +13,10 @@ class JadwalSholat extends Component
     use LivewireAlert;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
-    public $user_id, $tanggal_kegiatan, $new_id, $readyToLoad;
+    public $imam_id, $khotib_id, $tanggal_kegiatan, $new_id, $readyToLoad;
     protected $rules = [
-        'user_id' => ['required'],
+        'imam_id' => ['required'],
+        'khotib_id' => ['required'],
         'tanggal_kegiatan' => ['required'],
     ];
     protected $listeners = [
@@ -36,8 +37,9 @@ class JadwalSholat extends Component
     public function render()
     {
         return view('livewire.jadwal-sholat', [
-            'data_sholat' => $this->readyToLoad ? Kegiatan::with('user')->where('jenis_kegiatan', 1)->simplePaginate(10) : [],
-            'data_ustadz' => $this->readyToLoad ? User::where('role', '4')->where('JenisKelamin', 'Laki-laki')->select('id', 'name')->get() : [],
+            'data_sholat' => $this->readyToLoad ? SholatJumat::with(['imam', 'khotib'])->simplePaginate(10) : [],
+            'imam' => $this->readyToLoad ? User::where('imam', true)->select('id', 'name')->get() : [],
+            'khotib' => $this->readyToLoad ? User::where('khotib', true)->select('id', 'name')->get() : [],
         ]);
     }
 
@@ -51,11 +53,10 @@ class JadwalSholat extends Component
     {
         $this->validate();
         try {
-            Kegiatan::create([
-                'user_id' => $this->user_id,
-                'tanggal_kegiatan' => $this->tanggal_kegiatan,
-                'jenis_kegiatan' => '1',
-                'nama_kegiatan' => 'Sholat Jumat',
+            SholatJumat::create([
+                'imam_id' => $this->imam_id,
+                'khotib_id' => $this->khotib_id,
+                'tanggal' => $this->tanggal_kegiatan,
             ]);
             $this->alert(
                 'success',
@@ -86,20 +87,22 @@ class JadwalSholat extends Component
         $this->new_id = $id;
     }
 
-    public function edit($id, $tanggal, $name)
+    public function edit($id, $tanggal, $imam, $khotib)
     {
         $this->new_id = $id;
         $this->tanggal_kegiatan = $tanggal;
-        $this->user_id = $name;
+        $this->imam_id = $imam;
+        $this->khotib_id = $khotib;
     }
 
     public function update()
     {
         $this->validate();
         try {
-            Kegiatan::find($this->new_id)->update([
-                'user_id' => $this->user_id,
-                'tanggal_kegiatan' => $this->tanggal_kegiatan,
+            SholatJumat::find($this->new_id)->update([
+                'imam_id' => $this->imam_id,
+                'khotib_id' => $this->khotib_id,
+                'tanggal' => $this->tanggal_kegiatan,
                 'updated_at' => now(),
             ]);
 
@@ -123,7 +126,7 @@ class JadwalSholat extends Component
     {
         // Example code inside confirmed callback
         try {
-            Kegiatan::destroy($this->new_id);
+            SholatJumat::destroy($this->new_id);
             $this->alert(
                 'success',
                 'Data berhasil dihapus'

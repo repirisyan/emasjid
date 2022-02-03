@@ -11,7 +11,7 @@
             </button>
         </div>
         <div class="card-body">
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs" style="white-space: nowrap">
                 <li class="nav-item">
                     <a class="nav-link {{ $kategori == 1 ? 'active' : null }}" href="#"
                         wire:click="menu('1')">Pemasukan</a>

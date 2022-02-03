@@ -70,6 +70,7 @@ class Kernel extends HttpKernel
         'is_bendahara' => \App\Http\Middleware\isBendahara::class,
         'is_distribusi' => \App\Http\Middleware\isDistribusi::class,
         'is_ketua' => \App\Http\Middleware\isKetua::class,
+        'kajian' => \App\Http\Middleware\KajianOnline::class,
         'laporan_keuangan' => \App\Http\Middleware\LaporanKeuangan::class,
     ];
 }

@@ -15,8 +15,8 @@ class CreateProfileMasjidsTable extends Migration
     {
         Schema::create('profile_masjids', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('picture');
+            $table->text('visi_misi')->nullable();
+            $table->text('sejarah')->nullable();
             $table->timestamps();
         });
     }

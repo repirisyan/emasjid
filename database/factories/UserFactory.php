@@ -32,7 +32,7 @@ class UserFactory extends Factory
             'kontak' => $this->faker->phoneNumber(),
             'email' => $this->faker->email(),
             'JenisKelamin' => $this->faker->randomElement(['Laki-laki', 'Perempuan']),
-            'role' => 2,
+            'role' => 4,
             'id_jabatan' => null,
             'password' => Hash::make("12345"),
             'picture' => 'default_picture.png',

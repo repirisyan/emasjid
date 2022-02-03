@@ -103,7 +103,7 @@
                     </div>
                 </div>
             </div>
-            <h5 class="text-uppercase mt-4"><i class="fa fa-fw fa-calendar"></i>&nbsp;Jadwal Kajian</h5>
+            <h5 class="text-uppercase mt-4"><i class="fa fa-fw fa-calendar"></i>&nbsp;Jadwal Kajian Rutin</h5>
             <hr>
             <div class="row">
                 <div class="col-md-12">
@@ -123,8 +123,6 @@
                                             <p class="card-text">{{ $item->nama_kegiatan }}</p>
                                             <small class="text-center"><i class="fa fa-fw fa-calendar"></i>
                                                 {{ date_format($date, 'd M Y') }}</small>
-                                            <small class="text-center"><i class="fa fa-fw fa-location-arrow"></i>
-                                                E-Masjid</small>
                                         </div>
                                     </div>
                                 </div>
@@ -154,7 +152,7 @@
             </p>
             <hr>
             <h5 class="text-uppercase"><i class="fab fa-youtube"></i>&nbsp;Youtube Channel</h5>
-            <a href="https://www.youtube.com/channel/UC9R7JphX0QnHTUqiZMbJIkg/featured" target="_blank"
+            <a href="https://www.youtube.com/channel/UCB90AaWC9Z3DDp_i88Hf9RA" target="_blank"
                 class="btn bg-teal text-white"><i class="fab fa-youtube"></i>&nbsp;Subscribe</a>
             <hr>
             <div class="card card-outline card-teal shadow">
@@ -162,28 +160,31 @@
                     <h5 class="text-uppercase text-center">Jadwal Sholat Jumat</h5>
                 </div>
                 <div class="card-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Imam</th>
-                                <th>Tanggal</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($data_sholat as $item)
-                                @php
-                                    $date = date_create($item->tanggal_kegiatan);
-                                @endphp
+                    <div class="table-responsive" style="white-space: nowrap">
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td>{{ $item->user->name }}</td>
-                                    <td>{{ date_format($date, 'd M') }}</td>
+                                    <th>Imam</th>
+                                    <th>Khotib</th>
+                                    <th>Tanggal</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($data_sholat as $item)
+                                    @php
+                                        $date = date_create($item->tanggal);
+                                    @endphp
+                                    <tr>
+                                        <td>{{ $item->imam->name }}</td>
+                                        <td>{{ $item->khotib->name }}</td>
+                                        <td>{{ date_format($date, 'd M') }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <hr>
 </div>
