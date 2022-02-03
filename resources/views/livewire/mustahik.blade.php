@@ -4,7 +4,7 @@
         <div class="card-header">
             <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalTambah"><i
                     class="fa fa-fw fa-plus"></i> Tambah</button>
-            <a class="btn btn-sm btn-secondary" href="#" target="__blank">Export&nbsp;<i
+            <a class="btn btn-sm btn-secondary" href="{{ url('mustahik/export/') }}">Export&nbsp;<i
                     class="fa fa-fw fa-file-excel"></i></a>
             <div class="form-inline float-right">
                 <input class="form-control" wire:model.lazy="search" type="search" placeholder="Cari Nama..."

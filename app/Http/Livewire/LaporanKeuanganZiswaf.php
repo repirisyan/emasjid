@@ -44,6 +44,11 @@ class LaporanKeuanganZiswaf extends Component
         $this->readyToLoad = true;
     }
 
+    public function updated()
+    {
+        $this->resetPage();
+    }
+
     public function resetFields()
     {
         $this->resetValidation();

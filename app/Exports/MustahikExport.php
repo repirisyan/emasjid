@@ -14,7 +14,7 @@ class MustahikExport implements FromView
     public function view(): View
     {
         return view('admin.laporan.mustahik', [
-            'invoices' => Mustahik::all()
+            'data' => Mustahik::orderBy('desa', 'asc')->get()
         ]);
     }
 }
