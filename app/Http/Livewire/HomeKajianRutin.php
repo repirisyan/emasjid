@@ -26,7 +26,7 @@ class HomeKajianRutin extends Component
     public function render()
     {
         return view('livewire.home-kajian-rutin', [
-            'data' => $this->readyToLoad ? Kegiatan::with('user')->where('jenis_kegiatan', 2)->simplePaginate($this->paginateLimit) : [],
+            'data' => $this->readyToLoad ? Kegiatan::with('user')->where('jenis_kegiatan', '2')->simplePaginate($this->paginateLimit) : [],
         ]);
     }
 }

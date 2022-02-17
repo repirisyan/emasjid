@@ -91,7 +91,7 @@
                                 <td><i class="fa fa-fw fa-envelope"></i> {{ $email }}</td>
                             </tr>
                             <tr>
-                                <th class="text-muted">Range Gaji</th>
+                                <th class="text-muted">Range Penghasilan</th>
                                 <td><i class="fa fa-fw fa-money-bill"></i> {{ $range_gaji }}</td>
                             </tr>
                             <tr>
