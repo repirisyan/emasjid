@@ -185,7 +185,7 @@ class Pengurus extends Component
     {
         try {
             User::find($this->new_id)->update([
-                'id_jabatan' => 0,
+                'id_jabatan' => null,
                 'role' => 2,
                 'updated_at' => now()
             ]);
