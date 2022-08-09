@@ -56,11 +56,6 @@
                                                             class="fa fa-fw fa-dot-circle"></i>Khotib</button>
                                                 @endif
                                             @endif
-                                            <button class="dropdown-item" type="button" data-toggle="modal"
-                                                data-target="#modalUbah"
-                                                wire:click="$set('new_id','{{ $item->id }}')"><i
-                                                    class="fa fa-fw fa-user"></i>Hak
-                                                Akses</button>
                                             <button class="dropdown-item text-danger" type="button"
                                                 wire:click="triggerConfirm('{{ $item->id }}')"><i
                                                     class="fa fa-fw fa-trash"></i>Hapus</button>
@@ -81,7 +76,7 @@
     </div>
 
     <!-- Modal Ubah-->
-    <div wire:ignore.self.prevent class="modal fade" data-backdrop="static" data-keyboard="false" id="modalTambah"
+    <div wire:ignore.self.prevent class="modal fade" data-backdrop="static" data-keyboard="false" id="modalUbah"
         tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -106,7 +101,8 @@
                                             class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span>
                                     </div>
                                 </div>
-                                @error('name') <div class="invalid-feedback">{{ $message }}</div>
+                                @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -121,7 +117,8 @@
                                     </div>
                                 </div>
 
-                                @error('TanggalLahir') <div class="invalid-feedback">{{ $message }}</div>
+                                @error('TanggalLahir')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -138,7 +135,8 @@
                                     </div>
                                 </div>
 
-                                @error('TempatLahir') <div class="invalid-feedback">{{ $message }}</div>
+                                @error('TempatLahir')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -158,7 +156,8 @@
                                     </div>
                                 </div>
 
-                                @error('JenisKelamin') <div class="invalid-feedback">{{ $message }}</div>
+                                @error('JenisKelamin')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -175,7 +174,8 @@
                                     </div>
                                 </div>
 
-                                @error('email') <div class="invalid-feedback">{{ $message }}</div>
+                                @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
@@ -192,7 +192,8 @@
                                     </div>
                                 </div>
 
-                                @error('kontak') <div class="invalid-feedback">{{ $message }}</div>
+                                @error('kontak')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -206,7 +207,8 @@
                                             class="fas fa-location-arrow {{ config('adminlte.classes_auth_icon', '') }}"></span>
                                     </div>
                                 </div>
-                                @error('alamat') <div class="invalid-feedback">{{ $message }}</div>
+                                @error('alamat')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -227,7 +229,8 @@
                                     </div>
                                 </div>
 
-                                @error('JenisKelamin') <div class="invalid-feedback">{{ $message }}</div>
+                                @error('JenisKelamin')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -253,7 +256,8 @@
                                     </div>
                                 </div>
 
-                                @error('range_gaji') <div class="invalid-feedback">{{ $message }}</div>
+                                @error('range_gaji')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
@@ -294,7 +298,8 @@
                                             class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span>
                                     </div>
                                 </div>
-                                @error('name') <div class="invalid-feedback">{{ $message }}</div>
+                                @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -309,7 +314,8 @@
                                     </div>
                                 </div>
 
-                                @error('TanggalLahir') <div class="invalid-feedback">{{ $message }}</div>
+                                @error('TanggalLahir')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -326,7 +332,8 @@
                                     </div>
                                 </div>
 
-                                @error('TempatLahir') <div class="invalid-feedback">{{ $message }}</div>
+                                @error('TempatLahir')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -346,7 +353,8 @@
                                     </div>
                                 </div>
 
-                                @error('JenisKelamin') <div class="invalid-feedback">{{ $message }}</div>
+                                @error('JenisKelamin')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -363,7 +371,8 @@
                                     </div>
                                 </div>
 
-                                @error('email') <div class="invalid-feedback">{{ $message }}</div>
+                                @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
@@ -380,7 +389,8 @@
                                     </div>
                                 </div>
 
-                                @error('kontak') <div class="invalid-feedback">{{ $message }}</div>
+                                @error('kontak')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -394,7 +404,8 @@
                                             class="fas fa-location-arrow {{ config('adminlte.classes_auth_icon', '') }}"></span>
                                     </div>
                                 </div>
-                                @error('alamat') <div class="invalid-feedback">{{ $message }}</div>
+                                @error('alamat')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -415,7 +426,8 @@
                                     </div>
                                 </div>
 
-                                @error('JenisKelamin') <div class="invalid-feedback">{{ $message }}</div>
+                                @error('JenisKelamin')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -441,7 +453,8 @@
                                     </div>
                                 </div>
 
-                                @error('range_gaji') <div class="invalid-feedback">{{ $message }}</div>
+                                @error('range_gaji')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>

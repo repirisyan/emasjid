@@ -1,11 +1,11 @@
 @extends('adminlte::master')
 
-@php($dashboard_url = View::getSection('dashboard_url') ?? config('adminlte.dashboard_url', 'home'))
+@php( $dashboard_url = View::getSection('dashboard_url') ?? config('adminlte.dashboard_url', 'home') )
 
 @if (config('adminlte.use_route_url', false))
-    @php($dashboard_url = $dashboard_url ? route($dashboard_url) : '')
+    @php( $dashboard_url = $dashboard_url ? route($dashboard_url) : '' )
 @else
-    @php($dashboard_url = $dashboard_url ? url($dashboard_url) : '')
+    @php( $dashboard_url = $dashboard_url ? url($dashboard_url) : '' )
 @endif
 
 @section('adminlte_css')
@@ -16,11 +16,11 @@
 @section('classes_body'){{ ($auth_type ?? 'login') . '-page' }}@stop
 
 @section('body')
-    <div class="w-auto container-sm {{ $auth_type ?? 'login' }}-box">
+    <div class="{{ $auth_type ?? 'login' }}-box">
 
         {{-- Logo --}}
         <div class="{{ $auth_type ?? 'login' }}-logo">
-            <a class="text-decoration-none text-black-50" href="{{ $dashboard_url }}">
+            <a href="{{ $dashboard_url }}">
                 <img src="{{ asset(config('adminlte.logo_img')) }}" height="50">
                 {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
             </a>
@@ -33,7 +33,6 @@
             @hasSection('auth_header')
                 <div class="card-header {{ config('adminlte.classes_auth_header', '') }}">
                     <h3 class="card-title float-none text-center">
-                        <a href="/" class="text-teal"><i class="fa fa-fw fa-home"></i></a>
                         @yield('auth_header')
                     </h3>
                 </div>

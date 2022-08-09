@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('kontak')->unique();
             $table->string('email')->unique()->nullable();
             $table->char('JenisKelamin');
-            $table->string('role');
+            $table->enum('role', [2, 3, 4]); // 2 = Jamaah, 3 = Pengurus, 4 = Ustadz
             $table->string('picture');
             $table->boolean('imam')->nullable();
             $table->boolean('muadzin')->nullable();
