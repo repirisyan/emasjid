@@ -168,23 +168,14 @@ Route::middleware(['is_pengurus', 'auth'])->group(function () {
     Route::patch('pengurus/berita/{id}/update', [App\Http\Controllers\Berita::class, 'update']);
 });
 
-Route::middleware(['is_admin', 'auth'])->group(function () {
-    Route::get('/users', function () {
-        return view('admin.kelola_akun');
-    });
-    Route::get('admin/settings/masjid/logo', function () {
-        return view('admin.profile_masjid');
+Route::middleware('auth')->group(function () {
+
+    Route::group(['middleware' => 'can:admin', 'prefix' => 'admin'], function () {
+        Route::get('/kelola-user', function () {
+            return view('admin.kelola_users');
+        })->name('admin.users');
     });
 
-    Route::get('admin/settings/masjid/struktur-organisasi', function () {
-        return view('admin.profile_struktur_organisasi');
-    });
-    Route::get('admin/settings/masjid/visimisi', [App\Http\Controllers\MasjidVisiController::class, 'index'])->name('masjid.visi_misi');
-    Route::get('admin/settings/masjid/sejarah', [App\Http\Controllers\MasjidVisiController::class, 'sejarah']);
-    Route::post('admin/settings/masjid/visimisi/update', [App\Http\Controllers\MasjidVisiController::class, 'update']);
-    Route::post('admin/settings/masjid/sejarah/update', [App\Http\Controllers\MasjidVisiController::class, 'update_sejarah']);
-    Route::get('ziswaf/visimisi', [App\Http\Controllers\ZiswafVisiMisi::class, 'index'])->name('ziswaf.visi_misi');
-    Route::post('ziswaf/visimisi/update', [App\Http\Controllers\ZiswafVisiMisi::class, 'update']);
     Route::get('/users/pengurus', function () {
         return view('admin.pengurus');
     });

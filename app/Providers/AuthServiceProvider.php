@@ -26,34 +26,34 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('isAdmin', function (User $user) {
+        Gate::define('admin', function (User $user) {
             return ($user->role == 1);
         });
 
-        Gate::define('isPengurus', function (User $user) {
+        Gate::define('pengurus', function (User $user) {
             return ($user->role == 3 && $user->id_jabatan == null);
         });
 
-        Gate::define('isUstadz', function (User $user) {
+        Gate::define('ustadz', function (User $user) {
             return ($user->role == 4);
         });
 
-        Gate::define('isUser', function (User $user) {
+        Gate::define('user', function (User $user) {
             return ($user->role == 2);
         });
 
-        Gate::define('isProduksi', function (User $user) {
+        Gate::define('produksi', function (User $user) {
             return ($user->id_jabatan == 2);
         });
 
-        Gate::define('isDistribusi', function (User $user) {
+        Gate::define('distribusi', function (User $user) {
             return ($user->id_jabatan == 1);
         });
 
-        Gate::define('isBendahara', function (User $user) {
+        Gate::define('bendahara', function (User $user) {
             return ($user->id_jabatan == 3);
         });
-        Gate::define('isKetua', function (User $user) {
+        Gate::define('ketua', function (User $user) {
             return ($user->id_jabatan == 4);
         });
         //

@@ -34,7 +34,8 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ asset('storage/logo/mosque.png') }}"
                     alt="" style="width: 25px; heigh:25px">
-                <small> E-Masjid</small></a>
+                <small>&nbsp;{{ env('APP_NAME') }}
+                </small></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -42,10 +43,14 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item @if (Request::is('home/ustadz') || Request::is('home/profile/visimisi') || Request::is('home/profile/sejarah') || Request::is('home/profile/organisasi') || Request::is('home/imam-muadzin')) active @endif dropdown">
+                    <li class="nav-item @if (Request::is('home/ustadz') ||
+                        Request::is('home/profile/visimisi') ||
+                        Request::is('home/profile/sejarah') ||
+                        Request::is('home/profile/organisasi') ||
+                        Request::is('home/imam-muadzin')) active @endif dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-fw fa-mosque"></i>&nbsp;Profil
+                            <i class="fa fa-fw fa-mosque"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ url('home/profile/visimisi') }}">Visi Misi</a>
@@ -59,7 +64,7 @@
                     <li class="nav-item @if (Request::is('home/kajian-rutin') || Request::is('home/sholat-jumat') || Request::is('home/kajian-online')) active @endif dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
                             data-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-fw fa-quran"></i>&nbsp;Kajian
+                            <i class="fa fa-fw fa-quran"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
                             <a class="dropdown-item" href="{{ url('home/kajian-online') }}">Kajian Online</a>
@@ -71,7 +76,7 @@
                     <li class="nav-item @if (Request::is('home/ziswaf/visimisi') || Request::is('home/galeri/ziswaf')) active @endif dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button"
                             data-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-fw fa-users"></i>&nbsp;Divisi Ziswaf
+                            <i class="fa fa-fw fa-users"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
                             <a class="dropdown-item" href="{{ url('home/ziswaf/visimisi') }}">Visi Misi</a>
@@ -81,7 +86,7 @@
                     <li class="nav-item @if (Request::is('home/keuangan') || Request::is('home/keuangan/ziswaf')) active @endif dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button"
                             data-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-fw fa-file"></i>&nbsp;Laporan
+                            <i class="fa fa-fw fa-file"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
                             <a class="dropdown-item" href="{{ url('home/keuangan') }}">Laporan Kas Operational
@@ -91,12 +96,12 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('home/event') ? 'active' : '' }}" aria-current="page"
-                            href="{{ url('home/event') }}"><i class="fa fa-fw fa-calendar"></i> Event</a>
+                            href="{{ url('home/event') }}"><i class="fa fa-fw fa-calendar"></i></a>
                     </li>
                     <li class="nav-item @if (Request::is('home/galeri') || Request::is('home/berita')) active @endif dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button"
                             data-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-fw fa-image"></i>&nbsp;Galeri
+                            <i class="fa fa-fw fa-image"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
                             <a class="dropdown-item" href="{{ url('home/galeri') }}">Foto</a>
@@ -106,11 +111,11 @@
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('home/qurban/monitoring') ? 'active' : '' }}"
                             aria-current="page" href="{{ route('home.monitoring_qurban') }}"><i
-                                class="fa fa-fw fa-desktop"></i> Monitoring Qurban</a>
+                                class="fa fa-fw fa-desktop"></i></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('home/kontak') ? 'active' : '' }}" aria-current="page"
-                            href="{{ url('home/kontak') }}"><i class="fa fa-fw fa-envelope"></i>&nbsp;Kontak</a>
+                            href="{{ url('home/kontak') }}"><i class="fa fa-fw fa-envelope"></i></a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
@@ -143,8 +148,8 @@
         <hr>
         <div class="card-footer bg-light bg-gradient text-black text-center">
             <div>
-                CopyRight &copy; Repi Maulana Risyan</div> <a target="__blank" href="https://github.com/repirisyan98"><i
-                    class="fab fa-github"></i>&nbsp;repirisyan98</a>
+                CopyRight &copy; Repi Maulana Risyan</div> <a target="__blank"
+                href="https://github.com/repirisyan98"><i class="fab fa-github"></i>&nbsp;repirisyan98</a>
         </div>
     </footer>
     @livewireScripts

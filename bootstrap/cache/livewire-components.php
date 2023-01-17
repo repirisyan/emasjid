@@ -1,4 +1,5 @@
 <?php return array (
+  'admin.users' => 'App\\Http\\Livewire\\Admin\\Users',
   'berita' => 'App\\Http\\Livewire\\Berita',
   'dashboard' => 'App\\Http\\Livewire\\Dashboard',
   'distribusi' => 'App\\Http\\Livewire\\Distribusi',
@@ -43,10 +44,6 @@
   'pengajuan-anggaran' => 'App\\Http\\Livewire\\PengajuanAnggaran',
   'pengurus' => 'App\\Http\\Livewire\\Pengurus',
   'profile' => 'App\\Http\\Livewire\\Profile',
-  'profile-masjid' => 'App\\Http\\Livewire\\ProfileMasjid',
   'qurban' => 'App\\Http\\Livewire\\Qurban',
-  'sejarah' => 'App\\Http\\Livewire\\Sejarah',
-  'struktur-organisasi' => 'App\\Http\\Livewire\\StrukturOrganisasi',
-  'users' => 'App\\Http\\Livewire\\Users',
   'ustadz' => 'App\\Http\\Livewire\\Ustadz',
 );

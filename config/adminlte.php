@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'E-Masjid',
+    'title' => env("APP_NAME"),
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -30,12 +30,30 @@ return [
     |
     */
 
-    'use_ico_only' => true,
+    'use_ico_only' => false,
     'use_full_favicon' => false,
 
     /*
     |--------------------------------------------------------------------------
-    | Logo
+    | Google Fonts
+    |--------------------------------------------------------------------------
+    |
+    | Here you can allow or not the use of external google fonts. Disabling the
+    | google fonts may be useful if your admin panel internet access is
+    | restricted somehow.
+    |
+    | For detailed instructions you can look the google fonts section here:
+    | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
+    |
+    */
+
+    'google_fonts' => [
+        'allowed' => true,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Admin Panel Logo
     |--------------------------------------------------------------------------
     |
     | Here you can change the logo of your admin panel.
@@ -47,10 +65,57 @@ return [
 
     'logo' => '<b>E-masjid</b>',
     'logo_img' => 'storage/logo/mosque.png',
-    'logo_img_class' => 'brand-image img-circle elevation-1',
+    'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'E-Masjid',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Authentication Logo
+    |--------------------------------------------------------------------------
+    |
+    | Here you can setup an alternative logo to use on your login and register
+    | screens. When disabled, the admin panel logo will be used instead.
+    |
+    | For detailed instructions you can look the auth logo section here:
+    | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
+    |
+    */
+
+    'auth_logo' => [
+        'enabled' => true,
+        'img' => [
+            'path' => 'storage/logo/mosque.png',
+            'alt' => 'Auth Logo',
+            'class' => '',
+            'width' => 50,
+            'height' => 50,
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Preloader Animation
+    |--------------------------------------------------------------------------
+    |
+    | Here you can change the preloader animation configuration.
+    |
+    | For detailed instructions you can look the preloader section here:
+    | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
+    |
+    */
+
+    'preloader' => [
+        'enabled' => false,
+        'img' => [
+            'path' => 'storage/logo/mosque.png',
+            'alt' => 'AdminLTE Preloader Image',
+            'effect' => 'animation__shake',
+            'width' => 60,
+            'height' => 60,
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -66,7 +131,7 @@ return [
 
     'usermenu_enabled' => true,
     'usermenu_header' => true,
-    'usermenu_header_class' => 'bg-teal',
+    'usermenu_header_class' => 'bg-primary',
     'usermenu_image' => true,
     'usermenu_desc' => false,
     'usermenu_profile_url' => true,
@@ -102,12 +167,12 @@ return [
     |
     */
 
-    'classes_auth_card' => 'card-outline shadow card-teal',
-    'classes_auth_header' => 'bg-white',
-    'classes_auth_body' => 'bg-white text-muted',
-    'classes_auth_footer' => 'bg-white',
+    'classes_auth_card' => 'card-outline card-primary',
+    'classes_auth_header' => '',
+    'classes_auth_body' => '',
+    'classes_auth_footer' => '',
     'classes_auth_icon' => '',
-    'classes_auth_btn' => 'btn-flat bg-teal',
+    'classes_auth_btn' => 'btn-flat btn-primary',
 
     /*
     |--------------------------------------------------------------------------
@@ -123,12 +188,12 @@ return [
 
     'classes_body' => '',
     'classes_brand' => '',
-    'classes_brand_text' => 'text-black-50',
+    'classes_brand_text' => '',
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-light-primary sidebar-no-expand elevation-4',
-    'classes_sidebar_nav' => 'nav-flat',
+    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
@@ -208,7 +273,7 @@ return [
     |
     */
 
-    'enabled_laravel_mix' => false,
+    'enabled_laravel_mix' => true,
     'laravel_mix_css_path' => 'css/app.css',
     'laravel_mix_js_path' => 'js/app.js',
 
@@ -231,7 +296,7 @@ return [
         ],
         [
             'type'         => 'darkmode-widget',
-            'topnav_right' => false, // Or "topnav => true" to place on the left.
+            'topnav_right' => true, // Or "topnav => true" to place on the left.
         ],
         ['header' => 'MENU'],
         [
@@ -240,71 +305,44 @@ return [
             'url' => '/home',
         ],
         [
-            'text' => 'Profil Masjid',
-            'icon' => 'fas fa-fw fa-mosque',
-            'can'  => 'isAdmin',
-            'submenu' => [
-                [
-                    'text' => 'Logo',
-                    'url'  => 'admin/settings/masjid/logo',
-                    'icon' => 'fas fa-fw fa-dot-circle',
-                ],
-                [
-                    'text' => 'Visi Misi',
-                    'url'  => 'admin/settings/masjid/visimisi',
-                    'icon' => 'fas fa-fw fa-dot-circle',
-                ],
-                [
-                    'text' => 'Sejarah',
-                    'url'  => 'admin/settings/masjid/sejarah',
-                    'icon' => 'fas fa-fw fa-dot-circle',
-                ],
-                [
-                    'text' => 'Struktur Organisasi',
-                    'url'  => 'admin/settings/masjid/struktur-organisasi',
-                    'icon' => 'fas fa-fw fa-dot-circle',
-                ],
-            ]
-        ],
-        [
             'text'    => 'Kelola Akun',
             'icon'    => 'fas fa-fw fa-users',
-            'can'  => 'isAdmin',
+            'can'  => 'admin',
             'submenu' => [
                 [
                     'text'    => 'Users',
                     'icon'    => 'fas fa-fw fa-user',
-                    'can'  => 'isAdmin',
-                    'url'   => '/users',
+                    'can'  => 'admin',
+                    'route'   => 'admin.users',
                 ],
                 [
                     'text'    => 'Pengurus',
                     'icon'    => 'fas fa-fw fa-sitemap',
-                    'can'  => 'isAdmin',
+                    'can'  => 'admin',
                     'url'   => '/users/pengurus',
                 ],
                 [
                     'text'    => 'Ustadz',
                     'icon'    => 'fas fa-fw fa-user-shield',
-                    'can'  => 'isAdmin',
+                    'can'  => 'admin',
                     'url'   => '/users/ustadz',
                 ],
                 [
                     'text'    => 'Imam',
                     'icon'    => 'fas fa-fw fa-user-shield',
-                    'can'  => 'isAdmin',
+                    'can'  => 'admin',
                     'url'   => '/users/imam',
                 ],
                 [
                     'text'    => 'Muadzin',
                     'icon'    => 'fas fa-fw fa-user-shield',
-                    'can'  => 'isAdmin',
+                    'can'  => 'admin',
                     'url'   => '/users/muadzin',
                 ],
                 [
                     'text'    => 'Khotib',
                     'icon'    => 'fas fa-fw fa-user-shield',
-                    'can'  => 'isAdmin',
+                    'can'  => 'admin',
                     'url'   => '/users/khotib',
                 ],
             ],
@@ -312,25 +350,25 @@ return [
         [
             'text' => 'Divisi Ziswaf',
             'icon' => 'fas fa-fw fa-users',
-            'can' => ['isBendahara', 'isPengurus', 'isAdmin'],
+            'can' => ['bendahara', 'pengurus', 'admin'],
             'submenu' => [
                 [
                     'text' => 'Visi Misi',
                     'icon' => 'fas fa-fw fa-dot-circle',
                     'url' => 'ziswaf/visimisi',
-                    'can' => ['isAdmin', 'isPengurus']
+                    'can' => ['admin', 'pengurus']
                 ],
                 [
                     'text' => 'Laporan Keuangan',
                     'icon' => 'fas fa-fw fa-dot-circle',
                     'url' => 'ziswaf/keuangan',
-                    'can' => ['isAdmin', 'isBendahara']
+                    'can' => ['admin', 'bendahara']
                 ],
                 [
                     'text' => 'Galeri Kegiatan',
                     'icon' => 'fas fa-fw fa-dot-circle',
                     'url' => 'ziswaf/galeri',
-                    'can' => ['isAdmin', 'isPengurus']
+                    'can' => ['admin', 'pengurus']
                 ],
             ],
         ],
@@ -338,61 +376,61 @@ return [
             'text' => 'Berita',
             'icon' => 'fas fa-fw fa-newspaper',
             'url' => 'pengurus/berita',
-            'can' => ['isPengurus', 'isAdmin'],
+            'can' => ['pengurus', 'admin'],
         ],
         [
             'text' => 'Kajian Online',
             'icon' => 'fas fa-fw fa-newspaper',
             'url' => 'kajian/online',
-            'can' => ['isUstadz', 'isAdmin', 'isKetua'],
+            'can' => ['ustadz', 'admin', 'ketua'],
         ],
         [
             'text' => 'Galeri',
             'icon' => 'fas fa-fw fa-image',
             'url' => 'pengurus/galeri',
-            'can' => ['isPengurus', 'isAdmin'],
+            'can' => ['pengurus', 'admin'],
         ],
         [
             'text' => 'Event',
             'icon' => 'fas fa-fw fa-calendar',
             'url' => 'pengurus/event',
-            'can' => ['isPengurus', 'isAdmin'],
+            'can' => ['pengurus', 'admin'],
         ],
         [
             'text' => 'Mustahik',
             'icon' => 'fas fa-fw fa-user',
             'url' => 'pengurus/mustahik',
-            'can' => ['isPengurus', 'isAdmin'],
+            'can' => ['pengurus', 'admin'],
         ],
         [
             'text' => 'Keuangan',
             'icon' => 'fas fa-fw fa-money-bill-wave-alt',
-            'can' => ['isPengurus', 'isAdmin', 'isBendahara', 'isKetua'],
+            'can' => ['pengurus', 'admin', 'bendahara', 'ketua'],
             'submenu' => [
                 [
                     'text' => 'Laporan Keuangan',
                     'url' => 'keuangan/laporan',
                     'icon' => 'fas fa-fw fa-scroll',
-                    'can' => ['isBendahara', 'isAdmin', 'isKetua']
+                    'can' => ['bendahara', 'admin', 'ketua']
                 ],
                 [
                     'text' => 'Pengajuan Anggaran',
                     'url' => 'keuangan/pengajuan',
                     'icon' => 'fas fa-fw fa-hand-holding-usd',
-                    'can' => ['isPengurus', 'isAdmin']
+                    'can' => ['pengurus', 'admin']
                 ],
                 [
                     'text' => 'Konfirmasi Anggaran',
                     'url' => 'keuangan/pengajuan/konfirmasi',
                     'icon' => 'fas fa-fw fa-hand-holding-usd',
-                    'can' => ['isKetua', 'isAdmin']
+                    'can' => ['ketua', 'admin']
                 ],
             ],
         ],
         [
             'text' => 'Kelola Kegiatan',
             'icon' => 'fas fa-fw fa-calendar-week',
-            'can' => ['isPengurus', 'isAdmin'],
+            'can' => ['pengurus', 'admin'],
             'submenu' => [
                 [
                     'text' => 'Jadwal Sholat Jumat',
@@ -413,30 +451,30 @@ return [
                 [
                     'text' => 'Hewan',
                     'icon' => 'fas fa-fw fa-hippo',
-                    'can' => ['isBendahara', 'isAdmin'],
+                    'can' => ['bendahara', 'admin'],
                     'url' => '/pengurus/hewan_qurban',
                 ],
                 [
                     'text' => 'Konfirmasi Pembayaran',
                     'icon' => 'fas fa-fw fa-money-bill',
-                    'can' => ['isBendahara', 'isAdmin'],
+                    'can' => ['bendahara', 'admin'],
                     'url' => 'pengurus/qurban/pembayaran',
                 ],
                 [
                     'text' => 'Produksi',
                     'icon' => 'fas fa-fw fa-box-open',
-                    'can' => ['isProduksi', 'isAdmin'],
+                    'can' => ['produksi', 'admin'],
                     'submenu' => [
                         [
                             'text' => 'Penyembelihan',
                             'icon' => 'fas fa-fw fa-drumstick-bite',
-                            'can' => ['isProduksi', 'isAdmin'],
+                            'can' => ['produksi', 'admin'],
                             'url' => '/pengurus/produksi/penyembelihan',
                         ],
                         [
                             'text' => 'Pembungkusan',
                             'icon' => 'fas fa-fw fa-box',
-                            'can' => ['isProduksi', 'isAdmin'],
+                            'can' => ['produksi', 'admin'],
                             'url' => '/pengurus/produksi/pembungkusan',
                         ]
                     ]
@@ -445,18 +483,18 @@ return [
                 [
                     'text' => 'Distribusi',
                     'icon' => 'fas fa-fw fa-shipping-fast',
-                    'can' => ['isDistribusi', 'isAdmin'],
+                    'can' => ['distribusi', 'admin'],
                     'submenu' => [
                         [
                             'text' => 'Warga',
                             'icon' => 'fas fa-fw fa-users',
-                            'can' => ['isDistribusi', 'isAdmin'],
+                            'can' => ['distribusi', 'admin'],
                             'url' => '/qurban/distribusi'
                         ],
                         [
                             'text' => 'Shohibul',
                             'icon' => 'fas fa-fw fa-user',
-                            'can' => ['isDistribusi', 'isAdmin'],
+                            'can' => ['distribusi', 'admin'],
                             'url' => '/qurban/permintaan'
                         ],
                     ]
@@ -464,7 +502,7 @@ return [
                 [
                     'text' => 'Pendaftaran',
                     'icon' => 'fas fa-fw fa-clipboard-list',
-                    'can' => ['isUser', 'isAdmin'],
+                    'can' => ['user', 'admin'],
                     'url' => '/qurban/pendaftaran',
                 ],
                 [
@@ -475,7 +513,7 @@ return [
                 [
                     'text' => 'Laporan',
                     'icon' => 'fas fa-fw fa-file',
-                    'can' => ['isAdmin'],
+                    'can' => ['admin'],
                     'submenu' => [
                         [
                             'text' => 'Distribusi',
@@ -496,7 +534,7 @@ return [
             'text' => 'Kontak Pesan',
             'icon' => 'fas fa-fw fa-envelope',
             'url' => 'pengurus/kontak',
-            'can' => ['isPengurus', 'isAdmin'],
+            'can' => ['pengurus', 'admin'],
         ],
     ],
 
@@ -586,7 +624,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
+                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@11',
                 ],
             ],
         ],
@@ -596,12 +634,12 @@ return [
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => '//cdn.jsdelivr.net/npm/pace-js@latest/pace-theme-default.min.css',
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-center-radar.min.css',
                 ],
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js',
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
                 ],
             ],
         ],

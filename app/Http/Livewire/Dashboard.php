@@ -7,10 +7,22 @@ use Livewire\Component;
 
 class Dashboard extends Component
 {
+    public $readyToLoad;
+
+    public function mount()
+    {
+        $this->readyToLoad = false;
+    }
+
+    public function loadPosts()
+    {
+        $this->readyToLoad = true;
+    }
+
     public function render()
     {
         return view('livewire.dashboard', [
-            'saldo' => Saldo::value('jumlah_saldo'),
+            'saldo' => $this->readyToLoad ? Saldo::value('jumlah_saldo') : [],
         ]);
     }
 }
