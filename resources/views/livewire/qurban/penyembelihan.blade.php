@@ -83,7 +83,7 @@
                                                         </button>
                                                     @else
                                                         <button data-toggle="modal" data-target="#modalAntrian"
-                                                            wire:click="$set('qurban_id','{{ $item->id }}')"
+                                                            wire:click="set_data_antrian({{ $item->id }},{{ $item->master_hewan->id }})"
                                                             class="dropdown-item text-primary">
                                                             <i class="fa fa-fw fa-ticket-alt"></i> Buat Antrian
                                                         </button>

@@ -5,6 +5,8 @@ namespace App\Http\Livewire\Qurban;
 use App\Models\MasterHewan;
 use App\Models\Qurban as ModelsQurban;
 use App\Models\ShobulQurban;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -56,14 +58,25 @@ class Penyembelihan extends Component
         $this->resetExcept('filter_hewan', 'readyToLoad');
     }
 
+    public function set_data_antrian($qurban_id, $master_hewan_id)
+    {
+        $this->qurban_id = $qurban_id;
+        $this->master_hewan_id = $master_hewan_id;
+    }
+
     public function set_antrian()
     {
         //Need more advance validation
         $this->validate([
-            'antrian' => 'required'
+            'antrian' => 'required',
         ]);
+        if (ModelsQurban::where('master_hewan_id', $this->master_hewan_id)->where('antrian', $this->antrian)->whereYear('created_at', date('Y'))->exists()) {
+            return $this->alert(
+                'warning',
+                'Harap periksa kembali nomor antrian'
+            );
+        };
         try {
-            // $cek = ModelsQurban::where('master_hewan_id', $this->master_hewan_id)->where('antrian', $this->antrian)->whereYear('created_at', date('Y'))->lockForUpdate()->count();
             ModelsQurban::find($this->qurban_id)->update([
                 'antrian' => $this->antrian,
                 'updated_at' => now(),
