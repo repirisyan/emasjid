@@ -160,7 +160,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($data_sholat as $item)
+                        @forelse ($data_sholat as $item)
                             @php
                                 $date = date_create($item->tanggal);
                             @endphp
@@ -169,7 +169,13 @@
                                 <td>{{ $item->khotib->name }}</td>
                                 <td>{{ date_format($date, 'd M') }}</td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="3" class="text-center">
+                                    Tidak ada data
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
