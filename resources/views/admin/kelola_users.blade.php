@@ -3,7 +3,7 @@
 @section('title', 'Kelola Users')
 
 @section('content_header')
-    <h1>Users</h1>
+    <h1>Kelola User</h1>
     <hr>
 @stop
 
@@ -22,6 +22,8 @@
         window.livewire.on('userStore', () => {
             $('#modalTambah').modal('hide');
         });
+        window.livewire.on('userUpdateJabatan', () => {
+            $('#modalTambahJabatan').modal('hide');
+        });
     </script>
-
 @stop

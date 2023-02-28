@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\MasterHewan;
+use App\Models\ProfileMasjid;
 use App\Models\Saldo;
 use App\Models\User;
+use App\Models\ZiswafVisiMisi;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -41,6 +43,15 @@ class DatabaseSeeder extends Seeder
 
         MasterHewan::create([
             'nama' => 'Kambing'
+        ]);
+
+        ZiswafVisiMisi::create([
+            'visi_misi' => 'Visi Misi Ziswaf'
+        ]);
+
+        ProfileMasjid::create([
+            'visi_misi' => 'Visi Misi Masjid',
+            'sejarah' => 'Sejarah Masjid'
         ]);
     }
 }

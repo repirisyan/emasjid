@@ -17,7 +17,6 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->enum('id_jabatan', [1, 2, 3, 4])->nullable(); // 1 = distribusi, 2 = produksi, 3 = bendahara, 4 = ketua
             $table->string('name');
-            $table->string('range_gaji')->nullable();
             $table->string('password');
             $table->string('TempatLahir');
             $table->date('TanggalLahir');
@@ -25,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('kontak')->unique();
             $table->string('email')->unique()->nullable();
             $table->char('JenisKelamin');
-            $table->enum('role', [2, 3, 4]); // 2 = Jamaah, 3 = Pengurus, 4 = Ustadz
+            $table->enum('role', [1, 2, 3, 4]); //1 = Admin, 2 = Jamaah, 3 = Pengurus, 4 = Ustadz
             $table->string('picture');
             $table->boolean('imam')->nullable();
             $table->boolean('muadzin')->nullable();

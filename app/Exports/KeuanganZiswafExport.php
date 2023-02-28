@@ -21,7 +21,7 @@ class KeuanganZiswafExport implements FromView
 
     public function view(): View
     {
-        return view('admin.keuangan.keuangan_ziswaf_export', [
+        return view('ziswaf.keuangan_ziswaf_export', [
             'data' => KeuanganZiswaf::whereBetween('tanggal', [$this->dari, $this->sampai])->get()
         ]);
     }

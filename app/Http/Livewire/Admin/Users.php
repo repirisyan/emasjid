@@ -14,7 +14,10 @@ class Users extends Component
     use LivewireAlert;
     protected $paginationTheme = 'bootstrap';
 
-    public $readyToLoad, $created_at, $search, $name, $status, $TempatLahir, $range_gaji, $TanggalLahir, $alamat, $kontak, $email, $new_id, $JenisKelamin, $role;
+    public $readyToLoad, $created_at, $search, $filter_role, $filter_jabatan, $filter_status, $name, $status, $TempatLahir, $range_gaji, $TanggalLahir, $alamat, $kontak, $email, $new_id, $JenisKelamin, $role, $jabatan;
+
+    //Variable untuk mengatur status imam,muadzin dan khotib
+    public $status_id, $temp_status;
 
     public function mount()
     {
@@ -25,9 +28,8 @@ class Users extends Component
     protected $listeners = [
         'confirmed',
         'cancelled',
-        'confirmedImam',
-        'confirmedMuadzin',
-        'confirmedKhotib',
+        'confirmedStatus',
+        'deactiveJabatan'
     ];
 
 
@@ -39,17 +41,31 @@ class Users extends Component
     public function render()
     {
         return view('livewire.admin.users', [
-            'data_user' => $this->readyToLoad ? User::where('role', 2)->where('name', 'like', '%' . $this->search . '%')->simplePaginate(10) : [],
+            'data_user' => $this->readyToLoad ? User::when($this->search != null, function ($query) {
+                return $query->where('name', 'like', '%' . $this->search . '%');
+            })->when($this->filter_role != null, function ($query) {
+                return $query->orWhere('role', $this->filter_role);
+            })->when($this->filter_jabatan != null, function ($query) {
+                return $query->orWhere('id_jabatan', $this->filter_jabatan);
+            })->when($this->filter_status != null, function ($query) {
+                if ($this->filter_status == '1') {
+                    return $query->orWhere('imam', true);
+                } elseif ($this->filter_status == '2') {
+                    return $query->orWhere('muadzin', true);
+                } elseif ($this->filter_status == '3') {
+                    return $query->orWhere('khotib', true);
+                }
+            })->where('role', '!=', '1')->simplePaginate(10) : [],
         ]);
     }
 
     public function resetFields()
     {
         $this->resetValidation();
-        $this->resetExcept('readyToLoad');
+        $this->resetExcept('readyToLoad', 'search', 'filter_jabatan', 'filter_role');
     }
 
-    public function updated()
+    public function updatedSearch()
     {
         $this->resetPage();
     }
@@ -78,7 +94,10 @@ class Users extends Component
                 'range_gaji' => $this->range_gaji,
                 'role' => $this->status,
                 'password' => Hash::make('12345'),
-                'picture' => 'default_picture.png'
+                'picture' => 'default_picture.png',
+                'imam' => false,
+                'muadzin' => false,
+                'khotib' => false,
             ]);
             $this->alert(
                 'success',
@@ -95,8 +114,18 @@ class Users extends Component
         $this->resetFields();
     }
 
-    public function updateUser()
+    public function update()
     {
+        $this->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'TanggalLahir' => ['required'],
+            'TempatLahir' => ['required', 'max:255'],
+            'JenisKelamin' => ['required'],
+            'kontak' => ['required', 'digits_between:1,20'],
+            'alamat' => ['required', 'max:255'],
+            'status' => 'required',
+            'range_gaji' => 'required',
+        ]);
         try {
             User::find($this->new_id)->update([
                 'name' => $this->name,
@@ -119,8 +148,34 @@ class Users extends Component
                 'Terjadi kesalahan saat mengubah data'
             );
         }
-        $this->dispatchBrowserEvent('userUbah');
-        $this->emit('userUbah');
+        $this->dispatchBrowserEvent('userUpdate');
+        $this->emit('userUpdate');
+        $this->resetFields();
+    }
+
+    public function updateJabatan()
+    {
+        $this->validate([
+            'jabatan' => 'required',
+        ]);
+        try {
+            User::find($this->new_id)->update([
+                'id_jabatan' => $this->jabatan,
+                'updated_at' => now(),
+            ]);
+
+            $this->alert(
+                'success',
+                'Berhasil menambahkan jabatan',
+            );
+        } catch (\Exception $e) {
+            $this->alert(
+                'error',
+                'Terjadi kesalahan saat mengubah data'
+            );
+        }
+        $this->dispatchBrowserEvent('userUpdateJabatan');
+        $this->emit('userUpdateJabatan');
         $this->resetFields();
     }
 
@@ -140,30 +195,6 @@ class Users extends Component
         $this->created_at = $user->created_at;
     }
 
-    public function update()
-    {
-        $this->validate([
-            'status' => ['required'],
-        ]);
-        try {
-            User::find($this->new_id)->update([
-                'role' => $this->status,
-            ]);
-            $this->alert(
-                'success',
-                "Data berhasil diubah"
-            );
-        } catch (\Exception $e) {
-            $this->alert(
-                'error',
-                'Terjadi kesalahan saat mengubah data'
-            );
-        }
-        $this->dispatchBrowserEvent('userUpdate');
-        $this->emit('userUpdate');
-        $this->resetFields();
-    }
-
     public function triggerConfirm($id)
     {
         $this->confirm('Hapus User ?', [
@@ -178,49 +209,56 @@ class Users extends Component
         $this->new_id = $id;
     }
 
-    public function triggerImam($id)
+    public function triggerDeactiveJabatan($id)
     {
-        $this->confirm('Jadikan Imam ?', [
+        $this->confirm('Nonaktifkan Jabtan ?', [
             'toast' => false,
             'position' => 'center',
             'confirmButtonText' =>  'Ya',
             'cancelButtonText' =>  'Tidak',
-            'onConfirmed' => 'confirmedImam',
-            // 'onConfirmed' => ['confirmed', $id], you can pass argument with array
+            'onConfirmed' => 'deactiveJabatan',
             'onDismissed' => 'cancelled'
         ]);
 
         $this->new_id = $id;
     }
 
-    public function triggerMuadzin($id)
+    public function deactiveJabatan()
     {
-        $this->confirm('Jadikan Muadzin ?', [
-            'toast' => false,
-            'position' => 'center',
-            'confirmButtonText' =>  'Ya',
-            'cancelButtonText' =>  'Tidak',
-            'onConfirmed' => 'confirmedMuadzin',
-            // 'onConfirmed' => ['confirmed', $id], you can pass argument with array
-            'onDismissed' => 'cancelled'
-        ]);
-
-        $this->new_id = $id;
+        try {
+            User::find($this->new_id)->update([
+                'id_jabatan' => null,
+                'updated_at' => now(),
+            ]);
+            $this->alert(
+                'success',
+                'Jabatan berhasil dinonaktifkan'
+            );
+        } catch (\Throwable $th) {
+            $this->alert(
+                'error',
+                'Terjadi kesalahan saat mengubah status'
+            );
+        }
+        $this->resetExcept('readyToLoad');
     }
 
-    public function triggerKhotib($id)
+    // Function ubah status imam,muadzin & khotib
+    public function triggerStatus($id, $status_id, $status)
     {
-        $this->confirm('Jadikan Khotib ?', [
+        $this->confirm('Ubah Status ?', [
             'toast' => false,
             'position' => 'center',
             'confirmButtonText' =>  'Ya',
             'cancelButtonText' =>  'Tidak',
-            'onConfirmed' => 'confirmedKhotib',
+            'onConfirmed' => 'confirmedStatus',
             // 'onConfirmed' => ['confirmed', $id], you can pass argument with array
             'onDismissed' => 'cancelled'
         ]);
 
         $this->new_id = $id;
+        $this->status_id = $status_id;
+        $this->status = $status;
     }
 
     //Nonaktifkan Jabatan
@@ -242,56 +280,26 @@ class Users extends Component
         $this->resetFields();
     }
 
-    public function confirmedImam()
+    public function confirmedStatus()
     {
         // Example code inside confirmed callback
         try {
-            User::find($this->new_id)->update([
-                'imam' => true,
-            ]);
+            if ($this->status_id == '1') {
+                User::find($this->new_id)->update([
+                    'imam' => (!$this->status),
+                ]);
+            } elseif ($this->status_id == '2') {
+                User::find($this->new_id)->update([
+                    'muadzin' => (!$this->status),
+                ]);
+            } else {
+                User::find($this->new_id)->update([
+                    'khotib' => (!$this->status),
+                ]);
+            }
             $this->alert(
                 'success',
-                'Data imam berhasil ditambahkan'
-            );
-        } catch (\Throwable $th) {
-            $this->alert(
-                'success',
-                'Terjadi kesalahan saat mengubah status'
-            );
-        }
-        $this->resetExcept('readyToLoad');
-    }
-
-    public function confirmedMuadzin()
-    {
-        // Example code inside confirmed callback
-        try {
-            User::find($this->new_id)->update([
-                'muadzin' => true,
-            ]);
-            $this->alert(
-                'success',
-                'Data muadzin berhasil ditambahkan'
-            );
-        } catch (\Throwable $th) {
-            $this->alert(
-                'success',
-                'Terjadi kesalahan saat mengubah status'
-            );
-        }
-        $this->resetExcept('readyToLoad');
-    }
-
-    public function confirmedKhotib()
-    {
-        // Example code inside confirmed callback
-        try {
-            User::find($this->new_id)->update([
-                'khotib' => true,
-            ]);
-            $this->alert(
-                'success',
-                'Data khotib berhasil ditambahkan'
+                'Status berhasil diubah'
             );
         } catch (\Throwable $th) {
             $this->alert(

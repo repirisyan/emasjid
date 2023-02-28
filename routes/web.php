@@ -1,13 +1,20 @@
 <?php
 
-use App\Http\Controllers\DistribusiController;
-use App\Http\Controllers\KeuanganController;
-use App\Http\Controllers\MustahikConctroller;
-use App\Http\Controllers\ShobulController;
+use App\Exports\KeuanganZiswafExport;
+use App\Exports\MustahikExport;
+use App\Models\Berita;
+use App\Models\DetailSaldo;
+use App\Models\Distribusi;
+use App\Models\Galeri;
+use App\Models\Keuangan;
+use App\Models\ProfileMasjid;
+use App\Models\ShobulQurban;
+use App\Models\ZiswafVisiMisi;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,215 +33,197 @@ Route::get('/symlink', function () {
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('home/qurban/monitoring', function () {
-    return view('monitor_qurban_home');
-})->name('home.monitoring_qurban');
 
-Route::get('home/berita', function () {
-    return view('home_berita');
+Route::group(['prefix' => 'landing'], function () {
+    Route::get('qurban/monitoring', function () {
+        return view('landing.monitoring_qurban');
+    })->name('landing.monitoring_qurban');
+
+    Route::get('berita', function () {
+        return view('landing.berita');
+    })->name('landing.berita');
+
+    Route::get('keuangan', function () {
+        return view('landing.keuangan');
+    })->name('landing.keuangan');
+
+    Route::get('kajian-online', function () {
+        return view('landing.kajian_online');
+    })->name('landing.kajian_online');
+
+    Route::get('galeri', function () {
+        $data = Galeri::where('kategori', '1')->get();
+        return view('landing.galeri', compact('data'));
+    })->name('landing.galeri');
+
+    Route::get('tentang-kami', function () {
+        $data = ProfileMasjid::first();
+        return view('landing.profile_masjid', compact('data'));
+    })->name('landing.profile_masjid');
+
+    Route::get('ziswaf', function () {
+        $galeris = Galeri::where('kategori', '2')->get();
+        $data = ZiswafVisiMisi::first();
+        return view('landing.ziswaf', compact('galeris', 'data'));
+    })->name('landing.ziswaf');
 });
 
-Route::get('home/galeri', function () {
-    return view('home_galeri');
-});
+Route::get('detail/{id}', function ($id) {
+    $data = Berita::where('status', '1')->where('id', $id)->get();
+    return view('landing.detail', compact('data'));
+})->name('landing.detail');
 
-Route::get('home/galeri/ziswaf', function () {
-    return view('home_galeri_ziswaf');
-});
+Route::get('ziswaf/keuangan/{dari}/{sampai}/export', function ($dari, $sampai) {
+    $exporter = app()->makeWith(KeuanganZiswafExport::class, compact('dari', 'sampai'));
+    return $exporter->download('Laporan_keuangan_ziswaf-' . $dari . 'sampai' . $sampai . '.xlsx');
+})->name('keuangan_ziswaf.export');
 
-Route::get('home/event', function () {
-    return view('home_event');
-});
+//Public Print
+Route::get('keuangan/laporan/{bulan}/{tahun}/preview', function ($bulan, $tahun) {
+    $pemasukan = Keuangan::where('kategori', 1)->whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->get();
+    $pengeluaran = Keuangan::where('kategori', 2)->whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->get();
+    $detail_saldo = DetailSaldo::whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->first();
+    $pdf = PDF::loadView('bendahara.print_keuangan', ['pemasukan' => $pemasukan, 'pengeluaran' => $pengeluaran, 'detail_saldo' => $detail_saldo]);
+    return $pdf->stream();
+})->name('print.laporan_keuangan');
 
-Route::get('home/keuangan', function () {
-    return view('home_keuangan');
-});
-
-Route::get('home/keuangan/ziswaf', function () {
-    return view('home_keuangan_ziswaf');
-});
-
-Route::get('home/kontak', function () {
-    return view('home_kontak');
-});
-
-Route::get('home/ustadz', function () {
-    return view('home_ustadz');
-});
-
-Route::get('home/imam-muadzin', function () {
-    return view('home_imam_muadzin');
-});
-
-Route::get('home/sholat-jumat', function () {
-    return view('home_sholat_jumat');
-});
-
-Route::get('home/profile/visimisi', function () {
-    return view('home_visimisi');
-});
-
-Route::get('home/ziswaf/visimisi', function () {
-    return view('home_ziswaf_visimisi');
-});
-
-Route::get('home/profile/organisasi', function () {
-    return view('home_organisasi');
-});
-
-Route::get('home/profile/sejarah', function () {
-    return view('home_sejarah');
-});
-
-Route::get('home/kajian-rutin', function () {
-    return view('home_kajian_rutin');
-});
-
-Route::get('home/kajian-online', function () {
-    return view('home_kajian_online');
-});
-
-Route::get('home/berita/detail/{id}', [App\Http\Controllers\HomeBerita::class, 'detail']);
-Route::get('home/kajian/detail/{id}', [App\Http\Controllers\HomeKajian::class, 'detail']);
-
-Route::get('ziswaf/keuangan/{dari}/{sampai}/export', [App\Http\Controllers\ZiswafVisiMisi::class, 'export']);
+//Admin Panel Zone
 
 Auth::routes(['register' => false]);
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('qurban/monitoring', function () {
-        return view('monitor_qurban');
-    });
-    Route::get('admin/settings', function () {
-        return view('profile');
-    });
-});
-
 Route::middleware(['auth', 'kajian'])->group(function () {
     Route::get('kajian/online', function () {
-        return view('admin.kajian_online');
-    });
-    Route::get('kajian/online/{id}/edit', [App\Http\Controllers\KajianController::class, 'edit'])->name('kajian_edit');
-    Route::patch('kajian/online/{id}/update', [App\Http\Controllers\KajianController::class, 'update']);
-});
-
-Route::middleware(['auth', 'is_user'])->group(function () {
-    Route::get('/qurban/pendaftaran', function () {
-        return view('pendaftaran_qurban');
-    });
-});
-
-Route::middleware(['is_pengurus', 'auth'])->group(function () {
-    Route::get('ziswaf/galeri', function () {
-        return view('admin.ziswaf_galeri');
-    });
-    Route::get('pengurus/event', function () {
-        return view('admin.event');
-    });
-    Route::get('pengurus/kontak', function () {
-        return view('admin.kontak');
-    });
-    Route::get('pengurus/mustahik', function () {
-        return view('admin.mustahik');
-    });
-    Route::get('mustahik/export/', [MustahikConctroller::class, 'export']);
-    Route::get('pengurus/galeri', function () {
-        return view('admin.galeri');
-    });
-    Route::get('pengurus/berita', function () {
-        return view('admin.berita');
-    });
-    Route::get('/pengurus/kegiatan/jumat', function () {
-        return view('admin.jadwal_sholat');
-    });
-    Route::get('/pengurus/kegiatan/kajian', function () {
-        return view('admin.kelola_kajian');
-    });
-    Route::get('/qurban/laporan/mudhohi', function () {
-        return view('admin.laporan.mudhohi');
-    });
-    Route::get('/qurban/laporan/distribusi', function () {
-        return view('admin.laporan.distribusi');
-    });
-    Route::get('keuangan/pengajuan', function () {
-        return view('admin.keuangan.pengajuan_anggaran');
-    });
-    Route::get('/qurban/distribusi/laporan/{date}/print', [DistribusiController::class, 'print'])->name('print.distribusi');
-    Route::get('/qurban/distribusi/laporan/{date}/download', [DistribusiController::class, 'download'])->name('download.distribusi');
-    Route::get('/qurban/shobul/laporan/{date}/print/{hewan}', [ShobulController::class, 'print'])->name('print.shobul');
-    Route::get('/qurban/shobul/laporan/{date}/download/{hewan}', [ShobulController::class, 'download'])->name('download.shobul');
-    Route::get('pengurus/berita/{id}/edit', [App\Http\Controllers\Berita::class, 'edit'])->name('berita_edit');
-    Route::patch('pengurus/berita/{id}/update', [App\Http\Controllers\Berita::class, 'update']);
-});
-
-Route::middleware('auth')->group(function () {
-
-    Route::group(['middleware' => 'can:admin', 'prefix' => 'admin'], function () {
-        Route::get('/kelola-user', function () {
-            return view('admin.kelola_users');
-        })->name('admin.users');
-    });
-
-    Route::get('/users/pengurus', function () {
-        return view('admin.pengurus');
-    });
-    Route::get('/users/ustadz', function () {
-        return view('admin.ustadz');
-    });
-    Route::get('/users/imam', function () {
-        return view('admin.imam');
-    });
-    Route::get('/users/khotib', function () {
-        return view('admin.khotib');
-    });
-    Route::get('/users/muadzin', function () {
-        return view('admin.muadzin');
-    });
-});
-
-Route::middleware(['auth', 'is_ketua'])->group(function () {
-    Route::get('keuangan/pengajuan/konfirmasi', function () {
-        return view('admin.keuangan.konfirmasi_pengajuan');
+        return view('ustad.kajian_online');
     });
 });
 
 Route::middleware(['is_bendahara', 'auth'])->group(function () {
-    Route::get('/pengurus/hewan_qurban', function () {
-        return view('admin.hewan_qurban');
-    });
     Route::get('/ziswaf/keuangan', function () {
-        return view('admin.keuangan.ziswaf_keuangan');
-    });
-    Route::get('/pengurus/qurban/pembayaran', function () {
-        return view('admin.pembayaran');
-    });
-    Route::get('/qurban/mudhohi/laporan/sapi', function () {
-        return view('admin.laporan.mudhohi_sapi');
-    });
-
-    Route::get('keuangan/laporan/{bulan}/{tahun}/preview', [KeuanganController::class, 'preview']);
-});
-
-Route::get('keuangan/laporan', function () {
-    return view('admin.keuangan.laporan_keuangan');
-})->middleware('laporan_keuangan');
-
-Route::middleware(['is_distribusi', 'auth'])->group(function () {
-    Route::get('/qurban/distribusi', function () {
-        return view('admin.distribusi');
-    });
-    Route::get('/qurban/permintaan', function () {
-        return view('admin.distribusi_shohibul');
+        return view('ziswaf.ziswaf_keuangan');
     });
 });
 
-Route::middleware(['is_produksi', 'auth'])->group(function () {
 
-    Route::get('/pengurus/produksi/penyembelihan', function () {
-        return view('admin.penyembelihan');
+Route::middleware('auth')->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    Route::get('settings', function () {
+        return view('profile');
     });
-    Route::get('/pengurus/produksi/pembungkusan', function () {
-        return view('admin.pembungkusan');
+
+    Route::get('qurban/monitoring', function () {
+        return view('qurban.monitor_qurban');
+    });
+
+    Route::group(['middleware' => 'can:admin', 'prefix' => 'admin'], function () {
+        Route::get('kelola-user', function () {
+            return view('admin.kelola_users');
+        })->name('admin.users');
+        Route::get('profile-masjid', function () {
+            return view('admin.profile_masjid');
+        })->name('admin.profile_masjid');
+    });
+
+    Route::group(['middleware' => ['can:pengurus'], 'prefix' => 'pengurus'], function () {
+        //Mustahik
+        Route::get('mustahik', function () {
+            return view('pengurus.mustahik');
+        });
+        Route::get('mustahik/export/', function () {
+            return Excel::download(new MustahikExport, 'mustahik.xlsx');
+        });
+
+        //Ziswaf
+        Route::get('ziswaf/galeri', function () {
+            return view('pengurus.ziswaf_galeri');
+        })->name('galeri.ziswaf');
+
+        Route::get('ziswaf/visi-misi', function () {
+            return view('ziswaf.visi_misi');
+        })->name('ziswaf.visi_misi');
+
+        //Informasi
+        Route::get('berita', function () {
+            return view('pengurus.berita');
+        });
+
+        //Kegiatan
+        Route::get('event', function () {
+            return view('pengurus.event');
+        });
+        Route::get('galeri', function () {
+            return view('pengurus.galeri');
+        });
+        Route::get('kegiatan/jumat', function () {
+            return view('pengurus.jadwal_sholat_jumat');
+        });
+        Route::get('kegiatan/kajian', function () {
+            return view('pengurus.jadwal_kajian_rutin');
+        });
+
+        //Keuangan
+        Route::get('keuangan/pengajuan', function () {
+            return view('pengurus.pengajuan_anggaran');
+        })->name('pengajuan_anggaran');
+    });
+
+    Route::group(['middleware' => 'can:keuangan', 'prefix' => 'keuangan'], function () {
+        Route::get('laporan', function () {
+            return view('bendahara.laporan_keuangan');
+        });
+    });
+
+    Route::group(['middleware' => 'can:bendahara', 'prefix' => 'qurban'], function () {
+        Route::get('hewan_qurban', function () {
+            return view('qurban.hewan_qurban');
+        })->name('qurban.hewan_qurban');
+        Route::get('konfirmasi-pembayaran', function () {
+            return view('qurban.konfirmasi_pembayaran');
+        })->name('qurban.konfirmasi_pembayaran');
+    });
+
+    Route::group(['middleware' => 'can:ketua', 'prefix' => 'keuangan'], function () {
+        Route::get('pengajuan/konfirmasi', function () {
+            return view('ketua.konfirmasi_pengajuan_anggaran');
+        });
+    });
+
+    Route::group(['middleware' => 'can:jemaah', 'prefix' => 'qurban'], function () {
+        Route::get('pendaftaran', function () {
+            return view('qurban.pendaftaran');
+        })->name('qurban.pendaftaran');
+    });
+
+    Route::group(['middleware' => 'can:produksi', 'prefix' => 'qurban'], function () {
+        Route::get('penyembelihan', function () {
+            return view('qurban.penyembelihan');
+        })->name('qurban.penyembelihan');
+
+        Route::get('pembungkusan', function () {
+            return view('qurban.pembungkusan');
+        })->name('qurban.pembungkusan');
+    });
+
+    Route::group(['middleware' => 'can:distribusi', 'prefix' => 'qurban'], function () {
+        Route::get('distribusi-warga', function () {
+            return view('qurban.distribusi_warga');
+        })->name('qurban.distribusi_warga');
+        Route::get('distribusi-shohibul', function () {
+            return view('qurban.distribusi_shohibul');
+        })->name('qurban.distribusi_shohibul');
+        Route::get('distribusi/laporan/{date}/print', function ($date) {
+            $data = Distribusi::with('user')->whereYear('created_at', $date)->get();
+            $pdf = PDF::loadView('qurban.laporan.print_distribusi', ['data' => $data]);
+            return $pdf->stream();
+        })->name('print.distribusi');
+        Route::get('shobul/laporan/{year}/print/{master_hewan_id}', function ($year, $master_hewan_id) {
+            $data = ShobulQurban::with(['user', 'hewan', 'master_hewan', 'qurban'])->whereHas('hewan', function ($query) use ($year, $master_hewan_id) {
+                $query->whereYear('created_at', $year);
+            })->whereHas('qurban', function ($query) {
+                $query->groupBy('antrian');
+            })->where('master_hewan_id', $master_hewan_id)->whereNotIn('status', [0, 2])->get();
+            $pdf = PDF::loadView('qurban.laporan.print_mudhohi', ['data' => $data, 'id_master_hewan' => $master_hewan_id])->setPaper('a4');
+            return $pdf->stream();
+        })->name('print.shohibul');
     });
 });

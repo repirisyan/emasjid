@@ -29,6 +29,17 @@
       0 => 'Fruitcake\\Cors\\CorsServiceProvider',
     ),
   ),
+  'intervention/image' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Intervention\\Image\\ImageServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Image' => 'Intervention\\Image\\Facades\\Image',
+    ),
+  ),
   'jantinnerezo/livewire-alert' => 
   array (
     'providers' => 
@@ -109,17 +120,6 @@
     'providers' => 
     array (
       0 => 'Termwind\\Laravel\\TermwindServiceProvider',
-    ),
-  ),
-  'realrashid/sweet-alert' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'RealRashid\\SweetAlert\\SweetAlertServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'Alert' => 'RealRashid\\SweetAlert\\Facades\\Alert',
     ),
   ),
   'spatie/laravel-ignition' => 

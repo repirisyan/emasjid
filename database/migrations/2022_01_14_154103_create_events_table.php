@@ -17,7 +17,8 @@ class CreateEventsTable extends Migration
             $table->id();
             $table->string('nama_event');
             $table->date('tanggal_event')->nullable();
-            $table->enum('status', [1, 2]);
+            $table->boolean('status');
+            $table->string('thumbnail')->nullable();
             $table->timestamps();
         });
     }

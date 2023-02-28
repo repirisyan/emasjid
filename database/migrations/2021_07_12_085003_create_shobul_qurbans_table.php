@@ -18,7 +18,7 @@ class CreateShobulQurbansTable extends Migration
             $table->foreignId('master_hewan_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('hewan_id')->constrained();
-            $table->foreignId('qurban_id')->nullable()->constrained()->onDelete('restrict');
+            $table->foreignId('qurban_id')->nullable()->constrained();
             $table->string('metode_pembayaran');
             $table->unsignedInteger('permintaan_daging');
             $table->unsignedInteger('permintaan_daging_confirm');

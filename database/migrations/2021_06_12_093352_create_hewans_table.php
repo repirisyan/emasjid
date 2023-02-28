@@ -15,7 +15,7 @@ class CreateHewansTable extends Migration
     {
         Schema::create('hewans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('master_hewan_id')->constrained()->onDelete('restrict');
+            $table->foreignId('master_hewan_id')->constrained();
             $table->string('tipe');
             $table->unsignedInteger('harga');
             $table->timestamps();

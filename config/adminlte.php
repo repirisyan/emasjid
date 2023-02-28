@@ -63,12 +63,12 @@ return [
     |
     */
 
-    'logo' => '<b>E-masjid</b>',
+    'logo' => '<b>E</b>-Masjid',
     'logo_img' => 'storage/logo/mosque.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'E-Masjid',
+    'logo_img_alt' => 'E-Masjid Logo',
 
     /*
     |--------------------------------------------------------------------------
@@ -84,9 +84,9 @@ return [
     */
 
     'auth_logo' => [
-        'enabled' => true,
+        'enabled' => false,
         'img' => [
-            'path' => 'storage/logo/mosque.png',
+            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,
@@ -110,7 +110,7 @@ return [
         'enabled' => false,
         'img' => [
             'path' => 'storage/logo/mosque.png',
-            'alt' => 'AdminLTE Preloader Image',
+            'alt' => 'E-Masjid Logo',
             'effect' => 'animation__shake',
             'width' => 60,
             'height' => 60,
@@ -256,7 +256,8 @@ return [
     'dashboard_url' => 'home',
     'logout_url' => 'logout',
     'login_url' => 'login',
-    'register_url' => 'register',
+    // 'register_url' => 'register',
+    'register_url' => false,
     'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
     'profile_url' => false,
@@ -273,7 +274,7 @@ return [
     |
     */
 
-    'enabled_laravel_mix' => true,
+    'enabled_laravel_mix' => false,
     'laravel_mix_css_path' => 'css/app.css',
     'laravel_mix_js_path' => 'js/app.js',
 
@@ -305,47 +306,16 @@ return [
             'url' => '/home',
         ],
         [
-            'text'    => 'Kelola Akun',
+            'text'    => 'Kelola User',
             'icon'    => 'fas fa-fw fa-users',
             'can'  => 'admin',
-            'submenu' => [
-                [
-                    'text'    => 'Users',
-                    'icon'    => 'fas fa-fw fa-user',
-                    'can'  => 'admin',
-                    'route'   => 'admin.users',
-                ],
-                [
-                    'text'    => 'Pengurus',
-                    'icon'    => 'fas fa-fw fa-sitemap',
-                    'can'  => 'admin',
-                    'url'   => '/users/pengurus',
-                ],
-                [
-                    'text'    => 'Ustadz',
-                    'icon'    => 'fas fa-fw fa-user-shield',
-                    'can'  => 'admin',
-                    'url'   => '/users/ustadz',
-                ],
-                [
-                    'text'    => 'Imam',
-                    'icon'    => 'fas fa-fw fa-user-shield',
-                    'can'  => 'admin',
-                    'url'   => '/users/imam',
-                ],
-                [
-                    'text'    => 'Muadzin',
-                    'icon'    => 'fas fa-fw fa-user-shield',
-                    'can'  => 'admin',
-                    'url'   => '/users/muadzin',
-                ],
-                [
-                    'text'    => 'Khotib',
-                    'icon'    => 'fas fa-fw fa-user-shield',
-                    'can'  => 'admin',
-                    'url'   => '/users/khotib',
-                ],
-            ],
+            'route' => 'admin.users'
+        ],
+        [
+            'text'    => 'Profil Masjid',
+            'icon'    => 'fas fa-fw fa-mosque',
+            'can'  => 'admin',
+            'route' => 'admin.profile_masjid'
         ],
         [
             'text' => 'Divisi Ziswaf',
@@ -355,46 +325,68 @@ return [
                 [
                     'text' => 'Visi Misi',
                     'icon' => 'fas fa-fw fa-dot-circle',
-                    'url' => 'ziswaf/visimisi',
-                    'can' => ['admin', 'pengurus']
+                    'route' => 'ziswaf.visi_misi',
+                    'can' => 'bendahara'
                 ],
                 [
                     'text' => 'Laporan Keuangan',
                     'icon' => 'fas fa-fw fa-dot-circle',
                     'url' => 'ziswaf/keuangan',
-                    'can' => ['admin', 'bendahara']
+                    'can' => 'bendahara'
                 ],
                 [
                     'text' => 'Galeri Kegiatan',
                     'icon' => 'fas fa-fw fa-dot-circle',
-                    'url' => 'ziswaf/galeri',
-                    'can' => ['admin', 'pengurus']
+                    'route' => 'galeri.ziswaf',
+                    'can' => 'pengurus'
                 ],
             ],
         ],
         [
-            'text' => 'Berita',
+            'text' => 'Informasi',
             'icon' => 'fas fa-fw fa-newspaper',
-            'url' => 'pengurus/berita',
-            'can' => ['pengurus', 'admin'],
+            'can' => ['ustadz', 'admin', 'ketua', 'pengurus'],
+            'submenu' => [
+                [
+                    'text' => 'Berita',
+                    'icon' => 'fas fa-fw fa-dot-circle',
+                    'url' => 'pengurus/berita',
+                    'can' => 'pengurus',
+                ],
+                [
+                    'text' => 'Kajian Online',
+                    'icon' => 'fas fa-fw fa-dot-circle',
+                    'url' => 'kajian/online',
+                    'can' => ['ustadz', 'admin', 'ketua'],
+                ],
+            ],
         ],
         [
-            'text' => 'Kajian Online',
-            'icon' => 'fas fa-fw fa-newspaper',
-            'url' => 'kajian/online',
-            'can' => ['ustadz', 'admin', 'ketua'],
-        ],
-        [
-            'text' => 'Galeri',
-            'icon' => 'fas fa-fw fa-image',
-            'url' => 'pengurus/galeri',
-            'can' => ['pengurus', 'admin'],
-        ],
-        [
-            'text' => 'Event',
-            'icon' => 'fas fa-fw fa-calendar',
-            'url' => 'pengurus/event',
-            'can' => ['pengurus', 'admin'],
+            'text' => 'Kegiatan',
+            'icon' => 'fas fa-fw fa-calendar-week',
+            'can' => 'pengurus',
+            'submenu' => [
+                [
+                    'text' => 'Event',
+                    'icon' => 'fas fa-fw fa-dot-circle',
+                    'url' => 'pengurus/event',
+                ],
+                [
+                    'text' => 'Galeri',
+                    'icon' => 'fas fa-fw fa-dot-circle',
+                    'url' => 'pengurus/galeri',
+                ],
+                [
+                    'text' => 'Jadwal Sholat Jumat',
+                    'url'  => 'pengurus/kegiatan/jumat',
+                    'icon' => 'fas fa-fw fa-dot-circle',
+                ],
+                [
+                    'text' => 'Jadwal Kajian Rutin',
+                    'url'  => 'pengurus/kegiatan/kajian',
+                    'icon' => 'fas fa-fw fa-dot-circle',
+                ],
+            ],
         ],
         [
             'text' => 'Mustahik',
@@ -405,7 +397,7 @@ return [
         [
             'text' => 'Keuangan',
             'icon' => 'fas fa-fw fa-money-bill-wave-alt',
-            'can' => ['pengurus', 'admin', 'bendahara', 'ketua'],
+            'can' => ['pengurus', 'bendahara', 'ketua'],
             'submenu' => [
                 [
                     'text' => 'Laporan Keuangan',
@@ -415,32 +407,15 @@ return [
                 ],
                 [
                     'text' => 'Pengajuan Anggaran',
-                    'url' => 'keuangan/pengajuan',
+                    'route' => 'pengajuan_anggaran',
                     'icon' => 'fas fa-fw fa-hand-holding-usd',
-                    'can' => ['pengurus', 'admin']
+                    'can' => ['pengurus']
                 ],
                 [
                     'text' => 'Konfirmasi Anggaran',
                     'url' => 'keuangan/pengajuan/konfirmasi',
                     'icon' => 'fas fa-fw fa-hand-holding-usd',
-                    'can' => ['ketua', 'admin']
-                ],
-            ],
-        ],
-        [
-            'text' => 'Kelola Kegiatan',
-            'icon' => 'fas fa-fw fa-calendar-week',
-            'can' => ['pengurus', 'admin'],
-            'submenu' => [
-                [
-                    'text' => 'Jadwal Sholat Jumat',
-                    'url'  => 'pengurus/kegiatan/jumat',
-                    'icon' => 'fas fa-fw fa-mosque',
-                ],
-                [
-                    'text' => 'Jadwal Kajian Rutin',
-                    'url'  => 'pengurus/kegiatan/kajian',
-                    'icon' => 'fas fa-fw fa-quran',
+                    'can' => ['ketua']
                 ],
             ],
         ],
@@ -451,31 +426,31 @@ return [
                 [
                     'text' => 'Hewan',
                     'icon' => 'fas fa-fw fa-hippo',
-                    'can' => ['bendahara', 'admin'],
-                    'url' => '/pengurus/hewan_qurban',
+                    'can' => 'bendahara',
+                    'route' => 'qurban.hewan_qurban',
                 ],
                 [
-                    'text' => 'Konfirmasi Pembayaran',
+                    'text' => 'Pembayaran',
                     'icon' => 'fas fa-fw fa-money-bill',
-                    'can' => ['bendahara', 'admin'],
-                    'url' => 'pengurus/qurban/pembayaran',
+                    'can' => 'bendahara',
+                    'route' => 'qurban.konfirmasi_pembayaran',
                 ],
                 [
                     'text' => 'Produksi',
                     'icon' => 'fas fa-fw fa-box-open',
-                    'can' => ['produksi', 'admin'],
+                    'can' => 'produksi',
                     'submenu' => [
                         [
                             'text' => 'Penyembelihan',
                             'icon' => 'fas fa-fw fa-drumstick-bite',
-                            'can' => ['produksi', 'admin'],
-                            'url' => '/pengurus/produksi/penyembelihan',
+                            'can' => 'produksi',
+                            'route' => 'qurban.penyembelihan',
                         ],
                         [
                             'text' => 'Pembungkusan',
                             'icon' => 'fas fa-fw fa-box',
-                            'can' => ['produksi', 'admin'],
-                            'url' => '/pengurus/produksi/pembungkusan',
+                            'can' => 'produksi',
+                            'route' => 'qurban.pembungkusan',
                         ]
                     ]
 
@@ -483,26 +458,26 @@ return [
                 [
                     'text' => 'Distribusi',
                     'icon' => 'fas fa-fw fa-shipping-fast',
-                    'can' => ['distribusi', 'admin'],
+                    'can' => 'distribusi',
                     'submenu' => [
                         [
                             'text' => 'Warga',
                             'icon' => 'fas fa-fw fa-users',
-                            'can' => ['distribusi', 'admin'],
-                            'url' => '/qurban/distribusi'
+                            'can' => 'distribusi',
+                            'route' => 'qurban.distribusi_warga'
                         ],
                         [
                             'text' => 'Shohibul',
                             'icon' => 'fas fa-fw fa-user',
-                            'can' => ['distribusi', 'admin'],
-                            'url' => '/qurban/permintaan'
+                            'can' => 'distribusi',
+                            'route' => 'qurban.distribusi_shohibul'
                         ],
                     ]
                 ],
                 [
                     'text' => 'Pendaftaran',
                     'icon' => 'fas fa-fw fa-clipboard-list',
-                    'can' => ['user', 'admin'],
+                    'can' => 'jemaah',
                     'url' => '/qurban/pendaftaran',
                 ],
                 [
@@ -510,31 +485,8 @@ return [
                     'icon' => 'fas fa-fw fa-desktop',
                     'url' => 'qurban/monitoring',
                 ],
-                [
-                    'text' => 'Laporan',
-                    'icon' => 'fas fa-fw fa-file',
-                    'can' => ['admin'],
-                    'submenu' => [
-                        [
-                            'text' => 'Distribusi',
-                            'icon' => 'fas fa-fw fa-dot-circle',
-                            'url' => '/qurban/laporan/distribusi'
-                        ],
-                        [
-                            'text' => 'Mudhohi',
-                            'icon' => 'fas fa-fw fa-dot-circle',
-                            'url' => '/qurban/laporan/mudhohi'
-                        ],
-                    ],
-                ],
             ]
 
-        ],
-        [
-            'text' => 'Kontak Pesan',
-            'icon' => 'fas fa-fw fa-envelope',
-            'url' => 'pengurus/kontak',
-            'can' => ['pengurus', 'admin'],
         ],
     ],
 
@@ -624,7 +576,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@11',
+                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
                 ],
             ],
         ],

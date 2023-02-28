@@ -20,13 +20,4 @@
             $('#modalUbah').modal('hide');
         });
     </script>
-    <script>
-        function change_picture(e) {
-            $('#imgupload').trigger('click');
-        }
-
-        function upload_picture() {
-            $('#form-picture').trigger('submit');
-        }
-    </script>
 @stop

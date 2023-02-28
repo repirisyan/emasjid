@@ -1,12 +1,9 @@
 @extends('layouts.app')
 @section('custom_css')
-    <style>
-        .card {
-            margin-bottom: 20px
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('assets/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.css') }}">
 @endsection
-@section('title', 'Beranda')
+@section('title', 'Halaman Utama')
 @section('carousel')
     <div class="container animate__animated animate__fadeIn animate__delay-2s text-center mt-5">
         <h1 id="surah_arab"></h1>
@@ -17,6 +14,11 @@
             <source id="surah_audio" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
+        <p>
+            <a href="https://equran.id" class="btn btn-outline-primary btn-sm" target="_blank">
+                <i class="fa fa-fw fa-globe"></i> equran.id
+            </a>
+        </p>
     </div>
 @endsection
 @section('content')
@@ -25,6 +27,7 @@
     </div>
 @endsection
 @section('custom_js')
+    <script src="{{ asset('assets/OwlCarousel2-2.3.4/dist/owl.carousel.min.js') }}"></script>
     <script>
         $(document).ready(function() {
             var surah = Math.floor(Math.random() * 114) + 1;
@@ -37,6 +40,9 @@
                         .jumlah_ayat + ', Diturunkan : ' + data.tempat_turun);
                     $('#deskripsi_surah').html(data.deskripsi);
                 });
+            $(".owl-carousel").owlCarousel({
+                lazyLoad: true,
+            });
         });
     </script>
 @endsection

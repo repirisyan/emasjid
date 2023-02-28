@@ -39,7 +39,7 @@
     @else
         <link rel="stylesheet" href="{{ mix(config('adminlte.laravel_mix_css_path', 'css/app.css')) }}">
     @endif
-
+    <script src="//unpkg.com/alpinejs" defer></script>
     {{-- Livewire Styles --}}
     @if (config('adminlte.livewire'))
         @if (app()->version() >= 7)
@@ -74,22 +74,12 @@
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="{{ asset('favicon/ms-icon-144x144.png') }}">
     @endif
-
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>
 
     {{-- Body Content --}}
     @yield('body')
-
-    {{-- Livewire Script --}}
-    @if (config('adminlte.livewire'))
-        @if (app()->version() >= 7)
-            @livewireScripts
-        @else
-            <livewire:scripts />
-        @endif
-    @endif
 
     {{-- Base Scripts --}}
     @if (!config('adminlte.enabled_laravel_mix'))
@@ -105,9 +95,16 @@
         <script src="{{ mix(config('adminlte.laravel_mix_js_path', 'js/app.js')) }}"></script>
     @endif
 
+    {{-- Livewire Script --}}
+    @if (config('adminlte.livewire'))
+        @if (app()->version() >= 7)
+            @livewireScripts
+        @else
+            <livewire:scripts />
+        @endif
+    @endif
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <x-livewire-alert::scripts />
-
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
 
