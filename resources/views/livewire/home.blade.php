@@ -175,15 +175,15 @@
             </div>
             <hr>
             <h5 class="text-uppercase"><i class="fab fa-youtube"></i>&nbsp;Video</h5>
-            <iframe src="https://www.youtube.com/embed/A50RvFjJOZ0" frameborder="0" allow="autoplay; encrypted-media"
-                allowfullscreen></iframe>
-            <a href="https://www.youtube.com/channel/UCB90AaWC9Z3DDp_i88Hf9RA" target="_blank"
-                class="btn btn-sm btn-outline-primary"><i class="fab fa-youtube"></i>&nbsp;Subscribe</a>
+            <iframe src="https://www.youtube.com/embed/{{ env('APP_YOUTUBE_VID') }}" frameborder="0"
+                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <a href="{{ env('APP_YT_CHANNEL') }}" target="_blank" class="btn btn-sm btn-outline-primary"><i
+                    class="fab fa-youtube"></i>&nbsp;Subscribe</a>
             <hr>
             <h5 class="text-uppercase"><i class="fa fa-fw fa-map-marked"></i>&nbsp;Lokasi</h5>
             <div class="mapouter">
                 <div class="gmap_canvas"><iframe id="gmap_canvas"
-                        src="https://maps.google.com/maps?q=-6.8603626,107.5001552&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                        src="https://maps.google.com/maps?q={{ env('APP_GMAPS_COOR') }}&t=&z=13&ie=UTF8&iwloc=&output=embed"
                         frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><br>
                 </div>
             </div>

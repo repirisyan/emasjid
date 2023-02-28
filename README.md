@@ -46,3 +46,6 @@ Aplikasi yang digunakan untuk mengelola masjid, terdiri dari modul :
     - add struktur_organisasi.png
 2. .env variable
 - APP_WHATSAPP (contact)
+- APP_YOUTUBE_VID (video url)
+- APP_YT_CHANNEL (channel url)
+- APP_GMAPS_COOR (gmaps coordinate)
