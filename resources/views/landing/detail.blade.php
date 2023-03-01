@@ -10,7 +10,8 @@
     @foreach ($data as $item)
         <div class="mt-5">
             <div class="text-center">
-                <img src="{{ asset('storage/berita/' . $item->thumbnail) }}" alt="{{ $item->thumbnail }}">
+                <img src="{{ asset('storage/' . $item->kategori == '1' ? 'berita' : 'kajian_online' . '/' . $item->thumbnail) }}"
+                    alt="{{ $item->thumbnail }}">
                 <h1 class="text-center mt-2">{{ $item->judul }}</h1>
             </div>
             <hr>
