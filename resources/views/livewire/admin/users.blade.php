@@ -23,7 +23,7 @@
                             <option value="">-- Pilih Jabatan --</option>
                             <option value="1">Distribusi Qurban</option>
                             <option value="2">Produksi Qurban</option>
-                            <option value="3">Berndahara</option>
+                            <option value="3">Bendahara</option>
                             <option value="4">Ketua DKM</option>
                         </select>
                     </div>
@@ -107,15 +107,15 @@
                                                 @if ($item->JenisKelamin == 'Laki-laki')
                                                     <button class="dropdown-item" wire:loading.attr="disabled"
                                                         type="button"
-                                                        wire:click="triggerStatus({{ $item->id }},'1',{{ $item->imam }})"><i
+                                                        wire:click="triggerStatus({{ $item->id }},'1','{{ $item->imam }}')"><i
                                                             class="fa fa-fw fa-{{ $item->imam == true ? 'times-circle' : 'check' }} text-{{ $item->imam == true ? 'danger' : 'success' }}"></i>Imam</button>
                                                     <button class="dropdown-item" wire:loading.attr="disabled"
                                                         type="button"
-                                                        wire:click="triggerStatus({{ $item->id }},'2',{{ $item->muadzin }})"><i
+                                                        wire:click="triggerStatus({{ $item->id }},'2','{{ $item->muadzin }}')"><i
                                                             class="fa fa-fw fa-{{ $item->muadzin == true ? 'times-circle' : 'check' }} text-{{ $item->muadzin == true ? 'danger' : 'success' }}"></i>Muadzin</button>
                                                     <button class="dropdown-item" wire:loading.attr="disabled"
                                                         type="button"
-                                                        wire:click="triggerStatus({{ $item->id }},'3',{{ $item->khotib }})"><i
+                                                        wire:click="triggerStatus({{ $item->id }},'3','{{ $item->khotib }}')"><i
                                                             class="fa fa-fw fa-{{ $item->khotib == true ? 'times-circle' : 'check' }} text-{{ $item->khotib == true ? 'danger' : 'success' }}"></i>Khotib</button>
                                                 @endif
                                                 @if ($item->id_jabatan != null)

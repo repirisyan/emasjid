@@ -8,11 +8,13 @@
 @stop
 
 @section('content')
-   @livewire('dashboard')
+    @livewire('dashboard')
 @stop
 
 @section('css')
 @stop
 
 @section('js')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    @stack('scripts')
 @stop

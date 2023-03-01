@@ -27,7 +27,7 @@
                 <table class="table" style="white-space: nowrap">
                     <thead>
                         <th>Jenis Hewan</th>
-                        <th>Nama</th>
+                        <th>Atas Nama</th>
                         <th>Tanggal</th>
                         <th></th>
                     </thead>
@@ -42,7 +42,7 @@
                             @forelse ($data_pembayaran as $item)
                                 <tr>
                                     <td class="align-middle">{{ $item->master_hewan->nama }}</td>
-                                    <td class="align-middle">{{ $item->user->name }}</td>
+                                    <td class="align-middle">{{ $item->atasNama }}</td>
                                     <td class="align-middle">{{ $item->created_at->format('M d, Y') }}</td>
                                     <td>
                                         <div class="dropdown">
@@ -127,7 +127,7 @@
                             </tr>
                             <tr>
                                 <th class="text-muted">Permintaan Daging</th>
-                                <td><i class="fa fa-fw fa-drumstick-bite"></i> {{ $permintaan_daging }}</td>
+                                <td><i class="fa fa-fw fa-drumstick-bite"></i> {{ $permintaan_daging }} Bungkus</td>
                             </tr>
                             <tr>
                                 <th class="text-muted">Atas Nama</th>

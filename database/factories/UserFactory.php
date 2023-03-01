@@ -22,8 +22,6 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $index = User::latest()->first();
-        $no = $index->id;
         return [
             'name' => $this->faker->name(),
             'TanggalLahir' => $this->faker->date(),
@@ -31,7 +29,8 @@ class UserFactory extends Factory
             'alamat' => $this->faker->address(),
             'kontak' => $this->faker->phoneNumber(),
             'email' => $this->faker->email(),
-            'JenisKelamin' => $this->faker->randomElement(['Laki-laki', 'Perempuan']),
+            // 'JenisKelamin' => $this->faker->randomElement(['Laki-laki', 'Perempuan']),
+            'JenisKelamin' => 'Laki-laki',
             'role' => 4,
             'id_jabatan' => null,
             'password' => Hash::make("12345"),

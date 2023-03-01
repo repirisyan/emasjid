@@ -1,4 +1,4 @@
-<div wire:poll.300000ms wire:init="loadPosts">
+<div wire:init="loadPosts">
     {{-- Care about people's approval and you will be their prisoner. --}}
     {{-- @auth
         @if (auth()->user()->role == 1)
@@ -13,7 +13,8 @@
                         <i class="fa fa-fw fa-paw"></i>&nbsp;Penyembelihan {{ $item->nama }} {{ date('Y') }}
                     </div>
                     <div class="card-body bg-light">
-                        <h3 class="text-center"><b>{{ $item->jumlah_hewan }} / {{ $item->jumlah_sembelih }}</b>
+                        <h3 class="text-center"><b>{{ $item->jumlah_hewan }} / {{ $item->jumlah_sembelih }}
+                                <small>Ekor</small></b>
                         </h3>
                     </div>
                 </div>
@@ -25,7 +26,7 @@
                         {{ date('Y') }}
                     </div>
                     <div class="card-body bg-light">
-                        <h3 class="text-center"><b>{{ $item->timbangan }}</b></h3>
+                        <h3 class="text-center"><b>{{ $item->timbangan }} <small>Kg</small></b></h3>
                     </div>
                 </div>
             </div>
@@ -39,7 +40,7 @@
                         <i class="fa fa-fw fa-users"></i>&nbsp;Shohibul Qurban {{ $item2->nama }} {{ date('Y') }}
                     </div>
                     <div class="card-body bg-light">
-                        <h3 class="text-center"><b>{{ $item2->jumlah_shobul }}</b></h3>
+                        <h3 class="text-center"><b>{{ $item2->jumlah_shobul }} <small>Orang</small></b></h3>
                     </div>
                 </div>
             </div>
@@ -51,7 +52,7 @@
                     </div>
                     <div class="card-body bg-light">
                         <h3 class="text-center"><b>{{ $item2->jumlah_permintaan }} /
-                                {{ $item2->progress_permintaan }}</b></h3>
+                                {{ $item2->progress_permintaan }} <small>Bungkus</small></b></h3>
                     </div>
                 </div>
             </div>
@@ -67,6 +68,7 @@
                     </div>
                     <div class="card-body bg-light">
                         <h3 class="text-center"><b>{{ $item3->jumlah }} / {{ $item3->jumlahProduksi }}
+                                <small>Bungkus</small>
                             </b></h3>
                     </div>
                 </div>
@@ -79,7 +81,8 @@
                         <i class="fa fa-fw fa-truck"></i>&nbsp;Distribusi Daging Qurban {{ date('Y') }}
                     </div>
                     <div class="card-body bg-light">
-                        <h3 class="text-center"><b>{{ $item4->jumlah }} / {{ $item4->progressDistribusi }}</b>
+                        <h3 class="text-center"><b>{{ $item4->jumlah }} / {{ $item4->progressDistribusi }}
+                                <small>Bungkus</small></b>
                         </h3>
                     </div>
                 </div>

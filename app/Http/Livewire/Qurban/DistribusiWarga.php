@@ -55,7 +55,7 @@ class DistribusiWarga extends Component
     public function resetFields()
     {
         $this->resetValidation();
-        $this->resetExcept('readyToLoad', 'filter_status');
+        $this->resetExcept('readyToLoad', 'filter_status', 'print_date');
     }
 
     public function store()

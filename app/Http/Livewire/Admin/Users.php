@@ -62,7 +62,7 @@ class Users extends Component
     public function resetFields()
     {
         $this->resetValidation();
-        $this->resetExcept('readyToLoad', 'search', 'filter_jabatan', 'filter_role');
+        $this->resetExcept('readyToLoad', 'search', 'filter_jabatan', 'filter_role', 'filter_status');
     }
 
     public function updatedSearch()
@@ -307,7 +307,7 @@ class Users extends Component
                 'Terjadi kesalahan saat mengubah status'
             );
         }
-        $this->resetExcept('readyToLoad');
+        $this->resetFields();
     }
 
     public function cancelled()

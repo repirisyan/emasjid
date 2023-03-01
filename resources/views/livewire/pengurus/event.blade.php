@@ -185,24 +185,24 @@
                                             <progress max="100" x-bind:value="progress"></progress>
                                         </div>
                                     </div>
-                                    <small>Format : png, jpg, jepg</small>
+                                    <small>(Optional) Format : png, jpg, jepg</small>
                                     @error('thumbnail')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <select class="form-control @error('status') is-invalid @enderror" required
-                            wire:model.defer="status">
-                            <option value="">-- Pilih status --</option>
-                            <option value="1">Aktif</option>
-                            <option value="0">Tidak aktif</option>
-                        </select>
-                        @error('status')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                        <div class="form-group">
+                            <select class="form-control @error('status') is-invalid @enderror" required
+                                wire:model.defer="status">
+                                <option value="">-- Pilih status --</option>
+                                <option value="1">Aktif</option>
+                                <option value="0">Tidak aktif</option>
+                            </select>
+                            @error('status')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" wire:click="resetFields()" class="btn btn-secondary"
@@ -423,17 +423,6 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="form-group">
-                            <select class="form-control @error('status') is-invalid @enderror" required
-                                wire:model.defer="status">
-                                <option value="">-- Pilih status --</option>
-                                <option value="1">Aktif</option>
-                                <option value="0">Tidak aktif</option>
-                            </select>
-                            @error('status')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
                         <div class="mb-3">
                             <div class="form-group">
                                 <label>Foto</label>
@@ -450,12 +439,23 @@
                                             <progress max="100" x-bind:value="progress"></progress>
                                         </div>
                                     </div>
-                                    <small>Format : png, jpg, jepg</small>
+                                    <small>(Optional)Format : png, jpg, jepg</small>
                                     @error('new_thumbnail')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control @error('status') is-invalid @enderror" required
+                                wire:model.defer="status">
+                                <option value="">-- Pilih status --</option>
+                                <option value="1">Aktif</option>
+                                <option value="0">Tidak aktif</option>
+                            </select>
+                            @error('status')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="modal-footer">

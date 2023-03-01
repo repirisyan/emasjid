@@ -9,7 +9,7 @@
 @endsection
 @section('title', 'Divisi Ziswaf')
 @section('content')
-    <h3 class="mt-5">Visi & Misi</h3>
+    <div class="mt-5"></div>
     {!! $data->visi_misi !!}
     <hr>
     <h3>Laporan Keuangan Ziswaf</h3>
