@@ -9,10 +9,8 @@
 @section('title', 'Profile Masjid')
 @section('content')
     <div class="mt-5">
-        <h3>Visi & Misi</h3>
         {!! $data->visi_misi !!}
         <hr>
-        <h3>Sejarah</h3>
         {!! $data->sejarah !!}
         <hr>
         <h3>Struktur Organisasi</h3>
