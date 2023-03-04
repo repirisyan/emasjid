@@ -24,8 +24,8 @@
                         style="width: 100px; height: 100px">
                 </td>
                 <td class="text-center">
-                    <h2>DEWAN KEMAKMURAN MASJID <br>AL-IKHLASH</h2>
-                    <p>Perumahan Cimareme Indah-Desa Cimareme Bandung Barat 40552</p>
+                    <h2>DEWAN KEMAKMURAN MASJID <br>{{ env('APP_NAME') }}</h2>
+                    <p>{{ env('MASJID_ADDRESS') }}</p>
                 </td>
             </tr>
         </table>

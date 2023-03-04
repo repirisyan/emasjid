@@ -49,3 +49,4 @@ Aplikasi yang digunakan untuk mengelola masjid, terdiri dari modul :
 - APP_YOUTUBE_VID (video url)
 - APP_YT_CHANNEL (channel url)
 - APP_GMAPS_COOR (gmaps coordinate)
+- MASJID_ADDRESS (alamat masjid)

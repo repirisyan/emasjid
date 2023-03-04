@@ -2,9 +2,6 @@
     {{-- In work, do what you enjoy. --}}
     <div class="row">
         <div class="col">
-            <x-adminlte-alert theme="primary" title="Primary Notification" class="d-inline-block">
-                Selamat datang di E-masjid <b>{{ auth()->user()->name }}</b>
-            </x-adminlte-alert>
             <x-adminlte-alert theme="info" title="Total Saldo Masjid" class="d-inline-block">
                 @if ($this->readyToLoad == false)
                     <div class="text-center">

@@ -12,25 +12,27 @@
 
 <body>
     <header>
-        <div class="row">
-            <div class="col-md-3">
-                <img src="{{ public_path() . '/assets/img/mosque.png' }}" alt="" srcset=""
-                    style="width: 100px; height: 100px">
-            </div>
-            <div class="col-md-8 text-center">
-                <h2>DEWAN KEMAKMURAN MASJID <br>AL-IKHLASH</h2>
-                <p>Perumahan Cimareme Indah-Desa Cimareme Bandung Barat 40552</p>
-            </div>
-        </div>
-        <hr style="border: 5px solid black; margin-top: -100px">
+        <table>
+            <tr>
+                <td>
+                    <img src="{{ public_path() . '/assets/img/mosque.png' }}" alt="" srcset=""
+                        style="width: 100px; height: 100px">
+                </td>
+                <td class="text-center align-middle">
+                    <h2>DEWAN KEMAKMURAN MASJID <br>{{ env('APP_NAME') }}</h2>
+                    <p>{{ env('MASJID_ADDRESS') }}</p>
+                </td>
+            </tr>
+        </table>
+        <hr style="border: 5px solid black;">
         <hr style="border: 1px solid black" class="mt-n2">
     </header>
     @php
         $tanggal = new DateTime($detail_saldo->tanggal);
     @endphp
     <div class="text-center">
-        <h4>LAPORAN AKTIVITAS</h4>
-        <h4>PERIODE BULAN {{ $tanggal->format('m Y') }}</h4>
+        <h5>LAPORAN AKTIVITAS</h5>
+        <h5>PERIODE BULAN {{ $tanggal->format('m Y') }}</h5>
     </div>
     <h5>Pemasukan</h5>
     <table class="table table-bordered mt-4">
