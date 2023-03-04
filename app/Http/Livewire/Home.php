@@ -15,8 +15,8 @@ class Home extends Component
     public function render()
     {
         return view('livewire.home', [
-            'beritas' => Berita::where('status', true)->where('kategori', '1')->orderBy('created_at', 'desc')->limit(15)->get(),
-            'kajians' => Berita::where('status', true)->where('kategori', '2')->orderBy('created_at', 'desc')->limit(15)->get(),
+            'beritas' => Berita::with('user')->where('status', true)->where('kategori', '1')->orderBy('created_at', 'desc')->limit(15)->get(),
+            'kajians' => Berita::with('user')->where('status', true)->where('kategori', '2')->orderBy('created_at', 'desc')->limit(15)->get(),
             'galeris' => Galeri::where('kategori', '1')->limit(20)->orderBy('updated_at', 'desc')->get(),
             'events' => Event::where('status', 1)->orderBy('tanggal_event', 'desc')->get(),
             'data_sholat' => SholatJumat::with(['imam', 'khotib'])->whereDate('tanggal', '>=', date('Y-m-d'))->orderBy('tanggal', 'asc')->limit(5)->get(),
