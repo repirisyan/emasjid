@@ -9,7 +9,7 @@
 @endsection
 @section('title', 'Galeri Foto')
 @section('content')
-    <div class="text-cneter mt-5" id="lightgallery">
+    <div class="text-center mt-5" id="lightgallery">
         @foreach ($data as $item)
             <a href="{{ asset('storage/galeri/' . $item->picture) }}">
                 <img style="width: 200px;" alt="{{ $item->keterangan }}"

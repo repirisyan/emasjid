@@ -26,9 +26,9 @@ use Barryvdh\DomPDF\Facade\Pdf;
 |
 */
 
-Route::get('/symlink', function () {
-    Artisan::call('storage:link');
-});
+// Route::get('/symlink', function () {
+//     Artisan::call('storage:link');
+// });
 
 Route::get('/', function () {
     return view('welcome');

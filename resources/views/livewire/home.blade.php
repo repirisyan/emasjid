@@ -141,7 +141,7 @@
                     target="_blank">Lainnya</a>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mt-5 mt-md-0">
             <h5 class="text-uppercase"><i class="fa fa-fw fa-money-bill"></i>&nbsp;kas Operasional masjid</h5>
             <p style="font-size: 22px">
                 <b>Rp. {{ number_format($saldo, '0', ',', '.') }}</b>
@@ -200,6 +200,11 @@
                     <td><i class="fa fa-fw fa-envelope"></i> E-mail</td>
                     <td>:</td>
                     <td><a href="mailto:{{ env('MAIL_FROM_ADDRESS') }}">{{ env('MAIL_FROM_ADDRESS') }}</a></td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <hr>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="3"><a href="https://wa.me/{{ env('APP_WHATSAPP') }}" target="_blank"><img
