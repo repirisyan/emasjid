@@ -16,7 +16,7 @@
     @livewire('landing.keuangan-ziswaf')
     <hr>
     <h3>Galeri Kegiatan</h3>
-    <div class="text-cneter mt-2" id="lightgallery">
+    <div class="text-center mt-5" id="lightgallery">
         @foreach ($galeris as $item)
             <a href="{{ asset('storage/galeri/' . $item->picture) }}">
                 <img style="width: 200px;" alt="{{ $item->keterangan }}"
