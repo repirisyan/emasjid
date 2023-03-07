@@ -144,6 +144,7 @@
         &copy; 2022 <a target="_blank" href="https://github.com/repirisyan98"><i
                 class="fab fa-github"></i>&nbsp;repirisyan98</a>
     </footer>
+
     @if (!config('adminlte.enabled_laravel_mix'))
         <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

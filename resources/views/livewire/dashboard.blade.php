@@ -26,7 +26,6 @@
     @push('scripts')
         <script>
             document.addEventListener('livewire:load', function() {
-                console.log(JSON.parse(@this.pemasukkan));
                 var pemasukkan = JSON.parse(@this.pemasukkan);
                 var saldo_pemasukkan = [];
                 var bulan_pemasukkan = [];

@@ -2,11 +2,10 @@
 
 namespace App\Http\Livewire\Qurban;
 
+use App\Events\RefreshComponent;
 use App\Models\MasterHewan;
 use App\Models\Qurban as ModelsQurban;
 use App\Models\ShobulQurban;
-use Illuminate\Database\Query\Builder;
-use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -22,7 +21,7 @@ class Penyembelihan extends Component
 
     protected $listeners = [
         'confirmed',
-        'cancelled'
+        'cancelled',
     ];
 
     public function mount()
@@ -108,6 +107,7 @@ class Penyembelihan extends Component
                 'success',
                 'Berat timbangan daging qurban berhasil ditambahkan'
             );
+            event(new RefreshComponent);
         } catch (\Exception $e) {
             $this->alert(
                 'error',
@@ -149,6 +149,7 @@ class Penyembelihan extends Component
                 'success',
                 'Status hewan telah disembelih'
             );
+            event(new RefreshComponent);
         } catch (\Exception $e) {
             $this->alert(
                 'error',
