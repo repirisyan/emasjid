@@ -318,32 +318,6 @@
                                     @enderror
                                 </div>
 
-                                {{-- Range Gaji --}}
-                                <div class="input-group mb-3">
-                                    <select wire:model.defer="range_gaji"
-                                        class="form-control @error('range_gaji') is-invalid @enderror">
-                                        <option>Pilih Range Penghasilan</option>
-                                        <option value="<=500.000">
-                                            <=500.000 </option>
-                                        <option value="1500.000=>500.000">1500.000=>500.000</option>
-                                        <option value="2500.000=>1500.000">2500.000=>1500.000</option>
-                                        <option value="3500.000=>2500.000">3500.000=>2500.000</option>
-                                        <option value="4500.000=>3500.000">4500.000=>3500.000</option>
-                                        <option value="5500.000=>4500.000">5500.000=>4500.000</option>
-                                        <option value=">=6000.0000">>=6000.0000</option>
-                                    </select>
-
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <span
-                                                class="fas fa-money-bill {{ config('adminlte.classes_auth_icon', '') }}"></span>
-                                        </div>
-                                    </div>
-
-                                    @error('range_gaji')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -519,32 +493,6 @@
                                     @enderror
                                 </div>
 
-                                {{-- Range Gaji --}}
-                                <div class="input-group mb-3">
-                                    <select wire:model.defer="range_gaji"
-                                        class="form-control @error('range_gaji') is-invalid @enderror">
-                                        <option>Pilih Range Gaji</option>
-                                        <option value="<=500.000">
-                                            <=500.000 </option>
-                                        <option value="1500.000=>500.000">1500.000=>500.000</option>
-                                        <option value="2500.000=>1500.000">2500.000=>1500.000</option>
-                                        <option value="3500.000=>2500.000">3500.000=>2500.000</option>
-                                        <option value="4500.000=>3500.000">4500.000=>3500.000</option>
-                                        <option value="5500.000=>4500.000">5500.000=>4500.000</option>
-                                        <option value=">=6000.0000">>=6000.0000</option>
-                                    </select>
-
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <span
-                                                class="fas fa-money-bill {{ config('adminlte.classes_auth_icon', '') }}"></span>
-                                        </div>
-                                    </div>
-
-                                    @error('range_gaji')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -599,10 +547,6 @@
                             <tr>
                                 <th class="text-muted">E-mail</th>
                                 <td><i class="fa fa-fw fa-envelope"></i> {{ $email }}</td>
-                            </tr>
-                            <tr>
-                                <th class="text-muted">Range Gaji</th>
-                                <td><i class="fa fa-fw fa-money-bill"></i> {{ $range_gaji }}</td>
                             </tr>
                             <tr>
                                 <th class="text-muted">Dibuat</th>

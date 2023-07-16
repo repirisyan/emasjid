@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Visi Misi Divisi Ziswaf')
+@section('title', 'Profile Divisi Ziswaf')
 
 @section('content_header')
-    <h1>Visi Misi Divisi Ziswaf</h1>
+    <h1>Profile Divisi Ziswaf</h1>
     <hr>
 @stop
 

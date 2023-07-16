@@ -322,7 +322,7 @@ return [
             'can' => ['bendahara', 'pengurus', 'admin'],
             'submenu' => [
                 [
-                    'text' => 'Visi Misi',
+                    'text' => 'Profile',
                     'icon' => 'fas fa-fw fa-dot-circle',
                     'route' => 'ziswaf.visi_misi',
                     'can' => 'bendahara'

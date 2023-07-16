@@ -14,7 +14,7 @@ class Users extends Component
     use LivewireAlert;
     protected $paginationTheme = 'bootstrap';
 
-    public $readyToLoad, $created_at, $search, $filter_role, $filter_jabatan, $filter_status, $name, $status, $TempatLahir, $range_gaji, $TanggalLahir, $alamat, $kontak, $email, $new_id, $JenisKelamin, $role, $jabatan;
+    public $readyToLoad, $created_at, $search, $filter_role, $filter_jabatan, $filter_status, $name, $status, $TempatLahir, $TanggalLahir, $alamat, $kontak, $email, $new_id, $JenisKelamin, $role, $jabatan;
 
     //Variable untuk mengatur status imam,muadzin dan khotib
     public $status_id, $temp_status;
@@ -80,7 +80,6 @@ class Users extends Component
             'kontak' => ['required', 'digits_between:1,20', 'unique:users'],
             'alamat' => ['required', 'max:255'],
             'status' => 'required',
-            'range_gaji' => 'required',
         ]);
         try {
             User::create([
@@ -91,7 +90,6 @@ class Users extends Component
                 'kontak' => $this->kontak,
                 'email' => $this->email,
                 'JenisKelamin' => $this->JenisKelamin,
-                'range_gaji' => $this->range_gaji,
                 'role' => $this->status,
                 'password' => Hash::make('12345'),
                 'picture' => 'default_picture.png',
@@ -124,7 +122,6 @@ class Users extends Component
             'kontak' => ['required', 'digits_between:1,20'],
             'alamat' => ['required', 'max:255'],
             'status' => 'required',
-            'range_gaji' => 'required',
         ]);
         try {
             User::find($this->new_id)->update([
@@ -135,7 +132,6 @@ class Users extends Component
                 'kontak' => $this->kontak,
                 'email' => $this->email,
                 'JenisKelamin' => $this->JenisKelamin,
-                'range_gaji' => $this->range_gaji,
                 'role' => $this->status,
             ]);
             $this->alert(
@@ -190,7 +186,6 @@ class Users extends Component
         $this->kontak = $user->kontak;
         $this->email = $user->email;
         $this->status = $user->role;
-        $this->range_gaji = $user->range_gaji;
         $this->JenisKelamin = $user->JenisKelamin;
         $this->created_at = $user->created_at;
     }

@@ -165,7 +165,7 @@ class KajianOnline extends Component
             'onDismissed' => 'cancelled'
         ]);
 
-        $this->new_id = $id;
+        $this->temp_id = $id;
         $this->thumbnail = $thumbnail;
     }
 
@@ -174,7 +174,7 @@ class KajianOnline extends Component
         // Example code inside confirmed callback
         try {
             Storage::delete('public/kajian_online/' . $this->thumbnail);
-            Berita::destroy($this->new_id);
+            Berita::destroy($this->temp_id);
             $this->alert(
                 'success',
                 'Data berhasil dihapus'
