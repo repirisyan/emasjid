@@ -81,11 +81,11 @@ class Profile extends Component
             'TempatLahir' => ['required', 'max:255'],
             'JenisKelamin' => ['required'],
             'alamat' => ['required', 'max:255'],
-            'photo' => 'image|nullable'
+            'photo' => 'image|nullable',
         ]);
         try {
             if ($this->photo != null) {
-                if ($this->old_pict != 'default.webp') {
+                if ($this->old_pict != 'default_pictre.webp') {
                     Storage::delete('public/profile/' . $this->old_pict);
                 }
                 $filename = auth()->user()->id . '_' . uniqid() . '.webp';
