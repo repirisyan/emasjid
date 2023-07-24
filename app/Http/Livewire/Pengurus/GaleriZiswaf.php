@@ -55,8 +55,7 @@ class GaleriZiswaf extends Component
             'thumbnail' => 'image|required',
         ]);
         try {
-            $extension = $this->thumbnail->extension();
-            $filename = now() . '.' . $extension;
+            $filename = uniqid() . '.webp';
             Galeri::create([
                 'keterangan' => $this->keterangan,
                 'kategori' => 2,
@@ -64,6 +63,7 @@ class GaleriZiswaf extends Component
             ]);
             $originalPath = public_path() . '/storage/galeri/';
             $thumbnailImage = Image::make($this->thumbnail);
+            $thumbnailImage = $thumbnailImage->encode('webp', 85);
             $thumbnailImage->resize(800, 533);
             $thumbnailImage->save($originalPath . $filename);
             $this->alert(
@@ -94,10 +94,10 @@ class GaleriZiswaf extends Component
         try {
             if ($this->new_thumbnail != null) {
                 Storage::delete('public/galeri/' . $this->thumbnail);
-                $extension = $this->new_thumbnail->extension();
-                $filename = now() . '.' . $extension;
+                $filename = uniqid() . '.webp';
                 $originalPath = public_path() . '/storage/galeri/';
                 $thumbnailImage = Image::make($this->new_thumbnail);
+                $thumbnailImage = $thumbnailImage->encode('webp', 85);
                 $thumbnailImage->resize(800, 533);
                 $thumbnailImage->save($originalPath . $filename);
                 $this->thumbnail = $filename;

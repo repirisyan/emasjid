@@ -78,8 +78,12 @@ class ProfileMasjid extends Component
         ]);
         try {
             if ($this->organisasi_thumbnail != null) {
-                Storage::delete('public/struktur_organisasi/struktur_organisasi.png');
-                $this->organisasi_thumbnail->storeAs('struktur_organisasi', 'struktur_organisasi.png');
+                Storage::delete('public/struktur_organisasi/struktur_organisasi.webp');
+                $filename = 'struktur_organisasi.webp';
+                $originalPath = public_path() . '/storage/logo/';
+                $thumbnailImage = Image::make($this->organisasi_thumbnail);
+                $thumbnailImage = $thumbnailImage->encode('webp', 100);
+                $thumbnailImage->save($originalPath . $filename);
             }
             $this->alert(
                 'success',
@@ -104,10 +108,11 @@ class ProfileMasjid extends Component
 
         try {
             if ($this->logo != null) {
-                Storage::delete('public/logo/mosque.png');
-                $filename = 'mosque.png';
+                Storage::delete('public/logo/mosque.webp');
+                $filename = 'mosque.webp';
                 $originalPath = public_path() . '/storage/logo/';
                 $thumbnailImage = Image::make($this->logo);
+                $thumbnailImage = $thumbnailImage->encode('webp', 100);
                 $thumbnailImage->resize(100, 100);
                 $thumbnailImage->save($originalPath . $filename);
             }

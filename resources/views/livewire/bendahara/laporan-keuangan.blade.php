@@ -32,9 +32,9 @@
                 <div class="col">
                     <div class="form-group">
                         <div class="input-group">
-                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-fw fa-calendar"></i></span>
+                            <span class="input-group-text" id="filter-tahun"><i class="fa fa-fw fa-calendar"></i></span>
                             <input type="number" wire:model.lazy="tahun" min="1900"
-                                aria-describedby="basic-addon1"
+                                aria-describedby="filter-tahun"
                                 class="form-control @error('tahun') is-invalid @enderror"
                                 placeholder="{{ date('Y') }}">
                             @error('tahun')

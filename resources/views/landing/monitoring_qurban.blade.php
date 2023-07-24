@@ -1,4 +1,9 @@
 @extends('layouts.app')
+
+@section('meta_tags')
+    <meta name="description" content="Monitring Qurban {{ env('APP_NAME') }}">
+@endsection
+
 @section('custom_css')
     <style>
         .card {
@@ -10,10 +15,12 @@
         }
     </style>
 @endsection
+
 @section('title', 'Monitoring Qurban')
+
 @section('content')
-    <h1 class="animate__animated animate__fadeInDown text-center mt-5"><img src="{{ asset('assets/img/mosque.png') }}"
-            alt="" style="width: 50px;height:50px"> Monitoring Qurban
+    <h1 class="animate__animated animate__fadeInDown text-center mt-5"><img src="{{ asset('assets/img/mosque.webp') }}"
+            alt="Logo Mesjid" style="max-width: 50px;max-height:50px"> Monitoring Qurban
         {{ date('Y') }}</h1>
     <hr>
     @livewire('qurban.monitoring')

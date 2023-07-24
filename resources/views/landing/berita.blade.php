@@ -1,4 +1,9 @@
 @extends('layouts.app')
+
+@section('meta_tags')
+    <meta name="description" content="Berita {{ env('APP_NAME') }}">
+@endsection
+
 @section('custom_css')
     <style>
         .card {
@@ -10,7 +15,9 @@
         }
     </style>
 @endsection
+
 @section('title', 'Berita')
+
 @section('content')
     <div class="container">
         @livewire('landing.berita')

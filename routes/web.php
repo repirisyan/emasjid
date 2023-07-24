@@ -57,7 +57,7 @@ Route::group(['prefix' => 'landing'], function () {
     })->name('landing.galeri');
 
     Route::get('tentang-kami', function () {
-        $data = ProfileMasjid::first();
+        $data = ProfileMasjid::select('visi_misi', 'sejarah')->first();
         return view('landing.profile_masjid', compact('data'));
     })->name('landing.profile_masjid');
 

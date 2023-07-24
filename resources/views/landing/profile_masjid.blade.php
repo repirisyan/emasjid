@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('meta_tags')
+    <meta name="description" content="Tentang Kami {{ env('APP_NAME') }}">
+@endsection
 @section('custom_css')
     <style>
         #content {
@@ -14,8 +17,7 @@
         {!! $data->sejarah !!}
         <hr>
         <h3>Struktur Organisasi</h3>
-        <img src="{{ asset('storage/struktur_organisasi/struktur_organisasi.png') }}" alt="Struktur Organisasi Img">
+        <img src="{{ asset('storage/struktur_organisasi/struktur_organisasi.webp') }}" loading='lazy'
+            alt="Struktur Organisasi Img">
     </div>
-@endsection
-@section('custom_js')
 @endsection

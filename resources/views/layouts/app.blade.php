@@ -73,8 +73,8 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ asset('storage/logo/mosque.png') }}"
-                    alt="" style="width: 25px; heigh:25px">
+            <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ asset('storage/logo/mosque.webp') }}"
+                    alt="Logo Masjid" style="max-width: 25px; max-heigh:25px">
                 <small>&nbsp;{{ env('APP_NAME') }}
                 </small></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -142,7 +142,7 @@
     <footer class="mt-2 mb-2 text-center">
         <hr>
         &copy; 2022 <a target="_blank" href="https://github.com/repirisyan98"><i
-                class="fab fa-github"></i>&nbsp;repirisyan98</a>
+                class="fab fa-github"></i>&nbsp;repirisyan98</a> All Right Reserved
     </footer>
 
     @if (!config('adminlte.enabled_laravel_mix'))

@@ -21,16 +21,16 @@ class DatabaseSeeder extends Seeder
     {
         User::create([
             'name' => 'Admin',
-            'TempatLahir' => 'Bandung',
+            'TempatLahir' => 'Cianjur',
             'TanggalLahir' => '1998-12-13',
-            'alamat' => 'Bandung',
+            'alamat' => 'Cianjur',
             'kontak' => '082262366949',
             'JenisKelamin' => 'Laki-laki',
             'role' => 1,
-            'email' => 'admin@gmail.com',
+            'email' => 'admin@emasjid.com',
             'password' => Hash::make('password'),
             'email_verified_at' => now(),
-            'picture' => 'default_picture.png',
+            'picture' => 'default_picture.webp',
         ]);
 
         Saldo::create([

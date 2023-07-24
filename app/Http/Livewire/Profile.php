@@ -85,13 +85,13 @@ class Profile extends Component
         ]);
         try {
             if ($this->photo != null) {
-                if ($this->old_pict != 'default.png') {
+                if ($this->old_pict != 'default.webp') {
                     Storage::delete('public/profile/' . $this->old_pict);
                 }
-                $extension = $this->photo->extension();
-                $filename = auth()->user()->id . '_' . now() . '.' . $extension;
+                $filename = auth()->user()->id . '_' . uniqid() . '.webp';
                 $originalPath = public_path() . '/storage/profile/';
                 $thumbnailImage = Image::make($this->photo);
+                $thumbnailImage = $thumbnailImage->encode('webp', 85);
                 $thumbnailImage->resize(100, 100);
                 $thumbnailImage->save($originalPath . $filename);
                 $this->photo = $filename;

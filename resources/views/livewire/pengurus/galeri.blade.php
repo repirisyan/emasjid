@@ -29,7 +29,8 @@
                                     <td class="align-middle"><a href="{{ asset('storage/galeri/' . $item->picture) }}"
                                             target="_blank">
                                             <img src="{{ asset('storage/galeri/' . $item->picture) }}"
-                                                alt="{{ $item->keterangan }}" style="width: 100px;height:100px"></a>
+                                                alt="{{ $item->keterangan }}" style="max-width: 50px;max-height:50px"
+                                                loading='lazy'></a>
                                     </td>
                                     <td class="align-middle">
                                         <button wire:loading.attr="disabled" type="button" data-toggle="modal"

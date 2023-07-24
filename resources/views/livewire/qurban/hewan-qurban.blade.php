@@ -115,16 +115,20 @@
                         </div>
                         <div class="form-group">
                             <div class="input-group">
-                                <span class="input-group-text" id="basic-addon1">Rp</span>
-                                <input type="number" wire:model.defer="harga" aria-describedby="basic-addon1" required
-                                    class="form-control @error('harga') is-invalid @enderror" placeholder="Harga">
+                                <span class="input-group-text" id="tambah-harga-hewan">Rp</span>
+                                <input type="number" wire:model.defer="harga" aria-describedby="tambah-harga-hewan"
+                                    required class="form-control @error('harga') is-invalid @enderror"
+                                    placeholder="Harga">
                                 @error('harga')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="text" value="{{ date('Y') }}" readonly class="form-control">
+                            <div class="input-group">
+                                <span class="input-group-text" id="tahun-hewan">Tahun</span>
+                                <input type="text" value="{{ date('Y') }}" readonly class="form-control">
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -139,11 +143,11 @@
 
     <!-- Modal Ubah-->
     <div wire:ignore.self.prevent data-backdrop="static" data-keyboard="false" class="modal fade" id="modalUbah"
-        tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        tabindex="-1" aria-labelledby="modalUbahLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal Ubah Data Hewan</h5>
+                    <h5 class="modal-title" id="modalUbahLabel">Modal Ubah Data Hewan</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

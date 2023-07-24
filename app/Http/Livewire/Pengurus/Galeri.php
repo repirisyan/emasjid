@@ -54,8 +54,7 @@ class Galeri extends Component
             'thumbnail' => 'image|required',
         ]);
         try {
-            $extension = $this->thumbnail->extension();
-            $filename = now() . '.' . $extension;
+            $filename = uniqid() . '.webp';
             ModelsGaleri::create([
                 'keterangan' => $this->keterangan,
                 'kategori' => 1,
@@ -63,6 +62,7 @@ class Galeri extends Component
             ]);
             $originalPath = public_path() . '/storage/galeri/';
             $thumbnailImage = Image::make($this->thumbnail);
+            $thumbnailImage = $thumbnailImage->encode('webp', 85);
             $thumbnailImage->resize(800, 533);
             $thumbnailImage->save($originalPath . $filename);
             $this->alert(
@@ -91,12 +91,16 @@ class Galeri extends Component
     public function update()
     {
         try {
+            $this->validate([
+                'keterangan' => 'required',
+                'thumbnail' => 'image|nullable',
+            ]);
             if ($this->new_thumbnail != null) {
                 Storage::delete('public/galeri/' . $this->thumbnail);
-                $extension = $this->new_thumbnail->extension();
-                $filename = now() . '.' . $extension;
+                $filename = now() . '.webp';
                 $originalPath = public_path() . '/storage/galeri/';
                 $thumbnailImage = Image::make($this->new_thumbnail);
+                $thumbnailImage = $thumbnailImage->encode('webp', 85);
                 $thumbnailImage->resize(800, 533);
                 $thumbnailImage->save($originalPath . $filename);
                 $this->thumbnail = $filename;

@@ -2,7 +2,7 @@
     {{-- The best athlete wants his opponent at his best. --}}
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('keuangan_ziswaf.export', [$dari, $sampai]) }}"
+            <a href="{{ route('keuangan_ziswaf.export', [$dari, $sampai]) }}" aria-label="Export Excel Laporan Keuangan"
                 class="btn btn-sm float-right btn-success"><i class="fa fa-fw fa-file-excel"></i> Export</a>
             <div class="form-inline float-right mr-2">
                 <input class="form-control mr-2" wire:model.lazy="dari" type="date" aria-label="Search">
@@ -32,35 +32,43 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($data as $item)
-                            @php
-                                $tanggal = date_create($item->tanggal);
-                            @endphp
-                            <tr>
-                                <td>{{ $tanggal->format('d M Y') }}</td>
-                                <td>{{ $item->item }}</td>
-                                <td>Rp. {{ number_format($item->debit, '0', ',', '.') }}</td>
-                                <td>Rp. {{ number_format($item->kredit, '0', ',', '.') }}</td>
-                                <td>Rp. {{ number_format($item->saldo, '0', ',', '.') }}</td>
-                                <td>Rp. {{ number_format($item->debit_infaq, '0', ',', '.') }}</td>
-                                <td>Rp. {{ number_format($item->debit_pinjaman, '0', ',', '.') }}</td>
-                                <td>Rp. {{ number_format($item->kredit_infaq, '0', ',', '.') }}</td>
-                                <td>Rp. {{ number_format($item->kredit_pinjaman, '0', ',', '.') }}</td>
-                                <td>Rp. {{ number_format($item->saldo_infaq, '0', ',', '.') }}</td>
-                                <td>Rp. {{ number_format($item->piutang, '0', ',', '.') }}</td>
-                            </tr>
-                        @empty
+                        @if (empty($data))
                             <tr>
                                 <td colspan="14" class="text-center">
-                                    Tidak ada data
+                                    <i class="fa fa-spinner fa-spin"></i>
                                 </td>
                             </tr>
-                        @endforelse
+                        @else
+                            @forelse ($data as $item)
+                                @php
+                                    $tanggal = date_create($item->tanggal);
+                                @endphp
+                                <tr>
+                                    <td>{{ $tanggal->format('d M Y') }}</td>
+                                    <td>{{ $item->item }}</td>
+                                    <td>Rp. {{ number_format($item->debit, '0', ',', '.') }}</td>
+                                    <td>Rp. {{ number_format($item->kredit, '0', ',', '.') }}</td>
+                                    <td>Rp. {{ number_format($item->saldo, '0', ',', '.') }}</td>
+                                    <td>Rp. {{ number_format($item->debit_infaq, '0', ',', '.') }}</td>
+                                    <td>Rp. {{ number_format($item->debit_pinjaman, '0', ',', '.') }}</td>
+                                    <td>Rp. {{ number_format($item->kredit_infaq, '0', ',', '.') }}</td>
+                                    <td>Rp. {{ number_format($item->kredit_pinjaman, '0', ',', '.') }}</td>
+                                    <td>Rp. {{ number_format($item->saldo_infaq, '0', ',', '.') }}</td>
+                                    <td>Rp. {{ number_format($item->piutang, '0', ',', '.') }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="14" class="text-center">
+                                        Tidak ada data
+                                    </td>
+                                </tr>
+                            @endforelse
+                        @endif
                     </tbody>
                 </table>
             </div>
             @if ($readyToLoad == true)
-                <div>
+                <div class="mt-2">
                     {{ $data->links() }}
                 </div>
             @endif

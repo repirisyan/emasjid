@@ -40,8 +40,8 @@
                 </div>
                 <div class="col-3">
                     <div class="input-group mb-2">
-                        <input class="form-control" wire:model.lazy="search" type="search"
-                            placeholder="Cari nama user..." aria-label="Search">
+                        <input class="form-control" wire:model.lazy="search" type="search" placeholder="Cari nama..."
+                            aria-label="Search">
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-fw fa-search"></i></div>
                         </div>
@@ -509,7 +509,7 @@
     <!-- Modal Detail-->
     <div wire:ignore.self class="modal fade" id="modalDetail" data-backdrop="static" data-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel"><i class="fa fa-fw fa-user"></i>
@@ -524,33 +524,33 @@
                         <table class="table table-borderless">
                             <tr>
                                 <th class="text-muted">Tanggal Lahir</th>
-                                <td><i class="fa fa-fw fa-calendar"></i> {{ $TanggalLahir }}</td>
+                                <td>: <i class="fa fa-fw fa-calendar"></i> {{ $TanggalLahir }}</td>
                             </tr>
                             <tr>
                                 <th class="text-muted">Tempat Lahir</th>
-                                <td><i class="fa fa-fw fa-globe"></i> {{ $TempatLahir }}</td>
+                                <td>: <i class="fa fa-fw fa-globe"></i> {{ $TempatLahir }}</td>
                             </tr>
                             <tr>
                                 <th class="text-muted">Jenis Kelamin</th>
-                                <td><i
+                                <td>: <i
                                         class="fa fa-fw {{ $JenisKelamin == 'Perempuan' ? 'fa-venus' : 'fa-mars' }}"></i>
                                     {{ $JenisKelamin }}</td>
                             </tr>
                             <tr>
                                 <th class="text-muted">Alamat</th>
-                                <td><i class="fa fa-fw fa-location-arrow"></i> {{ $alamat }}</td>
+                                <td>: <i class="fa fa-fw fa-location-arrow"></i> {{ $alamat }}</td>
                             </tr>
                             <tr>
                                 <th class="text-muted">Kontak</th>
-                                <td><i class="fa fa-fw fa-phone"></i> {{ $kontak }}</td>
+                                <td>: <i class="fa fa-fw fa-phone"></i> {{ $kontak }}</td>
                             </tr>
                             <tr>
                                 <th class="text-muted">E-mail</th>
-                                <td><i class="fa fa-fw fa-envelope"></i> {{ $email }}</td>
+                                <td>: <i class="fa fa-fw fa-envelope"></i> {{ $email }}</td>
                             </tr>
                             <tr>
                                 <th class="text-muted">Dibuat</th>
-                                <td><i class="fa fa-fw fa-clock"></i> {{ $created_at }}</td>
+                                <td>: <i class="fa fa-fw fa-clock"></i> {{ $created_at }}</td>
                             </tr>
                         </table>
                     </div>

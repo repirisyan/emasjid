@@ -29,7 +29,8 @@
                                     <td>
                                         <a href="{{ asset('storage/galeri/' . $item->picture) }}">
                                             <img src="{{ asset('storage/galeri/' . $item->picture) }}"
-                                                style="height: 100px;weight:100px">
+                                                alt="{{ $item->keterangan }}" style="max-height: 50px;max-weight:50px"
+                                                loading='lazy'>
                                         </a>
                                     </td>
                                     <td class="align-middle">
@@ -110,7 +111,8 @@
                     <div class="modal-footer">
                         <button type="button" wire:click="resetFields()" class="btn btn-secondary"
                             data-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" class="btn btn-primary" wire:target='thumbnail'
+                            wire:loading.attr='disabled'>Simpan</button>
                     </div>
                 </form>
             </div>
@@ -166,7 +168,8 @@
                     <div class="modal-footer">
                         <button type="button" wire:click="resetFields()" class="btn btn-secondary"
                             data-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" class="btn btn-primary" wire:targer='new_thumbnail'
+                            wire:loading.attr='disabled'>Simpan</button>
                     </div>
                 </form>
             </div>

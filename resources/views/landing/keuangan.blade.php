@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('meta_tags')
+    <meta name="description" content="Laporan Keuangan Ziswaf {{ env('APP_NAME') }}">
+@endsection
 @section('custom_css')
     <style>
         #content {

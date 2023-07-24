@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('meta_tags')
+    <meta name="description" content="Halaman Utama {{ env('APP_NAME') }}">
+@endsection
 @section('custom_css')
     <link rel="stylesheet" href="{{ asset('assets/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.css') }}">
@@ -15,7 +18,8 @@
             Your browser does not support the audio element.
         </audio>
         <p>
-            <a href="https://equran.id" class="btn btn-outline-primary btn-sm" target="_blank">
+            <a aria-label="Hyperlink to equran.id" href="https://equran.id" class="btn btn-outline-primary btn-sm"
+                target="_blank">
                 <i class="fa fa-fw fa-globe"></i> equran.id
             </a>
         </p>

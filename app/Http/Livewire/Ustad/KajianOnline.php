@@ -85,8 +85,7 @@ class KajianOnline extends Component
             'visible' => 'required'
         ]);
         try {
-            $extension = $this->thumbnail->extension();
-            $filename = now() . '.' . $extension;
+            $filename = uniqid() . '.webp';
             Berita::create([
                 'judul' => $this->judul,
                 'berita' => $this->deskripsi,
@@ -97,6 +96,7 @@ class KajianOnline extends Component
             ]);
             $originalPath = public_path() . '/storage/kajian_online/';
             $thumbnailImage = Image::make($this->thumbnail);
+            $thumbnailImage = $thumbnailImage->encode('webp', 85);
             $thumbnailImage->resize(800, 533);
             $thumbnailImage->save($originalPath . $filename);
             $this->alert(
@@ -123,10 +123,10 @@ class KajianOnline extends Component
         try {
             if ($this->new_thumbnail != null) {
                 Storage::delete('public/kajian_online/' . $this->thumbnail);
-                $extension = $this->new_thumbnail->extension();
-                $filename = now() . '.' . $extension;
+                $filename = uniqid() . '.webp';
                 $originalPath = public_path() . '/storage/kajian_online/';
                 $thumbnailImage = Image::make($this->new_thumbnail);
+                $thumbnailImage = $thumbnailImage->encode('webp', 85);
                 $thumbnailImage->resize(800, 533);
                 $thumbnailImage->save($originalPath . $filename);
                 $this->thumbnail = $filename;

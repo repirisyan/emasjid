@@ -92,7 +92,7 @@ class Users extends Component
                 'JenisKelamin' => $this->JenisKelamin,
                 'role' => $this->status,
                 'password' => Hash::make('12345'),
-                'picture' => 'default_picture.png',
+                'picture' => 'default_picture.webp',
                 'imam' => false,
                 'muadzin' => false,
                 'khotib' => false,

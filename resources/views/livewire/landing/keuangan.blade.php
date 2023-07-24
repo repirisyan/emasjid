@@ -8,7 +8,7 @@
                 @if (!$menu_saldo)
                     <div class="col">
                         <div class="form-group">
-                            <select wire:model.lazy="bulan" class="form-control">
+                            <select wire:model.lazy="bulan" class="form-control" aria-label="Filter Bulan">
                                 <option value="01">Januari</option>
                                 <option value="02">Februari</option>
                                 <option value="03">Maret</option>
@@ -29,7 +29,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fa fa-fw fa-calendar"></i></span>
-                            <input type="number" wire:model.lazy="tahun" min="1900"
+                            <input type="number" wire:model.lazy="tahun" min="1900" aria-label="Filter Tahun"
                                 aria-describedby="basic-addon1"
                                 class="form-control @error('tahun') is-invalid @enderror"
                                 placeholder="{{ date('Y') }}">
@@ -41,7 +41,7 @@
                 </div>
                 <div class="col">
                     <a class="btn btn-sm btn-danger" href="{{ route('print.laporan_keuangan', [$bulan, $tahun]) }}"
-                        target="_blank"><i class="fa fa-fw fa-print"></i> Print</a>
+                        target="_blank" aria-label="Print Laporan Keuangan"><i class="fa fa-fw fa-print"></i> Print</a>
                 </div>
             </div>
         </div>
@@ -164,7 +164,7 @@
                 </table>
             </div>
             @if ($readyToLoad == true)
-                <div>
+                <div class="mt-2 d-flex justify-content-center">
                     {{ $data->links() }}
                 </div>
             @endif

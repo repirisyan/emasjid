@@ -91,10 +91,10 @@ class Event extends Component
         try {
             if ($this->thumbnail != null) {
                 Storage::delete('public/event/' . $this->thumbnail);
-                $extension = $this->thumbnail->extension();
-                $filename = now() . '.' . $extension;
+                $filename = now() . '.webp';
                 $originalPath = public_path() . '/storage/event/';
                 $thumbnailImage = Image::make($this->thumbnail);
+                $thumbnailImage = $thumbnailImage->encode('webp', 85);
                 $thumbnailImage->resize(800, 533);
                 $thumbnailImage->save($originalPath . $filename);
                 $this->thumbnail = $filename;
@@ -134,11 +134,10 @@ class Event extends Component
                 if ($this->thumbnail != null) {
                     Storage::delete('public/event/' . $this->thumbnail);
                 }
-
-                $extension = $this->new_thumbnail->extension();
-                $filename = now() . '.' . $extension;
+                $filename = now() . '.webp';
                 $originalPath = public_path() . '/storage/event/';
                 $thumbnailImage = Image::make($this->new_thumbnail);
+                $thumbnailImage = $thumbnailImage->encode('webp', 85);
                 $thumbnailImage->resize(800, 533);
                 $thumbnailImage->save($originalPath . $filename);
                 $this->thumbnail = $filename;

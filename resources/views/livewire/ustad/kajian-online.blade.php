@@ -87,54 +87,61 @@
                 class="mb-4 float-right btn-sm close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span></button>
             <form wire:submit.prevent='store' enctype="multipart/form-data">
-                <div class="form-group mb-3">
-                    <input type="text" required class="form-control @error('judul') is-invalid @enderror"
-                        placeholder="Judul" wire:model.defer='judul'>
-                    @error('judul')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="mb-3">
-                    <div class="row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">Thumbnail</label>
-                        <div class="col-sm-10">
-                            <div x-data="{ isUploading: false, progress: 0 }" x-on:livewire-upload-start="isUploading = true"
-                                x-on:livewire-upload-finish="isUploading = false"
-                                x-on:livewire-upload-error="isUploading = false"
-                                x-on:livewire-upload-progress="progress = $event.detail.progress">
-                                <!-- File Input -->
-                                <input type="file" wire:model="thumbnail"
-                                    class="@error('thumbnail') is-invalid @enderror">
-                                <!-- Progress Bar -->
-                                <div x-show="isUploading">
-                                    <progress max="100" x-bind:value="progress"></progress>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <input type="text" required class="form-control @error('judul') is-invalid @enderror"
+                                placeholder="Judul" wire:model.defer='judul'>
+                            @error('judul')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <div class="row">
+                                <label for="staticEmail" class="col-12 col-form-label">Thumbnail</label>
+                                <div class="col-sm-12">
+                                    <div x-data="{ isUploading: false, progress: 0 }" x-on:livewire-upload-start="isUploading = true"
+                                        x-on:livewire-upload-finish="isUploading = false"
+                                        x-on:livewire-upload-error="isUploading = false"
+                                        x-on:livewire-upload-progress="progress = $event.detail.progress">
+                                        <!-- File Input -->
+                                        <input type="file" wire:model="thumbnail"
+                                            class="@error('thumbnail') is-invalid @enderror">
+                                        <!-- Progress Bar -->
+                                        <div x-show="isUploading">
+                                            <progress max="100" x-bind:value="progress"></progress>
+                                        </div>
+                                    </div>
+                                    <small>Format : png, jpg, jepg</small>
+                                    @error('thumbnail')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
-                            <small>Format : png, jpg, jepg</small>
-                            @error('thumbnail')
+                        </div>
+                        <div class="mb-3">
+                            <select required class="@error('visible') is-invalid @enderror" wire:model.defer='visible'
+                                style="max-width: 200px">
+                                <option value="">-- Pilih Status --</option>
+                                <option value="1">Publish</option>
+                                <option value="0">Hidden</option>
+                            </select>
+                            @error('visible')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
-                </div>
-                <div class="mb-3">
-                    <select required class="@error('visible') is-invalid @enderror" wire:model.defer='visible'
-                        style="width: 200px">
-                        <option value="">-- Pilih Status --</option>
-                        <option value="1">Publish</option>
-                        <option value="0">Hidden</option>
-                    </select>
-                    @error('visible')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-                @if ($thumbnail != null)
-                    <div class="mb-3">
-                        <div x-data x-ref="quillEditor" x-init="quill = new Quill($refs.quillEditor, { theme: 'snow' });" style="height: 400px">
-                            {!! $deskripsi !!}
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="update-keterangan">Keterangan</label>
+                            @if ($thumbnail != null)
+                                <div x-data x-ref="quillEditor" x-init="quill = new Quill($refs.quillEditor, { theme: 'snow' });" style="height: 400px">
+                                    {!! $deskripsi !!}
+                                </div>
+                            @endif
                         </div>
                     </div>
-                @endif
+                </div>
                 <button type="submit" wire:loading.attr='disabled' wire:target='thumbnail'
                     wire:click='$set("deskripsi",quill.root.innerHTML)'
                     class="btn btn-sm btn-primary float-right">Simpan</button>
@@ -149,53 +156,60 @@
                 <span aria-hidden="true">&times;</span></button>
             @if ($thumbnail != null)
                 <img src="{{ asset('storage/berita/' . $thumbnail) }}" class="img-fluid mb-3" alt=""
-                    srcset="" style="width: 200px;height:200px">
+                    srcset="" style="max-width: 200px;max-height:200px">
             @endif
             <form wire:submit.prevent='update' enctype="multipart/form-data">
-                <div class="form-group mb-3">
-                    <input type="text" required class="form-control @error('judul') is-invalid @enderror"
-                        placeholder="Judul" wire:model.defer='judul'>
-                    @error('judul')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="mb-3">
-                    <div class="row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">Thumbnail (Optional)</label>
-                        <div class="col-sm-10">
-                            <div x-data="{ isUploadingUpdate: false, progress: 0 }" x-on:livewire-upload-start="isUploadingUpdate = true"
-                                x-on:livewire-upload-finish="isUploadingUpdate = false"
-                                x-on:livewire-upload-error="isUploadingUpdate = false"
-                                x-on:livewire-upload-progress="progress = $event.detail.progress">
-                                <!-- File Input -->
-                                <input type="file" wire:model="new_thumbnail"
-                                    class="@error('new_thumbnail') is-invalid @enderror">
-                                <!-- Progress Bar -->
-                                <div x-show="isUploadingUpdate">
-                                    <progress max="100" x-bind:value="progress"></progress>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <input type="text" required class="form-control @error('judul') is-invalid @enderror"
+                                placeholder="Judul" wire:model.defer='judul'>
+                            @error('judul')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <div class="row">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Thumbnail (Optional)</label>
+                                <div class="col-sm-10">
+                                    <div x-data="{ isUploadingUpdate: false, progress: 0 }" x-on:livewire-upload-start="isUploadingUpdate = true"
+                                        x-on:livewire-upload-finish="isUploadingUpdate = false"
+                                        x-on:livewire-upload-error="isUploadingUpdate = false"
+                                        x-on:livewire-upload-progress="progress = $event.detail.progress">
+                                        <!-- File Input -->
+                                        <input type="file" wire:model="new_thumbnail"
+                                            class="@error('new_thumbnail') is-invalid @enderror">
+                                        <!-- Progress Bar -->
+                                        <div x-show="isUploadingUpdate">
+                                            <progress max="100" x-bind:value="progress"></progress>
+                                        </div>
+                                    </div>
+                                    <small>Format : png, jpg, jepg</small>
+                                    @error('new_thumbnail')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
-                            <small>Format : png, jpg, jepg</small>
-                            @error('new_thumbnail')
+                        </div>
+                        <div class="mb-3">
+                            <select required class="form-select @error('visible') is-invalid @enderror"
+                                wire:model.defer='visible'>
+                                <option value="">-- Pilih Status --</option>
+                                <option value="1">Publish</option>
+                                <option value="0">Hidden</option>
+                            </select>
+                            @error('visible')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
-                </div>
-                <div class="mb-3">
-                    <select required class="form-select @error('visible') is-invalid @enderror"
-                        wire:model.defer='visible'>
-                        <option value="">-- Pilih Status --</option>
-                        <option value="1">Publish</option>
-                        <option value="0">Hidden</option>
-                    </select>
-                    @error('visible')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="mb-3">
-                    <div x-data x-ref="quillEditorEdit" x-init="quillEdit = new Quill($refs.quillEditorEdit, { theme: 'snow' });" style="height: 400px">
-                        {!! $deskripsi !!}
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="update-keterangan">Keterangan</label>
+                            <div x-data x-ref="quillEditorEdit" x-init="quillEdit = new Quill($refs.quillEditorEdit, { theme: 'snow' });" style="height: 400px">
+                                {!! $deskripsi !!}
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <button type="submit" wire:loading.attr='disabled' wire:target='new_thumbnail'

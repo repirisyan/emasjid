@@ -113,8 +113,9 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <div class="input-group">
-                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-fw fa-calendar"></i></span>
-                            <input type="date" wire:model.defer="tanggal" aria-describedby="basic-addon1" required
+                            <span class="input-group-text" id="tambah-tanggal"><i
+                                    class="fa fa-fw fa-calendar"></i></span>
+                            <input type="date" wire:model.defer="tanggal" aria-describedby="tambah-tanggal" required
                                 class="form-control @error('tanggal') is-invalid @enderror" placeholder="tanggal">
                             @error('tanggal')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -123,7 +124,7 @@
                     </div>
                     <div class="form-group">
                         <input type="text" wire:model.defer="item" required
-                            class="form-control @error('item') is-invalid @enderror" placeholder="Item">
+                            class="form-control @error('item') is-invalid @enderror" placeholder="Item (Required)">
                         @error('item')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -133,9 +134,9 @@
                     <hr>
                     <div class="form-group">
                         <div class="input-group">
-                            <span class="input-group-text" id="basic-addon1">Debit</span>
-                            <input min="0" type="number" wire:model.defer="debit"
-                                aria-describedby="basic-addon1"
+                            <span class="input-group-text" id="tambah-debit">Debit</span>
+                            <input min="0" type="number" wire:model.defer="debit" placeholder="(optional)"
+                                aria-describedby="tambah-debit"
                                 class="form-control @error('debit') is-invalid @enderror">
                             @error('debit')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -144,9 +145,9 @@
                     </div>
                     <div class="form-group">
                         <div class="input-group">
-                            <span class="input-group-text" id="basic-addon1">Kredit</span>
-                            <input min="0" type="number" wire:model.defer="kredit"
-                                aria-describedby="basic-addon1"
+                            <span class="input-group-text" id="tambah-kredit">Kredit</span>
+                            <input min="0" type="number" wire:model.defer="kredit" placeholder="(optional)"
+                                aria-describedby="tambah-kredit"
                                 class="form-control @error('kredit') is-invalid @enderror">
                             @error('kredit')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -155,9 +156,9 @@
                     </div>
                     <div class="form-group">
                         <div class="input-group">
-                            <span class="input-group-text" id="basic-addon1">Saldo</span>
-                            <input min="0" type="number" wire:model.defer="saldo"
-                                aria-describedby="basic-addon1"
+                            <span class="input-group-text" id="tambah-saldo">Saldo</span>
+                            <input min="0" type="number" wire:model.defer="saldo" placeholder="(optional)"
+                                aria-describedby="tambah-saldo"
                                 class="form-control @error('saldo') is-invalid @enderror">
                             @error('saldo')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -169,9 +170,9 @@
                     <hr>
                     <div class="form-group">
                         <div class="input-group">
-                            <span class="input-group-text" id="basic-addon1">Debit Infaq</span>
+                            <span class="input-group-text" id="debit-infaq">Debit Infaq</span>
                             <input min="0" type="number" wire:model.defer="debit_infaq"
-                                aria-describedby="basic-addon1"
+                                placeholder="(optional)" aria-describedby="debit-infaq"
                                 class="form-control @error('debit_infaq') is-invalid @enderror">
                             @error('debit_infaq')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -180,9 +181,9 @@
                     </div>
                     <div class="form-group">
                         <div class="input-group">
-                            <span class="input-group-text" id="basic-addon1">Debit Pinjaman</span>
+                            <span class="input-group-text" id="debit-pinjaman">Debit Pinjaman</span>
                             <input min="0" type="number" wire:model.defer="debit_pinjaman"
-                                aria-describedby="basic-addon1"
+                                placeholder="(optional)" aria-describedby="debit-pinjaman"
                                 class="form-control @error('debit_pinjaman') is-invalid @enderror">
                             @error('debit_pinjaman')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -191,9 +192,9 @@
                     </div>
                     <div class="form-group">
                         <div class="input-group">
-                            <span class="input-group-text" id="basic-addon1">Kredit Infaq</span>
+                            <span class="input-group-text" id="kredit-infaq">Kredit Infaq</span>
                             <input min="0" type="number" wire:model.defer="kredit_infaq"
-                                aria-describedby="basic-addon1"
+                                placeholder="(optional)" aria-describedby="kredit-infaq"
                                 class="form-control @error('kredit_infaq') is-invalid @enderror">
                             @error('kredit_infaq')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -202,9 +203,9 @@
                     </div>
                     <div class="form-group">
                         <div class="input-group">
-                            <span class="input-group-text" id="basic-addon1">Kredit Pinjaman</span>
+                            <span class="input-group-text" id="kredit-pinjaman">Kredit Pinjaman</span>
                             <input min="0" type="number" wire:model.defer="kredit_pinjaman"
-                                aria-describedby="basic-addon1"
+                                placeholder="(optional)" aria-describedby="kredit-pinjaman"
                                 class="form-control @error('kredit_pinjaman') is-invalid @enderror">
                             @error('kredit_pinjaman')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -213,9 +214,9 @@
                     </div>
                     <div class="form-group">
                         <div class="input-group">
-                            <span class="input-group-text" id="basic-addon1">Saldo</span>
+                            <span class="input-group-text" id="saldo-infaq">Saldo</span>
                             <input min="0" type="number" wire:model.defer="saldo_infaq_shodaqoh"
-                                aria-describedby="basic-addon1"
+                                placeholder="(optional)" aria-describedby="saldo-infaq"
                                 class="form-control @error('saldo_infaq_shodaqoh') is-invalid @enderror">
                             @error('saldo_infaq_shodaqoh')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -225,9 +226,9 @@
                     <hr>
                     <div class="form-group">
                         <div class="input-group">
-                            <span class="input-group-text" id="basic-addon1">Piutang</span>
-                            <input min="0" type="number" wire:model.defer="piutang"
-                                aria-describedby="basic-addon1"
+                            <span class="input-group-text" id="tambah-piutang">Piutang</span>
+                            <input min="0" type="number" wire:model.defer="piutang" placeholder="(optional)"
+                                aria-describedby="tambah-piutang"
                                 class="form-control @error('piutang') is-invalid @enderror">
                             @error('piutang')
                                 <div class="invalid-feedback">{{ $message }}</div>
