@@ -15,8 +15,7 @@
         <table>
             <tr>
                 <td>
-                    <img src="{{ public_path() . '/assets/img/mosque.png' }}" alt="" srcset=""
-                        style="width: 100px; height: 100px">
+                    <img src="{{ public_path() . '/assets/img/mosque.webp' }}" style="width: 100px; height: 100px">
                 </td>
                 <td class="text-center align-middle">
                     <h2>DEWAN KEMAKMURAN MASJID <br>{{ env('APP_NAME') }}</h2>
