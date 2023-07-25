@@ -59,14 +59,14 @@
                                     <progress max="100" x-bind:value="progress"></progress>
                                 </div>
                             </div>
-                            <small>Format : png,webp</small>
+                            <small>Format : png</small>
                             @error('logo')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
                     <div class="col">
-                        <img src="{{ asset('storage/favicons/favicon.ico') }}" alt="Favicon Masjid" loading='lazy'>
+                        <img src="{{ asset('storage/favicons/favicon.ico') }}" alt="Favicon Masjid">
                         <div class="my-3">
                             <div x-data="{ isUploadingFavicon: false, progress: 0 }" x-on:livewire-upload-start="isUploadingFavicon = true"
                                 x-on:livewire-upload-finish="isUploadingFavicon = false"
@@ -87,8 +87,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" wire:loading.attr='disabled' wire:target='logo'
-                    class="btn btn-sm btn-primary float-right">Simpan</button>
+                <button type="submit" class="btn btn-sm btn-primary float-right">Simpan</button>
             </form>
         </div>
     </div>
@@ -116,7 +115,7 @@
                                 <progress max="100" x-bind:value="progress"></progress>
                             </div>
                         </div>
-                        <small>Format : png,webp</small>
+                        <small>Format : png</small>
                         @error('organisasi_thumbnail')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

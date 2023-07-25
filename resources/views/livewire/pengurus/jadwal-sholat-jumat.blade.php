@@ -2,7 +2,7 @@
     {{-- The Master doesn't talk, he acts. --}}
     <div class="card">
         <div class="card-header">
-            <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalTambah">Tambah Data <i
+            <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalTambah">Tambah <i
                     class="fa fa-fw fa-plus"></i></button>
         </div>
         <div class="card-body">

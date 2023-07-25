@@ -68,7 +68,7 @@ class GaleriZiswaf extends Component
             $thumbnailImage->save($originalPath . $filename);
             $this->alert(
                 'success',
-                'Data berhasil ditambahkan'
+                'Data berhasil disimpan'
             );
         } catch (\Throwable $th) {
             $this->alert(

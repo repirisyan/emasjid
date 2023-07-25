@@ -93,7 +93,7 @@ class Galeri extends Component
         try {
             $this->validate([
                 'keterangan' => 'required',
-                'thumbnail' => 'image|nullable',
+                'new_thumbnail' => 'nullable|image',
             ]);
             if ($this->new_thumbnail != null) {
                 Storage::delete('public/galeri/' . $this->thumbnail);

@@ -119,16 +119,14 @@ class ProfileMasjid extends Component
             if ($this->favicon != null) {
                 Storage::delete('public/favicons/favicon.ico');
                 $filename = 'favicon.ico';
-                $originalPath = public_path() . '/storage/favicons/';
-                $thumbnailImage = Image::make($this->favicon);
-                $thumbnailImage->resize(100, 100);
-                $thumbnailImage->save($originalPath . $filename);
+                $this->favicon->storeAs('public/favicons', $filename);
             }
             $this->alert(
                 'success',
                 'Data berhasil diubah'
             );
         } catch (\Throwable $th) {
+            dd($th->getMessage());
             $this->alert(
                 'error',
                 'Terjadi kesalahan saat mengubah data'

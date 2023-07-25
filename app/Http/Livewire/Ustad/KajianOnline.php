@@ -136,7 +136,7 @@ class KajianOnline extends Component
                 'berita' => $this->deskripsi,
                 'user_id' => auth()->user()->id,
                 'status' => $this->visible,
-                'kategori' => 1,
+                'kategori' => 2,
                 'thumbnail' => $this->thumbnail,
                 'updated_at' => now()
             ]);

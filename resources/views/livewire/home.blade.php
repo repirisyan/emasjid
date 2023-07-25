@@ -16,8 +16,8 @@
                                 @if ($item->thumbnail != null)
                                     <img data-src="{{ asset('storage/event/' . $item->thumbnail) }}" class="owl-lazy">
                                 @endif
-                                <h5 class="mt-2"><i
-                                        class="fa fa-fw fa-calendar"></i>&nbsp;{{ date_format($tanggal, 'd M Y') }}
+                                <h5 class="mt-2">
+                                    {{ date_format($tanggal, 'd M Y') }}
                                 </h5>
                                 <p class="card-text mt-2">
                                     {{ $item->nama_event }}
@@ -47,7 +47,7 @@
                             <div class="carousel-item {{ $no == 1 ? 'active' : null }}">
                                 <div class="card shadow text-center">
                                     <div class="card-body">
-                                        <img src="{{ asset('storage/profile/' . $item->user->picture) }}" loading='lazy'
+                                        <img src="{{ asset('storage/profile/' . $item->user->picture) }}"
                                             class="img-circle elevation-2 mb-2"
                                             style="max-width: 100px;max-height: 100px;"
                                             alt="Profile {{ $item->user->name }}">
@@ -209,14 +209,14 @@
             </div>
             <hr>
             <h5 class="text-uppercase"><i class="fab fa-youtube"></i>&nbsp;Video</h5>
-            <iframe src="https://www.youtube.com/embed/{{ env('APP_YOUTUBE_VID') }}" frameborder="0"
-                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <iframe loading="lazy" src="https://www.youtube.com/embed/{{ env('APP_YOUTUBE_VID') }}" frameborder="0"
+                allow="autoplay; encrypted-media" allowfullscreen title="Youtube Channel"></iframe>
             <a href="{{ env('APP_YT_CHANNEL') }}" aria-label="Link Channel Youtube" target="_blank"
                 class="btn btn-sm btn-outline-primary"><i class="fab fa-youtube"></i>&nbsp;Subscribe</a>
             <hr>
             <h5 class="text-uppercase"><i class="fa fa-fw fa-map-marked"></i>&nbsp;Lokasi</h5>
             <div class="mapouter">
-                <div class="gmap_canvas"><iframe id="gmap_canvas"
+                <div class="gmap_canvas"><iframe id="gmap_canvas" loading="lazy" title="Google Maps"
                         src="https://maps.google.com/maps?q={{ env('APP_GMAPS_COOR') }}&t=&z=13&ie=UTF8&iwloc=&output=embed"
                         frameborder="0" scrolling="no" marginheight="0" allowfullscreen
                         marginwidth="0"></iframe><br>

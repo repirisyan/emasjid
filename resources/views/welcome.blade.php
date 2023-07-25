@@ -44,6 +44,7 @@
                         .jumlah_ayat + ', Diturunkan : ' + data.tempat_turun);
                     $('#deskripsi_surah').html(data.deskripsi);
                 });
+
             $(".owl-carousel").owlCarousel({
                 lazyLoad: true,
                 nav: true,

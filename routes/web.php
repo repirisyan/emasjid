@@ -138,10 +138,6 @@ Route::middleware('auth')->group(function () {
             return view('pengurus.ziswaf_galeri');
         })->name('galeri.ziswaf');
 
-        Route::get('ziswaf/visi-misi', function () {
-            return view('ziswaf.visi_misi');
-        })->name('ziswaf.visi_misi');
-
         //Informasi
         Route::get('berita', function () {
             return view('pengurus.berita');
@@ -181,6 +177,10 @@ Route::middleware('auth')->group(function () {
             return view('qurban.konfirmasi_pembayaran');
         })->name('qurban.konfirmasi_pembayaran');
     });
+
+    Route::get('ziswaf/visi-misi', function () {
+        return view('ziswaf.visi_misi');
+    })->middleware('can:bendahara')->name('ziswaf.visi_misi');
 
     Route::group(['middleware' => 'can:ketua', 'prefix' => 'keuangan'], function () {
         Route::get('pengajuan/konfirmasi', function () {

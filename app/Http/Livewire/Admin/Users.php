@@ -91,7 +91,7 @@ class Users extends Component
                 'email' => $this->email,
                 'JenisKelamin' => $this->JenisKelamin,
                 'role' => $this->status,
-                'password' => Hash::make('12345'),
+                'password' => Hash::make('12345678'),
                 'picture' => 'default_picture.webp',
                 'imam' => false,
                 'muadzin' => false,

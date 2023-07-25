@@ -319,7 +319,7 @@ return [
         [
             'text' => 'Divisi Ziswaf',
             'icon' => 'fas fa-fw fa-users',
-            'can' => ['bendahara', 'pengurus', 'admin'],
+            'can' => ['bendahara', 'pengurus'],
             'submenu' => [
                 [
                     'text' => 'Profile',
@@ -344,7 +344,7 @@ return [
         [
             'text' => 'Informasi',
             'icon' => 'fas fa-fw fa-newspaper',
-            'can' => ['ustadz', 'admin', 'ketua', 'pengurus'],
+            'can' => ['ustadz', 'ketua', 'pengurus'],
             'submenu' => [
                 [
                     'text' => 'Berita',
@@ -356,7 +356,7 @@ return [
                     'text' => 'Kajian Online',
                     'icon' => 'fas fa-fw fa-dot-circle',
                     'url' => 'kajian/online',
-                    'can' => ['ustadz', 'admin', 'ketua'],
+                    'can' => ['ustadz', 'ketua'],
                 ],
             ],
         ],
@@ -391,7 +391,7 @@ return [
             'text' => 'Mustahik',
             'icon' => 'fas fa-fw fa-user',
             'url' => 'pengurus/mustahik',
-            'can' => ['pengurus', 'admin'],
+            'can' => ['pengurus'],
         ],
         [
             'text' => 'Keuangan',
@@ -402,7 +402,7 @@ return [
                     'text' => 'Laporan Keuangan',
                     'url' => 'keuangan/laporan',
                     'icon' => 'fas fa-fw fa-scroll',
-                    'can' => ['bendahara', 'admin', 'ketua']
+                    'can' => ['bendahara', 'ketua']
                 ],
                 [
                     'text' => 'Pengajuan Anggaran',
